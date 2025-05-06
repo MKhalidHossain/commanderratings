@@ -1,0 +1,36 @@
+import 'package:flutter/material.dart';
+
+class WideCustomButtonMore extends StatelessWidget {
+  final String text;
+  final VoidCallback onPressed;
+
+  const WideCustomButtonMore({
+    super.key,
+    required this.text,
+    required this.onPressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          alignment: Alignment.centerLeft,
+          backgroundColor:
+              Colors.transparent, // Make it red like in your design
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8),
+            side: BorderSide(color: Colors.white24, width: 2),
+          ),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        ),
+        onPressed: onPressed,
+        child: Text(
+          text,
+          style: const TextStyle(color: Colors.white, fontSize: 14),
+        ),
+      ),
+    );
+  }
+}
