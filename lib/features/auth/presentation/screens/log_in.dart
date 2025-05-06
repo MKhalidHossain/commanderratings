@@ -154,6 +154,7 @@ class _LogInState extends State<LogIn> {
 
 
 class Authenticaion {
+  //for Authenticaiton
   final String email;
   final String password;
   Authenticaion({required this.email, required this.password});
