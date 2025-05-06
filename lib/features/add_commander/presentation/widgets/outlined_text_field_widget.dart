@@ -32,13 +32,22 @@ class OutlinedTextFieldWidget extends StatelessWidget {
           ),
         ),
         SizedBox(height: 7),
-        TextField(
-          
-          controller: controller,
-          keyboardType: textInputType,
-          decoration: InputDecoration(
-            labelText: lebel,
-            border: OutlineInputBorder(),
+        SizedBox(
+          height: 40,
+          child: TextField(
+            controller: controller,
+            keyboardType: textInputType,
+            decoration: InputDecoration(
+              labelText: lebel,
+              labelStyle: TextStyle(color: Colors.grey),
+              border: OutlineInputBorder(),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: AppColors.context(context).borderColor,
+                  width: 2.0,
+                ),
+              ),
+            ),
           ),
         ),
       ],

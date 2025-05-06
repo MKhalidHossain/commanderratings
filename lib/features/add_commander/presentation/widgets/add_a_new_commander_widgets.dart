@@ -1,9 +1,6 @@
-
-
-
+import 'package:commanderratings/core/widgets/normal_custom_button.dart';
 import 'package:commanderratings/core/widgets/wide_custom_button.dart';
 import 'package:flutter/material.dart';
-
 
 import '../../../../core/utils/constants/app_colors.dart';
 import 'outlined_text_field_widget.dart';
@@ -99,10 +96,37 @@ class _AddANewCommanderWidgetsState extends State<AddANewCommanderWidgets> {
                           textInputType: TextInputType.text,
                         ),
                         const SizedBox(height: 20),
+                        const Divider(height: 1, thickness: 1),
+                        const SizedBox(height: 10),
 
-                        
-
-
+                        //..............................For Featured Image.........................
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Featured Image',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            const SizedBox(height: 10),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'No Image Delected',
+                                  style: TextStyle(fontSize: 12),
+                                ),
+                                //button for Image
+                                NormalCustomButton(
+                                  height: 30,
+                                  weight: 100,
+                                  text: 'Add image +',
+                                  onPressed: () {},
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 20),
 
                         WideCustomButton(
                           text: 'Submit Commander',

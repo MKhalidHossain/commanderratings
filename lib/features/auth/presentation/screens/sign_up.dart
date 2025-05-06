@@ -1,32 +1,32 @@
-import 'package:commanderratings/app.dart';
-import 'package:commanderratings/core/headers/header_for_auth_three_man.dart';
-import 'package:commanderratings/core/utils/constants/app_colors.dart';
-import 'package:commanderratings/features/add_commander/presentation/widgets/outlined_text_field_widget.dart';
-import 'package:commanderratings/features/auth/core/domain_or_model/authentication_model.dart';
+import 'package:commanderratings/features/auth/presentation/screens/log_in.dart';
 import 'package:commanderratings/features/auth/presentation/screens/lost_password.dart';
-import 'package:commanderratings/features/auth/presentation/screens/sign_up.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import '../../../../app.dart';
+import '../../../../core/headers/header_for_auth_three_man.dart';
+import '../../../../core/utils/constants/app_colors.dart';
 import '../../../../core/widgets/wide_custom_button.dart';
+import '../../../add_commander/presentation/widgets/outlined_text_field_widget.dart';
+import '../../core/domain_or_model/authentication_model.dart';
 
-class LogIn extends StatefulWidget {
-  const LogIn({super.key});
+class SignUp extends StatefulWidget {
+  const SignUp({super.key});
 
   @override
-  State<LogIn> createState() => _LogInState();
+  State<SignUp> createState() => _SignUpState();
 }
 
-class _LogInState extends State<LogIn> {
+class _SignUpState extends State<SignUp> {
   late Authenticaion authenticaion;
-
   bool isRemember = false;
 
+  late TextEditingController nameController;
   late TextEditingController emailContoller;
   late TextEditingController passwordController;
 
   @override
   void initState() {
+    nameController = TextEditingController();
     emailContoller = TextEditingController();
     passwordController = TextEditingController();
     super.initState();
@@ -38,7 +38,7 @@ class _LogInState extends State<LogIn> {
       // backgroundColor: Colors.red,
       body: Column(
         children: [
-          HeaderForAuthThreeMan(text: 'LOG IN'),
+          HeaderForAuthThreeMan(text: 'SIGN UP'),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24.0),
 
@@ -58,59 +58,40 @@ class _LogInState extends State<LogIn> {
                   children: [
                     const SizedBox(height: 8.0),
                     OutlinedTextFieldWidget(
-                      name: 'Username or Email',
-                      lebel: 'Enter eamil or username',
+                      name: 'name',
+                      lebel: 'Enter your username',
+                      controller: nameController,
+                      textInputType: TextInputType.text,
+                      textFieldHeaderName: 'Username',
+                    ),
+                    const SizedBox(height: 20.0),
+                    OutlinedTextFieldWidget(
+                      name: 'Email',
+                      lebel: 'Enter your email.',
                       controller: emailContoller,
 
                       textInputType: TextInputType.text,
-                      textFieldHeaderName: 'Username or Email',
-                    ),
-                    const SizedBox(height: 24),
-                    OutlinedTextFieldWidget(
-                      name: 'Password',
-                      lebel: 'Enter valid password',
-                      controller: passwordController,
-                      textInputType: TextInputType.text,
-                      textFieldHeaderName: 'password',
-                    ),
-                    const SizedBox(height: 30),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Container(
-                          color: AppColors.context(context).backgroundColor,
-                          height: 15,
-                          width: 15,
-                          child: Checkbox(
-                            value: isRemember,
-                            onChanged: (bool? value) {
-                              setState(() {
-                                isRemember = value!;
-                              });
-                            },
-                          ),
-                        ),
-                        const SizedBox(width: 10),
-                        Text(
-                          'Remember Me',
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: AppColors.context(context).textColor,
-                          ),
-                        ),
-                      ],
+                      textFieldHeaderName: 'Email',
                     ),
                     const SizedBox(height: 20.0),
-
+                    OutlinedTextFieldWidget(
+                      name: 'Password',
+                      lebel: 'Enter a valid password',
+                      controller: passwordController,
+                      textInputType: TextInputType.text,
+                      textFieldHeaderName: 'Password',
+                    ),
+                    const SizedBox(height: 24.0),
                     WideCustomButton(
-                      text: 'LOG IN',
+                      text: 'SIGN IN',
                       onPressed: () {
-                        if (emailContoller.text.isNotEmpty ||
+                        if (nameController.text.isNotEmpty ||
+                            emailContoller.text.isNotEmpty ||
                             passwordController.text.isNotEmpty) {
                           authenticaion = Authenticaion(
+                            name: nameController.text,
                             email: emailContoller.text,
                             password: passwordController.text,
-                            name: 'name',
                           );
 
                           showDialog(
@@ -118,8 +99,9 @@ class _LogInState extends State<LogIn> {
                             builder: (context) {
                               return AlertDialog(
                                 title: Text('Error'),
+                                //.......................... need to show the code...................
                                 content: Text(
-                                  '${authenticaion.email} ${authenticaion.password}',
+                                  '${nameController.text} ${authenticaion.email} ${authenticaion.password}',
                                 ),
                                 actions: [
                                   TextButton(
@@ -153,7 +135,7 @@ class _LogInState extends State<LogIn> {
                         }
                       },
                     ),
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 5),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -180,25 +162,10 @@ class _LogInState extends State<LogIn> {
             children: [
               TextButton(
                 onPressed: () {
-                  Get.to(SignUp());
+                  Get.to(LogIn());
                 },
                 child: Text(
-                  'Not have an account? SignUp!',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.red),
-                ),
-              ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              TextButton(
-                onPressed: () {
-                  Get.to(MainScreen());
-                },
-                child: Text(
-                  'SKIP',
+                  'Already have an account! Log In',
                   textAlign: TextAlign.center,
                   style: TextStyle(color: Colors.red),
                 ),
@@ -210,3 +177,15 @@ class _LogInState extends State<LogIn> {
     );
   }
 }
+
+// class Authenticaion {
+//   //for Authenticaiton
+//   final String name;
+//   final String email;
+//   final String password;
+//   Authenticaion({
+//     required this.name,
+//     required this.email,
+//     required this.password,
+//   });
+// }

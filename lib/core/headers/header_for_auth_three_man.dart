@@ -13,14 +13,14 @@ class HeaderForAuthThreeMan extends StatelessWidget {
             Image.asset(
               'assets/images/banner/banner_for_auth.jpg',
               opacity: const AlwaysStoppedAnimation(
-                0.6,
+                0.1,
               ), // replace with your image
               width: double.infinity,
               height: 240,
               fit: BoxFit.cover,
             ),
             Positioned(
-              top: 110,
+              top: 130,
               left: 20,
               right: 20,
               child: Center(
