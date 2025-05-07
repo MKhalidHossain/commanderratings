@@ -35,7 +35,7 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: Colors.red,
+      backgroundColor: Colors.black,
       body: Column(
         children: [
           HeaderForAuthThreeMan(text: 'SIGN UP'),
@@ -45,7 +45,7 @@ class _SignUpState extends State<SignUp> {
             child: Container(
               width: double.infinity,
               decoration: BoxDecoration(
-                color: AppColors.context(context).contentBoxColor,
+                color: Colors.white,
                 borderRadius: BorderRadius.all(Radius.circular(8.0)),
               ),
               child: Padding(
@@ -59,7 +59,7 @@ class _SignUpState extends State<SignUp> {
                     const SizedBox(height: 8.0),
                     OutlinedTextFieldWidget(
                       name: 'name',
-                      lebel: 'Enter your username',
+                      // lebel: 'Enter your username',
                       controller: nameController,
                       textInputType: TextInputType.text,
                       textFieldHeaderName: 'Username',
@@ -67,7 +67,7 @@ class _SignUpState extends State<SignUp> {
                     const SizedBox(height: 20.0),
                     OutlinedTextFieldWidget(
                       name: 'Email',
-                      lebel: 'Enter your email.',
+                      // lebel: 'Enter your email.',
                       controller: emailContoller,
 
                       textInputType: TextInputType.text,
@@ -76,7 +76,7 @@ class _SignUpState extends State<SignUp> {
                     const SizedBox(height: 20.0),
                     OutlinedTextFieldWidget(
                       name: 'Password',
-                      lebel: 'Enter a valid password',
+                      //lebel: 'Enter a valid password',
                       controller: passwordController,
                       textInputType: TextInputType.text,
                       textFieldHeaderName: 'Password',

@@ -94,15 +94,14 @@ class HomeScreen extends StatelessWidget {
                   const TitleText(text: 'FEATURED REVIEWS'),
                   const SizedBox(height: 16),
                   // Map the list of reviews to ReviewCard widgets
-                  ...featuredReviews
-                      .map(
-                        (review) => Column(
-                          children: [
-                            ReviewCard(review: review),
-                            // const SizedBox(height: 0),
-                          ],
-                        ),
-                      )
+                  ...featuredReviews.map(
+                    (review) => Column(
+                      children: [
+                        ReviewCard(review: review),
+                        // const SizedBox(height: 0),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -112,18 +111,6 @@ class HomeScreen extends StatelessWidget {
             const QrCodeDonation(),
           ],
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 0,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.people),
-            label: 'Leadership',
-          ),
-          BottomNavigationBarItem(icon: Icon(Icons.star), label: 'Commanders'),
-          BottomNavigationBarItem(icon: Icon(Icons.more_horiz), label: 'More'),
-        ],
       ),
     );
   }

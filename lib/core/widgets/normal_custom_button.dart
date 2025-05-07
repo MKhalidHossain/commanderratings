@@ -6,6 +6,7 @@ class NormalCustomButton extends StatelessWidget {
   final double height;
   final double weight;
   final double fontSize;
+  final Color textColor;
 
   const NormalCustomButton({
     super.key,
@@ -14,6 +15,7 @@ class NormalCustomButton extends StatelessWidget {
     this.height = 50,
     this.weight = 200,
     this.fontSize = 14,
+    this.textColor = Colors.white,
   });
 
   @override
@@ -31,7 +33,7 @@ class NormalCustomButton extends StatelessWidget {
         onPressed: onPressed,
         child: Text(
           text,
-          style: TextStyle(color: Colors.white, fontSize: fontSize),
+          style: TextStyle(color: textColor, fontSize: fontSize),
         ),
       ),
     );

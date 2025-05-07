@@ -28,7 +28,7 @@ class _LostPasswordScreenState extends State<LostPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: Colors.red,
+      backgroundColor: Colors.black,
       body: Column(
         children: [
           HeaderForAuthThreeMan(text: 'LOST PASSWORD'),
@@ -38,7 +38,7 @@ class _LostPasswordScreenState extends State<LostPasswordScreen> {
             child: Container(
               width: double.infinity,
               decoration: BoxDecoration(
-                color: AppColors.context(context).contentBoxColor,
+                color: Colors.white,
                 borderRadius: BorderRadius.all(Radius.circular(8.0)),
               ),
               child: Padding(
@@ -52,7 +52,7 @@ class _LostPasswordScreenState extends State<LostPasswordScreen> {
                     const SizedBox(height: 8.0),
                     OutlinedTextFieldWidget(
                       name: 'Username or Email',
-                      lebel: 'Enter eamil or username',
+                      // lebel: 'Enter eamil or username',
                       controller: emailContoller,
 
                       textInputType: TextInputType.text,
@@ -64,7 +64,7 @@ class _LostPasswordScreenState extends State<LostPasswordScreen> {
                       onPressed: () {
                         if (emailContoller.text.isNotEmpty) {
                           authenticaion = Authenticaion(
-                            email: emailContoller.text,                     
+                            email: emailContoller.text,
                             name: 'name',
                           );
 

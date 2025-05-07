@@ -35,7 +35,7 @@ class _LogInState extends State<LogIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: Colors.red,
+      backgroundColor: Colors.black,
       body: Column(
         children: [
           HeaderForAuthThreeMan(text: 'LOG IN'),
@@ -45,7 +45,7 @@ class _LogInState extends State<LogIn> {
             child: Container(
               width: double.infinity,
               decoration: BoxDecoration(
-                color: AppColors.context(context).contentBoxColor,
+                color: Colors.white,
                 borderRadius: BorderRadius.all(Radius.circular(8.0)),
               ),
               child: Padding(
@@ -59,7 +59,7 @@ class _LogInState extends State<LogIn> {
                     const SizedBox(height: 8.0),
                     OutlinedTextFieldWidget(
                       name: 'Username or Email',
-                      lebel: 'Enter eamil or username',
+                      //lebel: 'Enter eamil or username',
                       controller: emailContoller,
 
                       textInputType: TextInputType.text,
@@ -68,7 +68,7 @@ class _LogInState extends State<LogIn> {
                     const SizedBox(height: 24),
                     OutlinedTextFieldWidget(
                       name: 'Password',
-                      lebel: 'Enter valid password',
+                     // lebel: 'Enter valid password',
                       controller: passwordController,
                       textInputType: TextInputType.text,
                       textFieldHeaderName: 'password',
@@ -78,10 +78,18 @@ class _LogInState extends State<LogIn> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Container(
-                          color: AppColors.context(context).backgroundColor,
-                          height: 15,
-                          width: 15,
+                          height: 18,
+                          width: 18,
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.grey.shade500,
+                              width: 3,
+                            ),
+                            color: Colors.white,
+                          ),
                           child: Checkbox(
+                            checkColor: Colors.white,
+                            activeColor: Colors.grey.shade500,
                             value: isRemember,
                             onChanged: (bool? value) {
                               setState(() {
@@ -95,7 +103,7 @@ class _LogInState extends State<LogIn> {
                           'Remember Me',
                           style: TextStyle(
                             fontSize: 12,
-                            color: AppColors.context(context).textColor,
+                            color: Colors.grey.shade500,
                           ),
                         ),
                       ],
