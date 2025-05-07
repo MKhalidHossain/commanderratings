@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 
 import '../widgets/add_a_new_commander_widgets.dart';
 
-class CommandersScreen extends StatelessWidget {
-  const CommandersScreen({super.key});
+class AddCommandersScreen extends StatelessWidget {
+  const AddCommandersScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

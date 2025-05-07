@@ -5,14 +5,14 @@ import '../../../data/domain_or_model/post_model.dart';
 import 'widgets/filter_buttons.dart';
 import 'widgets/post_card.dart';
 
-class AllBlogPost extends StatefulWidget {
-  const AllBlogPost({super.key});
+class CommandersCall extends StatefulWidget {
+  const CommandersCall({super.key});
 
   @override
-  State<AllBlogPost> createState() => _AllBlogPostState();
+  State<CommandersCall> createState() => _CommandersCallState();
 }
 
-class _AllBlogPostState extends State<AllBlogPost> {
+class _CommandersCallState extends State<CommandersCall> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +20,7 @@ class _AllBlogPostState extends State<AllBlogPost> {
       body: SafeArea(
         child: Column(
           children: [
-            HeaderForOthers(text: 'All Posts'),
+            HeaderForOthers(text: 'Commanders Call'),
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: FilterButtons(
@@ -41,16 +41,6 @@ class _AllBlogPostState extends State<AllBlogPost> {
           ],
         ),
       ),
-      // bottomNavigationBar: BottomNavigationBar(
-      //   backgroundColor: Colors.black,
-      //   selectedItemColor: Colors.white,
-      //   unselectedItemColor: Colors.grey,
-      //   items: const [
-      //     BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-      //     BottomNavigationBarItem(icon: Icon(Icons.bookmark), label: 'Saved'),
-      //     BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
-      //   ],
-      // ),
     );
   }
 }

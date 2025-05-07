@@ -1,10 +1,10 @@
 import 'package:commanderratings/core/widgets/wide_custom_button_more.dart';
 import 'package:commanderratings/features/auth/presentation/screens/log_in.dart';
+import 'package:commanderratings/features/commander_details/presentation/screens/commanders_details.dart';
 import 'package:commanderratings/features/more/presentation/screens/others/about_screen.dart';
 import 'package:commanderratings/features/more/presentation/screens/others/contact_us.dart';
-import 'package:commanderratings/features/more/presentation/screens/others/law_enforcement.dart';
-import 'package:commanderratings/features/post_or_blog_or_commanders_call/presentation/screens/all_post_blog/all_blog_post.dart';
-import 'package:commanderratings/features/post_or_blog_or_commanders_call/presentation/screens/read_blog_post_details/read_blog_or_is_the_meo_office_effective.dart';
+import 'package:commanderratings/features/commanders_call/presentation/screens/all_post_blog/all_blog_post.dart';
+import 'package:commanderratings/features/commanders_call/presentation/screens/read_blog_post_details/call_of_commander.dart';
 import 'package:commanderratings/features/theme/presentation/screens/theme_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -65,21 +65,34 @@ class MoreScreen extends StatelessWidget {
                     },
                   ),
                   WideCustomButtonMore(
-                    text: 'COMMANDER\'S CALL',
-                    onPressed: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(builder: (context) => AboutScreen()),
-                      // );
-                    },
-                  ),
-                  WideCustomButtonMore(
-                    text: 'LAW ENFORCEMENT',
+                    text: 'COMMANDERS CALL',
                     onPressed: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => LawEnforcement(),
+                          builder: (context) => CommandersCall(),
+                        ),
+                      );
+                    },
+                  ),
+                  WideCustomButtonMore(
+                    text: 'CALL OF COMMANDER',
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => CallOfCommnder(),
+                        ),
+                      );
+                    },
+                  ),
+                  WideCustomButtonMore(
+                    text: 'COMMANDERS DETAILS',
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => CommandersDetails(),
                         ),
                       );
                     },
@@ -99,27 +112,6 @@ class MoreScreen extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => ContactUs()),
-                      );
-                    },
-                  ),
-                  WideCustomButtonMore(
-                    text: 'All BLOG',
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => AllBlogPost()),
-                      );
-                    },
-                  ),
-                  WideCustomButtonMore(
-                    text: 'READ BLOG',
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder:
-                              (context) => ReadBlogOrIsTheMeoOfficeEffective(),
-                        ),
                       );
                     },
                   ),

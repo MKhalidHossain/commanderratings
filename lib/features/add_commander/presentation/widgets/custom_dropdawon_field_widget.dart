@@ -24,7 +24,7 @@ class CustomDropdownFieldWidget<T> extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+          Text(
           text,
           textAlign: TextAlign.start,
           style: TextStyle(

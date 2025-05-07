@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'core/widgets/custom_bottom_nev_bar.dart';
-import 'features/add_commander/presentation/screens/commanders_screen.dart';
+import 'features/add_commander/presentation/screens/add_commanders_screen.dart';
 import 'features/home/presentation/screens/home_screen.dart';
 import 'features/leaderboard/presentation/screens/leaderboard_screen.dart';
 import 'features/more/presentation/screens/more_screen.dart';
@@ -17,7 +17,7 @@ class _MainScreenState extends State<MainScreen> {
   final List<Widget> _pages = [
     HomeScreen(),
     LeaderboardScreen(),
-    CommandersScreen(),
+    AddCommandersScreen(),
     MoreScreen(),
   ];
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../features/add_commander/presentation/screens/commanders_screen.dart';
+import '../features/add_commander/presentation/screens/add_commanders_screen.dart';
 
 import '../features/home/presentation/screens/home_screen.dart';
 import '../features/leaderboard/presentation/screens/leaderboard_screen.dart';
@@ -20,7 +20,7 @@ class _AppNavigationState extends State<AppNavigation> {
   final List<Widget> _screens = [
     HomeScreen(),
     const LeaderboardScreen(),
-    const CommandersScreen(),
+    const AddCommandersScreen(),
     const MoreScreen(),
   ];
 
@@ -39,9 +39,7 @@ class _AppNavigationState extends State<AppNavigation> {
           return _screens[currentIndex];
         },
       ),
-      bottomNavigationBar: CustomBottomNavBar(
-        currentIndex: _currentIndex,
-      ),
+      bottomNavigationBar: CustomBottomNavBar(currentIndex: _currentIndex),
     );
   }
 }
