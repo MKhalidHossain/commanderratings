@@ -28,7 +28,6 @@ class AddCommandersScreen extends StatelessWidget {
                   color: AppColors.context(context).iconColor,
                 ),
               ),
-
               TitleWithIconPrefix(
                 text: 'Commander',
                 color: AppColors.context(context).textColor,

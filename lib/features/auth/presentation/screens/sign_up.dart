@@ -2,9 +2,7 @@ import 'package:commanderratings/features/auth/presentation/screens/log_in.dart'
 import 'package:commanderratings/features/auth/presentation/screens/lost_password.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../../app.dart';
 import '../../../../core/headers/header_for_auth_three_man.dart';
-import '../../../../core/utils/constants/app_colors.dart';
 import '../../../../core/widgets/wide_custom_button.dart';
 import '../../../add_commander/presentation/widgets/outlined_text_field_widget.dart';
 import '../../core/domain_or_model/authentication_model.dart';
