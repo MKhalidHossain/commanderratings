@@ -21,7 +21,7 @@ class HomeScreen extends StatelessWidget {
       content:
           'Exceptional leadership during our deployment. Created a positive environment while maintaining high standards.',
       reviewerPosition: 'Squadron Commander',
-      nineStarRating: 9,
+      tenStarRating: 9.5,
       avatarUrl: 'https://randomuser.me/api/portraits/men/1.jpg',
     ),
     Review(
@@ -30,7 +30,7 @@ class HomeScreen extends StatelessWidget {
       content:
           'Demonstrated outstanding strategic planning during joint operations. Always put the team first.',
       reviewerPosition: 'Battalion Commander',
-      nineStarRating: 8,
+      tenStarRating: 8.5,
       avatarUrl: 'https://randomuser.me/api/portraits/women/2.jpg',
     ),
     Review(
@@ -39,7 +39,7 @@ class HomeScreen extends StatelessWidget {
       content:
           'Innovative approach to problem-solving that improved our squadron efficiency by 30%.',
       reviewerPosition: 'Wing Commander',
-      nineStarRating: 9,
+      tenStarRating: 9,
       avatarUrl: 'https://randomuser.me/api/portraits/men/3.jpg',
     ),
     Review(
@@ -48,7 +48,7 @@ class HomeScreen extends StatelessWidget {
       content:
           'Led with courage and integrity in challenging conditions. Inspired the entire unit.',
       reviewerPosition: 'Company Commander',
-      nineStarRating: 7,
+      tenStarRating: 7.5,
       avatarUrl: 'https://randomuser.me/api/portraits/women/4.jpg',
     ),
   ];

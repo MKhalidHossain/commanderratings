@@ -1,3 +1,4 @@
+import 'package:commanderratings/core/utils/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class WideCustomButtonMore extends StatelessWidget {
@@ -21,7 +22,10 @@ class WideCustomButtonMore extends StatelessWidget {
               Colors.transparent, // Make it red like in your design
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
-            side: BorderSide(color: Colors.white24, width: 2),
+            side: BorderSide(
+              color: AppColors.context(context).inActiveButtonColor,
+              width: 2,
+            ),
           ),
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         ),

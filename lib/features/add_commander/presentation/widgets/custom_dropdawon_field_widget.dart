@@ -24,7 +24,7 @@ class CustomDropdownFieldWidget<T> extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-          Text(
+        Text(
           text,
           textAlign: TextAlign.start,
           style: TextStyle(
@@ -46,7 +46,7 @@ class CustomDropdownFieldWidget<T> extends StatelessWidget {
               //labelText: label,
               labelStyle: TextStyle(color: Colors.white70),
               filled: true,
-              fillColor: Colors.grey[850],
+              fillColor: AppColors.context(context).fillColor,
               contentPadding: const EdgeInsets.symmetric(
                 horizontal: 12,
                 vertical: 8,
@@ -61,17 +61,24 @@ class CustomDropdownFieldWidget<T> extends StatelessWidget {
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(4),
-                borderSide: BorderSide(color: Colors.white),
+                borderSide: BorderSide(
+                  color: AppColors.context(context).borderColor,
+                ),
               ),
             ),
-            dropdownColor: Colors.grey[900],
+            dropdownColor: AppColors.context(context).popupBackgroundColor,
             iconEnabledColor: AppColors.context(context).textColor,
             style: TextStyle(color: Colors.white, fontSize: 13),
             items:
                 items.map((item) {
                   return DropdownMenuItem<T>(
                     value: item,
-                    child: Text(item.toString()),
+                    child: Text(
+                      item.toString(),
+                      style: TextStyle(
+                        color: AppColors.context(context).textColor,
+                      ),
+                    ),
                   );
                 }).toList(),
             onChanged: onChanged,

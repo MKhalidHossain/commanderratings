@@ -37,7 +37,7 @@ class ReviewCard extends StatelessWidget {
                     ),
                   ),
                 ),
-                ShowRating(rating: review.nineStarRating),
+                ShowRating(rating: review.tenStarRating),
               ],
             ),
             const SizedBox(height: 8),
