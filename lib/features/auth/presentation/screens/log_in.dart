@@ -1,6 +1,6 @@
 import 'package:commanderratings/app.dart';
 import 'package:commanderratings/core/headers/header_for_auth_three_man.dart';
-import 'package:commanderratings/features/add_commander/presentation/widgets/outlined_text_field_widget.dart';
+import 'package:commanderratings/core/widgets/outlined_text_field_widget.dart';
 import 'package:commanderratings/features/auth/core/domain_or_model/authentication_model.dart';
 import 'package:commanderratings/features/auth/presentation/screens/lost_password.dart';
 import 'package:commanderratings/features/auth/presentation/screens/sign_up.dart';

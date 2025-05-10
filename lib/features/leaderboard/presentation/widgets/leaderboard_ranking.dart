@@ -6,44 +6,44 @@ class LeaderboardRanking extends StatefulWidget {
 
   final List<Map<String, dynamic>> leaderboardData = const [
     {
-      'name': 'John Doe',
+      'name': 'Daniel J. Markh',
       'rank': 1,
-      'score': 100,
+      'score': 2800,
       'commanderCatagory': 'Air Force',
       'speciality': 'None',
     },
     {
-      'name': 'John Doe',
+      'name': 'Lawrance Wyatt, Jr. (Rat)',
       'rank': 1,
-      'score': 100,
+      'score': 2730,
       'commanderCatagory': 'Air Force',
       'speciality': 'None',
     },
     {
-      'name': 'John Doe',
+      'name': 'Jeffray Adoms (Rat)',
       'rank': 1,
-      'score': 100,
+      'score': 1518,
       'commanderCatagory': 'Air Force',
       'speciality': 'None',
     },
     {
-      'name': 'John Doe',
+      'name': 'Alexander D. Vanlear (Rat)',
       'rank': 1,
-      'score': 100,
+      'score': 875,
       'commanderCatagory': 'Air Force',
       'speciality': 'None',
     },
     {
-      'name': 'John Doe',
+      'name': 'Daniel J. Markh',
       'rank': 1,
-      'score': 100,
+      'score': 830,
       'commanderCatagory': 'Air Force',
       'speciality': 'None',
     },
     {
-      'name': 'John Doe',
+      'name': 'Daniel J. Markh',
       'rank': 1,
-      'score': 100,
+      'score': 770,
       'commanderCatagory': 'Air Force',
       'speciality': 'None',
     },
@@ -85,16 +85,19 @@ class _LeaderboardContentState extends State<LeaderboardRanking> {
                     Text(
                       data['score'].toString(),
                       style: const TextStyle(
+                        fontFamily: 'aero_matics',
                         fontWeight: FontWeight.bold,
-                        fontSize: 12,
+                        fontSize: 14,
                         color: Colors.amber,
                       ),
                     ),
                     const SizedBox(width: 8),
+
                     Text(
                       data['name'],
                       style: const TextStyle(
-                        fontSize: 12,
+                        fontFamily: 'aero_matics',
+                        fontSize: 14,
                         color: Colors.red,
                         fontWeight: FontWeight.bold,
                       ),

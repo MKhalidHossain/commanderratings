@@ -46,6 +46,9 @@ class AppColors {
   final Color tabBarColor;
   final Color shadowColor;
   final Color errorColor;
+  final Color smallContainerColor;
+  final Color iconOutsideFillColor;
+  final Color starIconColor;
 
   AppColors._internalLight()
     : textColor = Colors.black,
@@ -55,11 +58,11 @@ class AppColors {
       backgroundColor = Colors.white,
       iconColor = Colors.black,
       secondaryAccentColor = _secondaryActionColor,
-      buttonColor = Colors.black,
+      buttonColor = Colors.black45,
       buttonContentColor = Colors.white,
       activeButtonContentColor = Colors.white,
       inActiveButtonContentColor = Colors.grey.shade200,
-      inActiveButtonColor = Colors.grey.shade700,
+      inActiveButtonColor = Colors.grey.shade300,
       drawerColor = Colors.white,
       fillColor = Colors.transparent,
       hintColor = Colors.grey.shade700,
@@ -72,7 +75,10 @@ class AppColors {
       popupContentColor = Colors.black,
       shadowColor = const Color(0x1F000000),
       errorColor = Colors.red,
-      tabBarColor = Colors.white;
+      tabBarColor = Colors.white,
+      smallContainerColor = Colors.grey.shade100,
+      iconOutsideFillColor = Colors.white,
+      starIconColor = Colors.blueGrey.shade400;
 
   AppColors._internalDark()
     : textColor = Colors.white,
@@ -82,11 +88,11 @@ class AppColors {
       contentBoxGreyColor = Colors.grey.shade800,
       iconColor = Colors.white,
       secondaryAccentColor = _secondaryActionColor,
-      buttonColor = Colors.white,
+      buttonColor = Colors.transparent,
       buttonContentColor = Colors.black,
       activeButtonContentColor = Colors.white,
       inActiveButtonContentColor = Colors.grey.shade500,
-      inActiveButtonColor = Colors.grey.shade900,
+      inActiveButtonColor = Colors.transparent,
       drawerColor = Colors.black,
       fillColor = Colors.transparent,
       hintColor = Colors.grey.shade400,
@@ -99,7 +105,10 @@ class AppColors {
       popupBackgroundColor = Colors.black,
       popupContentColor = Colors.white,
       shadowColor = const Color.fromARGB(146, 124, 123, 123),
-      tabBarColor = Colors.black;
+      tabBarColor = Colors.black,
+      smallContainerColor = Colors.grey.shade600,
+      iconOutsideFillColor = Colors.grey.shade600,
+      starIconColor = Colors.yellow;
 
   factory AppColors.light() {
     return _lightInstance;

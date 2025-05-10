@@ -1,4 +1,4 @@
-
+import 'package:commanderratings/core/utils/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class OutlinedTextFieldWidget extends StatelessWidget {
@@ -37,7 +37,7 @@ class OutlinedTextFieldWidget extends StatelessWidget {
           child: TextField(
             controller: controller,
             keyboardType: textInputType,
-            style: TextStyle(color: Colors.black),
+            style: TextStyle(color: AppColors.context(context).textColor),
             decoration: InputDecoration(
               //labelText: lebel,
               labelStyle: TextStyle(color: Colors.grey),

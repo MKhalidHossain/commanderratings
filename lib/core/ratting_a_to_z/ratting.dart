@@ -1,3 +1,4 @@
+import 'package:commanderratings/core/utils/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(const MaterialApp(home: RatingPage()));
@@ -53,17 +54,24 @@ class ShowRating extends StatelessWidget {
       children: List.generate(10, (index) {
         double currentStar = index + 1;
         if (rating >= currentStar) {
-          return const Icon(Icons.star, color: Colors.yellow, size: 20);
-        } else if (rating + 0.5 >= currentStar) {
           return const Icon(
-            Icons.star_half_outlined,
+            Icons.star,
             color: Colors.yellow,
+            shadows: [Shadow(blurRadius: 5, color: Colors.red)],
             size: 20,
           );
+        } else if (rating + 0.5 >= currentStar) {
+          return Icon(
+            Icons.star_half_outlined,
+            color: Colors.yellow,
+            shadows: [Shadow(blurRadius: 5, color: Colors.blueGrey.shade400)],
+            size: 20,
+            //20,
+          );
         } else {
-          return const Icon(
+          return Icon(
             Icons.star_border_outlined,
-            color: Colors.white,
+            color: AppColors.context(context).starIconColor,
             size: 20,
           );
         }

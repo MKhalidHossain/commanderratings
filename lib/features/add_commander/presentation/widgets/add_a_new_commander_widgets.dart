@@ -1,11 +1,10 @@
 import 'package:commanderratings/core/widgets/normal_custom_button.dart';
 import 'package:commanderratings/core/widgets/wide_custom_button.dart';
-import 'package:commanderratings/features/add_commander/presentation/widgets/custom_dropdawon_field_widget.dart';
+import 'package:commanderratings/core/widgets/custom_dropdawon_field_widget.dart';
 import 'package:flutter/material.dart';
 
-
 import '../../../../core/utils/constants/app_colors.dart';
-import 'outlined_text_field_widget.dart';
+import '../../../../core/widgets/outlined_text_field_widget.dart';
 
 class AddANewCommanderWidgets extends StatefulWidget {
   const AddANewCommanderWidgets({super.key});
@@ -73,7 +72,7 @@ class _AddANewCommanderWidgetsState extends State<AddANewCommanderWidgets> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    // Size size = MediaQuery.of(context).size;
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(

@@ -21,7 +21,7 @@ class ContainerForCommanderDetails extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       margin: const EdgeInsets.all(8),
       decoration: BoxDecoration(
-        color: Colors.grey.shade600,
+        color: AppColors.context(context).smallContainerColor,
         borderRadius: BorderRadius.circular(8),
         border: Border.all(color: AppColors.context(context).borderColor),
       ),

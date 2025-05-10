@@ -8,15 +8,17 @@ class CustomDropdownFieldWidget<T> extends StatelessWidget {
   final List<T> items;
   final void Function(T?)? onChanged;
   final String? Function(T?)? validator;
+  final hinttext;
 
   const CustomDropdownFieldWidget({
     super.key,
     // required this.label,
-    required this.text,
+    this.text,
     required this.value,
     required this.items,
     required this.onChanged,
     required this.validator,
+    this.hinttext = 'Select',
   });
 
   @override
@@ -38,7 +40,7 @@ class CustomDropdownFieldWidget<T> extends StatelessWidget {
           height: 40,
           child: DropdownButtonFormField<T>(
             hint: Text(
-              'Select',
+              hinttext,
               style: TextStyle(color: AppColors.context(context).textColor),
             ),
             value: value,
@@ -66,7 +68,7 @@ class CustomDropdownFieldWidget<T> extends StatelessWidget {
                 ),
               ),
             ),
-            dropdownColor: AppColors.context(context).popupBackgroundColor,
+            dropdownColor: AppColors.context(context).contentBoxGreyColor,
             iconEnabledColor: AppColors.context(context).textColor,
             style: TextStyle(color: Colors.white, fontSize: 13),
             items:

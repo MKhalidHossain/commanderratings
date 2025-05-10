@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../core/headers/header_for_auth_three_man.dart';
 import '../../../../core/widgets/wide_custom_button.dart';
-import '../../../add_commander/presentation/widgets/outlined_text_field_widget.dart';
+import '../../../../core/widgets/outlined_text_field_widget.dart';
 import '../../core/domain_or_model/authentication_model.dart';
 
 class LostPasswordScreen extends StatefulWidget {

@@ -7,6 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
+import '../widgets/search_and_recent_widget.dart';
+import '../widgets/user_reveiws_widgets.dart';
+
 class CommandersDetails extends StatefulWidget {
   const CommandersDetails({super.key});
 
@@ -15,6 +18,7 @@ class CommandersDetails extends StatefulWidget {
 }
 
 class _CommandersDetailsState extends State<CommandersDetails> {
+  //late TextEditingController _searchController;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -210,7 +214,7 @@ class _CommandersDetailsState extends State<CommandersDetails> {
                       ),
                       Divider(
                         color: Colors.grey,
-                        thickness: 0.5,
+                        thickness: 1,
                         endIndent: 60,
                         indent: 60,
                       ),
@@ -219,7 +223,7 @@ class _CommandersDetailsState extends State<CommandersDetails> {
                           'Notify us commander info changes',
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            fontWeight: FontWeight.normal,
+                            fontWeight: FontWeight.bold,
                             fontSize: 12,
                             color: Colors.red,
                           ),
@@ -237,7 +241,9 @@ class _CommandersDetailsState extends State<CommandersDetails> {
                             borderRadius: const BorderRadius.all(
                               Radius.circular(5),
                             ),
-                            border: Border.all(color: Colors.white),
+                            border: Border.all(
+                              color: AppColors.context(context).borderColor,
+                            ),
                           ),
                           child: Padding(
                             padding: const EdgeInsets.all(32.0),
@@ -273,6 +279,33 @@ class _CommandersDetailsState extends State<CommandersDetails> {
                                 const SizedBox(height: 8.0),
                                 ValueTextAeroMatics(text: 'Overall '),
                                 const SizedBox(height: 32.0),
+                                ShowRating(rating: 8.5),
+                                const SizedBox(height: 8),
+                                ValueTextAeroMatics(text: '8.5'),
+                                const SizedBox(height: 8.0),
+                                ValueTextAeroMatics(
+                                  text:
+                                      'Tactical Competence: Now Effectively Does the commander make operational decisions during Mission: Or Exercise? Are they tactically sound and capable of leading during high pressure Solution',
+                                ),
+                                const SizedBox(height: 32.0),
+
+                                //
+                                const SizedBox(height: 32.0),
+
+                                //SearchBar(controller: _searchController),
+
+                                //.................................... Search section with white border..........................
+                                // OutlinedTextFieldWidget(
+                                //   controller: controller,
+                                //   name: 'search',
+                                //   textInputType: textInputType,
+                                //   textFieldHeaderName: 'Search',
+                                // ),
+                                SearchAndRecentWidget(),
+                                const SizedBox(height: 32.0),
+                                
+
+                                UserReveiwsWidgets(),
                               ],
                             ),
                           ),
