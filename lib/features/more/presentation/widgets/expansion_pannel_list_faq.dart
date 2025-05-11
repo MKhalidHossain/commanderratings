@@ -1,3 +1,4 @@
+import 'package:commanderratings/core/utils/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class ExpansionPannelListFaq extends StatelessWidget {
@@ -22,7 +23,7 @@ class ExpansionPannelListFaq extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                        color: AppColors.context(context).textColor,
                       ),
                     ),
                   ),
@@ -34,7 +35,10 @@ class ExpansionPannelListFaq extends StatelessWidget {
                 child: Text(
                   maxLines: 15,
                   faq['answer']!,
-                  style: TextStyle(fontSize: 12, color: Colors.white),
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: AppColors.context(context).textColor,
+                  ),
                 ),
               ),
             );

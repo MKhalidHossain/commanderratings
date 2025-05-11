@@ -1,3 +1,4 @@
+import 'package:commanderratings/core/utils/constants/app_colors.dart';
 import 'package:commanderratings/core/widgets/normal_custom_button.dart';
 import 'package:commanderratings/core/widgets/title_subtitle_text.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +11,7 @@ class ContactSection extends StatefulWidget {
 }
 
 class _ContactSectionState extends State<ContactSection> {
-  final borderColor = Colors.white;
+  // final borderColor = Colors.white;
   final redColor = Colors.red;
 
   final TextEditingController nameController = TextEditingController();
@@ -67,7 +68,7 @@ class _ContactSectionState extends State<ContactSection> {
               padding: const EdgeInsets.symmetric(vertical: 16),
               decoration: BoxDecoration(
                 border: Border.all(
-                  color: Color(0xFFFFFFFF),
+                  color: AppColors.context(context).borderColor,
                   // top: BorderSide(color: Color(0xFFFFFFFF)),
                   // left: BorderSide(color: Color(0xFFFFFFFF)),
                   // right: BorderSide(color: Color(0xFFFFFFFF)),
@@ -81,12 +82,16 @@ class _ContactSectionState extends State<ContactSection> {
                       return Column(
                         children: [
                           const SizedBox(height: 12),
-                          Icon(item['icon'], color: borderColor, size: 32),
+                          Icon(
+                            item['icon'],
+                            color: AppColors.context(context).iconColor,
+                            size: 32,
+                          ),
                           const SizedBox(height: 12),
                           Text(
                             item['text'],
                             style: TextStyle(
-                              color: borderColor,
+                              color: AppColors.context(context).textColor,
                               fontSize: 16,
                               fontWeight: FontWeight.w500,
                             ),
@@ -96,7 +101,10 @@ class _ContactSectionState extends State<ContactSection> {
                               ? Column(
                                 children: [
                                   const SizedBox(height: 12),
-                                  Divider(color: borderColor),
+                                  Divider(
+                                    color:
+                                        AppColors.context(context).borderColor,
+                                  ),
                                 ],
                               )
                               : Text(''),
@@ -107,17 +115,29 @@ class _ContactSectionState extends State<ContactSection> {
             ),
 
             const SizedBox(height: 32),
-            TitleText(text: 'DROP A LINE', color: Colors.white),
+            TitleText(
+              text: 'DROP A LINE',
+              color: AppColors.context(context).textColor,
+            ),
             const SizedBox(height: 16),
             Row(
               children: [
-                Expanded(child: _inputField("First Name", nameController)),
+                Expanded(
+                  child: _inputField("First Name", context, nameController),
+                ),
                 const SizedBox(width: 8),
-                Expanded(child: _inputField("E-mail", emailController)),
+                Expanded(
+                  child: _inputField("E-mail", context, emailController),
+                ),
               ],
             ),
             const SizedBox(height: 8),
-            _inputField("Your Message", messageController, maxLines: 5),
+            _inputField(
+              "Your Message",
+              context,
+              messageController,
+              maxLines: 5,
+            ),
             const SizedBox(height: 16),
 
             SizedBox(
@@ -137,7 +157,9 @@ class _ContactSectionState extends State<ContactSection> {
                             margin: const EdgeInsets.only(bottom: 12),
                             padding: const EdgeInsets.all(12),
                             decoration: BoxDecoration(
-                              border: Border.all(color: Colors.white),
+                              border: Border.all(
+                                color: AppColors.context(context).borderColor,
+                              ),
                               borderRadius: BorderRadius.circular(8),
                             ),
                             child: Column(
@@ -145,15 +167,21 @@ class _ContactSectionState extends State<ContactSection> {
                               children: [
                                 Text(
                                   "Name: ${msg['name']}",
-                                  style: const TextStyle(color: Colors.white),
+                                  style: TextStyle(
+                                    color: AppColors.context(context).textColor,
+                                  ),
                                 ),
                                 Text(
                                   "Email: ${msg['email']}",
-                                  style: const TextStyle(color: Colors.white),
+                                  style: TextStyle(
+                                    color: AppColors.context(context).textColor,
+                                  ),
                                 ),
                                 Text(
                                   "Message: ${msg['message']}",
-                                  style: const TextStyle(color: Colors.white),
+                                  style: TextStyle(
+                                    color: AppColors.context(context).textColor,
+                                  ),
                                 ),
                               ],
                             ),
@@ -169,20 +197,21 @@ class _ContactSectionState extends State<ContactSection> {
 
   Widget _inputField(
     String hint,
+    BuildContext context,
     TextEditingController controller, {
     int maxLines = 1,
   }) {
     return TextField(
       controller: controller,
       maxLines: maxLines,
-      style: const TextStyle(color: Colors.white),
+      style: TextStyle(color: AppColors.context(context).textColor),
       decoration: InputDecoration(
         hintText: hint,
-        hintStyle: const TextStyle(color: Colors.white54),
+        hintStyle: TextStyle(color: Colors.grey[600]),
         filled: true,
         fillColor: Colors.transparent,
-        enabledBorder: const OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.white),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: AppColors.context(context).borderColor),
         ),
         focusedBorder: const OutlineInputBorder(
           borderSide: BorderSide(color: Colors.red),

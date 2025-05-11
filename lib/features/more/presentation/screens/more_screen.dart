@@ -3,7 +3,7 @@ import 'package:commanderratings/features/auth/presentation/screens/log_in.dart'
 import 'package:commanderratings/features/commander_details/presentation/screens/commanders_details.dart';
 import 'package:commanderratings/features/more/presentation/screens/others/about_screen.dart';
 import 'package:commanderratings/features/more/presentation/screens/others/contact_us.dart';
-import 'package:commanderratings/features/commanders_call/presentation/screens/all_post_blog/all_blog_post.dart';
+import 'package:commanderratings/features/commanders_call/presentation/screens/all_post_blog/commanders_call.dart';
 import 'package:commanderratings/features/commanders_call/presentation/screens/read_blog_post_details/call_of_commander.dart';
 import 'package:commanderratings/features/theme/presentation/screens/theme_ui.dart';
 import 'package:flutter/material.dart';

@@ -57,7 +57,7 @@ class _IsThisMeoOfficeEffectiveWeigetState
               padding: const EdgeInsets.symmetric(vertical: 16),
               decoration: BoxDecoration(
                 border: Border.all(
-                  color: Color(0xFFFFFFFF),
+                  color: AppColors.context(context).borderColor,
                   // top: BorderSide(color: Color(0xFFFFFFFF)),
                   // left: BorderSide(color: Color(0xFFFFFFFF)),
                   // right: BorderSide(color: Color(0xFFFFFFFF)),
@@ -75,22 +75,18 @@ class _IsThisMeoOfficeEffectiveWeigetState
                           SubTitleText(
                             text:
                                 "The Military Equal Opportunity (MEO) office plays a crucial role in maintaining fairness and equity within the military. Discrimination based on protected statuses has no place in the U.'S. military, and MEO provides service members with a formal avenue to report suspected discrimination for review and investigation. /These investigations are conducted by impartial third parties to eliminate bias and ensure a fair and just process/.\n",
-                            color: AppColors.context(context).textColor,
                           ),
                           SubTitleText(
                             text:
                                 "Once an investigation is completed, MEO generates a report and forwards it to the accused individual’s commander for review. If disciplinary action is warranted, the commander has the authority to administer non-judicial punishment. However, this is where the system begins to break down. With commanders holding full discretion over punishments—often without oversight from higher authorities—outcomes can be inconsistent and, at times, unjust. One service member may receive a mere verbal warning for an offense, while another, under a different commander, might face an Article 15 for the exact same infraction.\n",
-                            color: AppColors.context(context).textColor,
                           ),
                           SubTitleText(
                             text:
                                 "lack of standardized enforcement fosters resentment—not just among those facing harsher penalties, but also toward commanders who abuse their power by issuing disproportionate punishments. Instead of adhering to a consistent set of consequences for specific offenses, commanders are free to act as they see fit. So, what happens when a commander’s favored personnel are implicated in an MEO report?\n",
-                            color: AppColors.context(context).textColor,
                           ),
                           SubTitleText(
                             text:
                                 "The answer depends on the commander. More often than not, favoritism results in lighter punishments for some while others face severe consequences for similar offenses. Our platform sheds light on these discrepancies, allowing service members to report instances of biased disciplinary action.\n",
-                            color: AppColors.context(context).textColor,
                           ),
                         ],
                       ),
@@ -137,13 +133,20 @@ class _IsThisMeoOfficeEffectiveWeigetState
                         ),
                         Row(
                           children: [
-                            ImageButtonContainer(
-                              imagePath:
-                                  'assets/images/blog/image_button/for_light/fb_light.png',
-                              onPressed: () {
-                                // handle button press
-                              },
+                            Container(
+                              color: Colors.black,
+                              child: ImageButtonContainer(
+                                imagePath:
+                                    MediaQuery.of(context).platformBrightness ==
+                                            Brightness.light
+                                        ? 'assets/images/blog/image_button/for_dark/fb_dark.png'
+                                        : 'assets/images/blog/image_button/for_light/fb_light.png',
+                                onPressed: () {
+                                  // handle button press
+                                },
+                              ),
                             ),
+
                             ImageButtonContainer(
                               imagePath:
                                   'assets/images/blog/image_button/for_light/x_light.png',
@@ -194,17 +197,29 @@ class _IsThisMeoOfficeEffectiveWeigetState
             ),
 
             const SizedBox(height: 32),
-            TitleText(text: 'DROP A LINE', color: Colors.white),
+            TitleText(
+              text: 'DROP A LINE',
+              color: AppColors.context(context).textColor,
+            ),
             const SizedBox(height: 16),
             Row(
               children: [
-                Expanded(child: _inputField("First Name", nameController)),
+                Expanded(
+                  child: _inputField("First Name", context, nameController),
+                ),
                 const SizedBox(width: 8),
-                Expanded(child: _inputField("E-mail", emailController)),
+                Expanded(
+                  child: _inputField("E-mail", context, emailController),
+                ),
               ],
             ),
             const SizedBox(height: 8),
-            _inputField("Your Message", messageController, maxLines: 5),
+            _inputField(
+              "Your Message",
+              context,
+              messageController,
+              maxLines: 5,
+            ),
             const SizedBox(height: 16),
 
             SizedBox(
@@ -256,20 +271,21 @@ class _IsThisMeoOfficeEffectiveWeigetState
 
   Widget _inputField(
     String hint,
+    BuildContext context,
     TextEditingController controller, {
     int maxLines = 1,
   }) {
     return TextField(
       controller: controller,
       maxLines: maxLines,
-      style: const TextStyle(color: Colors.white),
+      style: TextStyle(color: AppColors.context(context).textColor),
       decoration: InputDecoration(
         hintText: hint,
-        hintStyle: const TextStyle(color: Colors.white54),
+        hintStyle: TextStyle(color: Colors.grey[800]),
         filled: true,
         fillColor: Colors.transparent,
-        enabledBorder: const OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.white),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: AppColors.context(context).textColor),
         ),
         focusedBorder: const OutlineInputBorder(
           borderSide: BorderSide(color: Colors.brown),

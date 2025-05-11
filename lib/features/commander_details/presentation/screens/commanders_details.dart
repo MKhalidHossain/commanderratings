@@ -1,12 +1,13 @@
 import 'package:commanderratings/core/ratting_a_to_z/ratting.dart';
 import 'package:commanderratings/core/utils/constants/app_colors.dart';
 import 'package:commanderratings/core/widgets/title_with_icon_prefix.dart';
+import 'package:commanderratings/features/commander_details/presentation/widgets/commander_details_header.dart';
 import 'package:commanderratings/features/commander_details/presentation/widgets/container_for_commander_details.dart';
 import 'package:commanderratings/features/commander_details/presentation/widgets/lebel_and_value_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-
+import '../widgets/bottom_sheet_leave_a_review.dart';
 import '../widgets/search_and_recent_widget.dart';
 import '../widgets/user_reveiws_widgets.dart';
 
@@ -41,43 +42,7 @@ class _CommandersDetailsState extends State<CommandersDetails> {
           child: Column(
             children: [
               const SizedBox(height: 8.0),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 24.0,
-                  vertical: 16.0,
-                ),
-                child: Column(
-                  children: [
-                    Image.asset(
-                      'assets/images/banner/banner_for_commanders_details.png',
-                      opacity: const AlwaysStoppedAnimation(.9),
-                      fit: BoxFit.cover,
-                      height: 300,
-                    ),
-                    const SizedBox(height: 12.0),
-                    Row(
-                      children: [
-                        Image.asset(
-                          'assets/icons/commander_bedge.png',
-                          fit: BoxFit.cover,
-                          height: 20,
-                          width: 20,
-                        ),
-                        const SizedBox(width: 5.0),
-                        Text(
-                          'Certified Great Leader',
-                          style: TextStyle(
-                            color: AppColors.context(context).textColor,
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-
+              CommanderDetailsHeader(),
               //.................................... After Banner section CNontent.........................................
               Padding(
                 padding: const EdgeInsets.all(0.0),
@@ -250,6 +215,7 @@ class _CommandersDetailsState extends State<CommandersDetails> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
+                                //.................................... Leave a Review button..........................
                                 OutlinedButton(
                                   style: OutlinedButton.styleFrom(
                                     alignment: Alignment.center,
@@ -265,7 +231,15 @@ class _CommandersDetailsState extends State<CommandersDetails> {
                                       vertical: 8,
                                     ),
                                   ),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    showModalBottomSheet(
+                                      context: context,
+                                      builder: (BuildContext contex) {
+                                        // ......bottom sheet content..........
+                                        return BottomSheetLeaveAReview();
+                                      },
+                                    );
+                                  },
                                   child: Text(
                                     'Leave a Review',
                                     style: TextStyle(
@@ -303,7 +277,6 @@ class _CommandersDetailsState extends State<CommandersDetails> {
                                 // ),
                                 SearchAndRecentWidget(),
                                 const SizedBox(height: 32.0),
-                                
 
                                 UserReveiwsWidgets(),
                               ],

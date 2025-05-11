@@ -1,3 +1,4 @@
+import 'package:commanderratings/core/utils/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class ThreeIconImageForHeader extends StatelessWidget {
@@ -10,7 +11,7 @@ class ThreeIconImageForHeader extends StatelessWidget {
       children: [
         IconButton(
           icon: Icon(Icons.arrow_back),
-          color: Colors.white,
+          color: AppColors.context(context).iconColor,
           iconSize: 30,
           onPressed: () {
             Navigator.pop(context);

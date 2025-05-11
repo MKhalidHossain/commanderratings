@@ -1,3 +1,4 @@
+import 'package:commanderratings/core/utils/constants/app_colors.dart';
 import 'package:commanderratings/core/widgets/title_subtitle_text.dart';
 import 'package:flutter/material.dart';
 
@@ -35,41 +36,34 @@ class AboutScreen extends StatelessWidget {
                         TitleText(
                           fontSize: 24,
                           text: 'MILITARY LEADERSHIP AND ACCOUNTABILITY',
-                          color: Colors.white,
                         ),
                         SubTitleText(
                           text:
                               'Military leadership often champions transparency as a hallmark of effective command. Yet, in reality, the officer corps often operates like an exclusive club—a “good ol’ boy” network with little accountability. The uncomfortable truth is that officers often protect one another.',
-                          color: Colors.white,
                         ),
                         const SizedBox(height: 24),
                         SubTitleText(
                           text:
                               'Commanders only hold one another accountable when misconduct becomes public, forcing higher-ups to intervene.',
-                          color: Colors.white,
                         ),
                         const SizedBox(height: 24),
                         TitleText(
                           fontSize: 24,
                           text:
                               'THE PROBLEM WITH “DIFFERENT SPANKS FOR DIFFERENT RANKS”',
-                          color: Colors.white,
                         ),
                         SubTitleText(
                           text:
                               'The outdated mindset of “different spanks for different ranks” epitomizes toxic leadership. If an officer gets a DUI, their punishment should match that of a lower-enlisted member because the standards should apply equally to all military personnel. The idea that rank diminishes accountability is flawed and perpetuates an environment where leaders—who need accountability the most—are left unchecked.',
-                          color: Colors.white,
                         ),
                         const SizedBox(height: 24),
                         TitleText(
                           fontSize: 24,
                           text: 'WHY COMMANDER RATINGS WAS CREATED',
-                          color: Colors.white,
                         ),
                         SubTitleText(
                           text:
                               'Commander Ratings was created to provide military personnel a secure platform to voice concerns about their leadership, without the risk of retaliation. It gives higher leadership an unfiltered view of commander effectiveness, straight from those most impacted by it. It allows you, the user, to see how others view a commander and identify the negatives or positives of their command.',
-                          color: Colors.white,
                         ),
                         const SizedBox(height: 10),
                       ],

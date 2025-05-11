@@ -24,7 +24,7 @@ class _TitleTextState extends State<TitleText> {
       maxLines: 5,
       widget.text,
       style: TextStyle(
-        color: widget.color ?? AppColors.context(context).textColor,
+        color: AppColors.context(context).textColor,
         fontSize: widget.fontSize, // default size
         fontWeight: FontWeight.bold, // default bold
       ),
