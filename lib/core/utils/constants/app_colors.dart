@@ -49,6 +49,8 @@ class AppColors {
   final Color smallContainerColor;
   final Color iconOutsideFillColor;
   final Color starIconColor;
+  final Color filterSelectedTextColor;
+  final Color filterUnselectedTextColor;
 
   AppColors._internalLight()
     : textColor = Colors.black,
@@ -78,7 +80,9 @@ class AppColors {
       tabBarColor = Colors.white,
       smallContainerColor = Colors.grey.shade100,
       iconOutsideFillColor = Colors.white,
-      starIconColor = Colors.blueGrey.shade400;
+      starIconColor = Colors.blueGrey.shade400,
+      filterSelectedTextColor = Colors.white,
+      filterUnselectedTextColor = Colors.black;
 
   AppColors._internalDark()
     : textColor = Colors.white,
@@ -108,7 +112,9 @@ class AppColors {
       tabBarColor = Colors.black,
       smallContainerColor = Colors.grey.shade600,
       iconOutsideFillColor = Colors.grey.shade600,
-      starIconColor = Colors.yellow;
+      starIconColor = Colors.yellow,
+      filterSelectedTextColor = Colors.white,
+      filterUnselectedTextColor = Colors.white;
 
   factory AppColors.light() {
     return _lightInstance;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class NormalCustomButton extends StatelessWidget {
+class ButtionForSeviceBranches extends StatelessWidget {
   final String text;
   final VoidCallback onPressed;
   final double height;
@@ -9,20 +9,19 @@ class NormalCustomButton extends StatelessWidget {
   final Color textColor;
   final Color fillColor;
 
-  const NormalCustomButton({
+  const ButtionForSeviceBranches({
     super.key,
     required this.text,
     required this.onPressed,
-    this.height = 50,
-    this.weight = 200,
-    this.fontSize = 14,
+    this.height = 30 ,
+    this.weight = 70,
+    this.fontSize = 12,
     this.textColor = Colors.white,
-    this.fillColor = Colors.red,
+    this.fillColor = Colors.grey,
   });
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return SizedBox(
       height: height,
       width: weight,
@@ -30,7 +29,7 @@ class NormalCustomButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           backgroundColor: fillColor, // Make it red like in your design
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 3),
         ),
         onPressed: onPressed,
         child: Text(

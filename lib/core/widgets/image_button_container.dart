@@ -14,8 +14,8 @@ class ImageButtonContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.transparent,
-      width: 60,
-      height: 60,
+      width: 40,
+      height: 40,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           padding: EdgeInsets.zero, // remove default padding
@@ -24,10 +24,7 @@ class ImageButtonContainer extends StatelessWidget {
           elevation: 0,
         ),
         onPressed: onPressed ?? () {},
-        child: Image.asset(
-          imagePath,
-          fit: BoxFit.cover,
-        ),
+        child: Image.asset(imagePath, fit: BoxFit.cover),
       ),
     );
   }

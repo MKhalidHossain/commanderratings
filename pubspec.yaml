@@ -66,6 +66,7 @@ flutter:
     - assets/images/qr/
     - assets/images/headers/
     - assets/images/blog/image_button/for_light/
+    - assets/images/blog/image_button/for_dark/
     - assets/icons/
     - assets/
     - assets/images/commander/

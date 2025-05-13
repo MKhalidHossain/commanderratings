@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'core/widgets/custom_bottom_nev_bar.dart';
-import 'features/all_commanders /presentation/screens/all_commanders_screen.dart';
+import 'features/all_commanders/presentation/screens/all_commanders_screen.dart';
 import 'features/home/presentation/screens/home_screen.dart';
 import 'features/leaderboard/presentation/screens/leaderboard_screen.dart';
 import 'features/more/presentation/screens/more_screen.dart';

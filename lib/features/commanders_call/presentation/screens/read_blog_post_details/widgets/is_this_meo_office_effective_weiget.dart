@@ -14,8 +14,7 @@ class IsThisMeoOfficeEffectiveWeiget extends StatefulWidget {
 
 class _IsThisMeoOfficeEffectiveWeigetState
     extends State<IsThisMeoOfficeEffectiveWeiget> {
-  final borderColor = Colors.white;
-  final redColor = Colors.red;
+
 
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
@@ -93,7 +92,7 @@ class _IsThisMeoOfficeEffectiveWeigetState
                     ),
                   ),
                   const SizedBox(height: 12),
-                  Divider(color: borderColor),
+                  Divider(color: AppColors.context(context).borderColor),
                   Container(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -133,30 +132,37 @@ class _IsThisMeoOfficeEffectiveWeigetState
                         ),
                         Row(
                           children: [
-                            Container(
-                              color: Colors.black,
-                              child: ImageButtonContainer(
-                                imagePath:
-                                    MediaQuery.of(context).platformBrightness ==
-                                            Brightness.light
-                                        ? 'assets/images/blog/image_button/for_dark/fb_dark.png'
-                                        : 'assets/images/blog/image_button/for_light/fb_light.png',
-                                onPressed: () {
-                                  // handle button press
-                                },
-                              ),
+                            ImageButtonContainer(
+                              imagePath:
+                                  // MediaQuery.of(context).platformBrightness ==
+                                  //         Brightness.dark
+                                  Theme.of(context).brightness ==
+                                          Brightness.light
+                                      ? 'assets/images/blog/image_button/for_dark/fb_dark.png'
+                                      : 'assets/images/blog/image_button/for_light/fb_light.png',
+                              onPressed: () {
+                                // handle button press
+                              },
                             ),
 
                             ImageButtonContainer(
                               imagePath:
-                                  'assets/images/blog/image_button/for_light/x_light.png',
+                                  Theme.of(context).brightness ==
+                                          Brightness.light
+                                      ? 'assets/images/blog/image_button/for_dark/x_dark.png'
+                                      : 'assets/images/blog/image_button/for_light/x_light.png',
                               onPressed: () {
                                 // handle button press
                               },
                             ),
                             ImageButtonContainer(
                               imagePath:
-                                  'assets/images/blog/image_button/for_light/tuter_light.png',
+                                  // MediaQuery.of(context).platformBrightness ==
+                                  //         Brightness.dark
+                                  Theme.of(context).brightness ==
+                                          Brightness.light
+                                      ? 'assets/images/blog/image_button/for_dark/tuter_dark.png'
+                                      : 'assets/images/blog/image_button/for_light/tuter_light.png',
                               onPressed: () {
                                 // handle button press
                               },
@@ -174,7 +180,7 @@ class _IsThisMeoOfficeEffectiveWeigetState
                     ),
                   ),
                   const SizedBox(height: 12),
-                  Divider(color: borderColor),
+                  Divider(color: AppColors.context(context).borderColor),
                   Container(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,

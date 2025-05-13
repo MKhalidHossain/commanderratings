@@ -42,8 +42,14 @@ class _TakeRatingState extends State<TakeRating> {
 
 class ShowRating extends StatelessWidget {
   final double rating;
+  final double iconSize;
 
-  const ShowRating({super.key, required this.rating});
+  const ShowRating({
+    super.key,
+    required this.rating,
+    //....................... default iconSize........................
+    this.iconSize = 20,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -54,25 +60,25 @@ class ShowRating extends StatelessWidget {
       children: List.generate(10, (index) {
         double currentStar = index + 1;
         if (rating >= currentStar) {
-          return const Icon(
+          return Icon(
             Icons.star,
             color: Colors.yellow,
             shadows: [Shadow(blurRadius: 5, color: Colors.red)],
-            size: 20,
+            size: iconSize,
           );
         } else if (rating + 0.5 >= currentStar) {
           return Icon(
             Icons.star_half_outlined,
             color: Colors.yellow,
             shadows: [Shadow(blurRadius: 5, color: Colors.blueGrey.shade400)],
-            size: 20,
+            size: iconSize,
             //20,
           );
         } else {
           return Icon(
             Icons.star_border_outlined,
             color: AppColors.context(context).starIconColor,
-            size: 20,
+            size: iconSize,
           );
         }
       }),

@@ -3,11 +3,15 @@ import 'package:flutter/material.dart';
 class WideCustomButton extends StatelessWidget {
   final String text;
   final VoidCallback onPressed;
+  final bool showIcon;
+  final IconData? sufixIcon;
 
   const WideCustomButton({
     super.key,
     required this.text,
     required this.onPressed,
+    this.showIcon = false,
+    this.sufixIcon,
   });
 
   @override
@@ -22,9 +26,19 @@ class WideCustomButton extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         ),
         onPressed: onPressed,
-        child: Text(
-          text,
-          style: const TextStyle(color: Colors.white, fontSize: 14),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              text,
+              style: const TextStyle(color: Colors.white, fontSize: 14),
+            ),
+            if(showIcon && sufixIcon != null) ...[
+              const SizedBox(width: 5),
+              Icon(sufixIcon, color: Colors.white),
+            ],
+            
+          ],
         ),
       ),
     );

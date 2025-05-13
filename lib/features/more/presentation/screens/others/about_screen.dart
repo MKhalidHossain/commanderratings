@@ -1,4 +1,3 @@
-import 'package:commanderratings/core/utils/constants/app_colors.dart';
 import 'package:commanderratings/core/widgets/title_subtitle_text.dart';
 import 'package:flutter/material.dart';
 

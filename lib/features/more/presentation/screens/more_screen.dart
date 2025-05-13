@@ -1,10 +1,10 @@
 import 'package:commanderratings/core/widgets/wide_custom_button_more.dart';
 import 'package:commanderratings/features/auth/presentation/screens/log_in.dart';
 import 'package:commanderratings/features/commander_details/presentation/screens/commanders_details.dart';
+import 'package:commanderratings/features/leave_a_review/presentation/screens/leave_a_review.dart';
 import 'package:commanderratings/features/more/presentation/screens/others/about_screen.dart';
 import 'package:commanderratings/features/more/presentation/screens/others/contact_us.dart';
-import 'package:commanderratings/features/commanders_call/presentation/screens/all_post_blog/commanders_call.dart';
-import 'package:commanderratings/features/commanders_call/presentation/screens/read_blog_post_details/call_of_commander.dart';
+import 'package:commanderratings/features/commanders_call/presentation/screens/commanders_calls/commanders_call.dart';
 import 'package:commanderratings/features/theme/presentation/screens/theme_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -75,25 +75,34 @@ class MoreScreen extends StatelessWidget {
                       );
                     },
                   ),
+                  // WideCustomButtonMore(
+                  //   text: 'CALL OF COMMANDER',
+                  //   onPressed: () {
+                  //     Navigator.push(
+                  //       context,
+                  //       MaterialPageRoute(
+                  //         builder: (context) => CallOfCommnder(),
+                  //       ),
+                  //     );
+                  //   },
+                  // ),
+                  // WideCustomButtonMore(
+                  //   text: 'COMMANDERS DETAILS',
+                  //   onPressed: () {
+                  //     Navigator.push(
+                  //       context,
+                  //       MaterialPageRoute(
+                  //         builder: (context) => CommandersDetails(),
+                  //       ),
+                  //     );
+                  //   },
+                  // ),
                   WideCustomButtonMore(
-                    text: 'CALL OF COMMANDER',
+                    text: 'LEAVE A REVIEW',
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
-                          builder: (context) => CallOfCommnder(),
-                        ),
-                      );
-                    },
-                  ),
-                  WideCustomButtonMore(
-                    text: 'COMMANDERS DETAILS',
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => CommandersDetails(),
-                        ),
+                        MaterialPageRoute(builder: (context) => LeaveAReview()),
                       );
                     },
                   ),
