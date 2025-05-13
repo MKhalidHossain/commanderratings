@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 class OutlinedTextFieldWidget extends StatelessWidget {
   final TextEditingController controller;
   final String name;
-  // final String lebel;
+  final bool isLable;
+  // final String? lebel;
   final TextInputType textInputType;
   final String textFieldHeaderName;
 
@@ -12,7 +13,8 @@ class OutlinedTextFieldWidget extends StatelessWidget {
     super.key,
     required this.controller,
     required this.name,
-    //required this.lebel,
+    this.isLable = false,
+    // this.lebel,
     required this.textInputType,
     required this.textFieldHeaderName,
   });
@@ -39,6 +41,8 @@ class OutlinedTextFieldWidget extends StatelessWidget {
             keyboardType: textInputType,
             style: TextStyle(color: AppColors.context(context).textColor),
             decoration: InputDecoration(
+              // labelText: isLable && lebel != null ? lebel : null,
+
               //labelText: lebel,
               labelStyle: TextStyle(color: Colors.grey),
               border: OutlineInputBorder(),
