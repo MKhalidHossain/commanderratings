@@ -1,5 +1,4 @@
 import 'package:commanderratings/core/utils/constants/app_colors.dart';
-import 'package:commanderratings/core/widgets/outlined_text_field_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

@@ -5,6 +5,7 @@ import 'package:commanderratings/features/leave_a_review/presentation/screens/le
 import 'package:commanderratings/features/more/presentation/screens/others/about_screen.dart';
 import 'package:commanderratings/features/more/presentation/screens/others/contact_us.dart';
 import 'package:commanderratings/features/commanders_call/presentation/screens/commanders_calls/commanders_call.dart';
+import 'package:commanderratings/features/onboarding/presentation/screens/onboarding1.dart';
 import 'package:commanderratings/features/theme/presentation/screens/theme_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -121,6 +122,15 @@ class MoreScreen extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => ContactUs()),
+                      );
+                    },
+                  ),
+                  WideCustomButtonMore(
+                    text: 'ONBOARDING',
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Onboarding1()),
                       );
                     },
                   ),

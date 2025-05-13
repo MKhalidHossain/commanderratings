@@ -5,6 +5,7 @@ class WideCustomButton extends StatelessWidget {
   final VoidCallback onPressed;
   final bool showIcon;
   final IconData? sufixIcon;
+  final double ?height;
 
   const WideCustomButton({
     super.key,
@@ -12,11 +13,13 @@ class WideCustomButton extends StatelessWidget {
     required this.onPressed,
     this.showIcon = false,
     this.sufixIcon,
+    this.height,
   });
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
+      height: height,
       width: double.infinity,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
@@ -33,11 +36,10 @@ class WideCustomButton extends StatelessWidget {
               text,
               style: const TextStyle(color: Colors.white, fontSize: 14),
             ),
-            if(showIcon && sufixIcon != null) ...[
+            if (showIcon && sufixIcon != null) ...[
               const SizedBox(width: 5),
               Icon(sufixIcon, color: Colors.white),
             ],
-            
           ],
         ),
       ),

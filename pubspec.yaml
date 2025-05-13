@@ -70,6 +70,7 @@ flutter:
     - assets/icons/
     - assets/
     - assets/images/commander/
+    - assets/images/onboarding/
     # - assets/images/blog/image_button/for_dark/
     # - assets/images/blog/image_button/for_light/
 
