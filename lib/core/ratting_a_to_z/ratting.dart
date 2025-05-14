@@ -13,32 +13,110 @@ class TakeRating extends StatefulWidget {
 }
 
 class _TakeRatingState extends State<TakeRating> {
-  double selectedRating = 0;
+  double selectedRating = 0.0;
+
+  void _updateRating(Offset localPosition, double width) {
+    final starWidth = width / 10;
+    double rawRating = localPosition.dx / starWidth;
+
+    // Clamp rating between 0.5 and 10.0
+    double newRating = (rawRating * 2).round() / 2;
+    newRating = newRating.clamp(0.5, 10.0);
+
+    setState(() {
+      selectedRating = newRating;
+    });
+    widget.onRatingSelected(selectedRating);
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Wrap(
-      children: List.generate(20, (index) {
-        double starValue = (index + 1) * 0.5;
-        bool isHalf = starValue % 1 != 0;
-
+    return LayoutBuilder(
+      builder: (context, constraints) {
         return GestureDetector(
-          onTap: () {
-            setState(() {
-              selectedRating = starValue;
-            });
-            widget.onRatingSelected(selectedRating);
+          onPanDown: (details) {
+            _updateRating(details.localPosition, constraints.maxWidth);
           },
-          child: Icon(
-            isHalf ? Icons.star_half : Icons.star,
-            color: starValue <= selectedRating ? Colors.yellow : Colors.white,
-            size: 32,
+          onPanUpdate: (details) {
+            _updateRating(details.localPosition, constraints.maxWidth);
+          },
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: List.generate(10, (index) {
+              double fullStarValue = (index + 1).toDouble();
+              IconData icon;
+
+              if (selectedRating >= fullStarValue) {
+                icon = Icons.star;
+              } else if (selectedRating >= fullStarValue - 0.5) {
+                icon = Icons.star_half;
+              } else {
+                icon = Icons.star_border;
+              }
+
+              return Icon(icon, color: Colors.yellow, size: 32);
+            }),
           ),
         );
-      }),
+      },
     );
   }
 }
+
+// class TakeRating extends StatefulWidget {
+//   final void Function(double) onRatingSelected;
+
+//   const TakeRating({super.key, required this.onRatingSelected});
+
+//   @override
+//   _TakeRatingState createState() => _TakeRatingState();
+// }
+
+// class _TakeRatingState extends State<TakeRating> {
+//   double selectedRating = 0.0;
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Row(
+//       mainAxisSize: MainAxisSize.min,
+//       children: List.generate(10, (index) {
+//         double fullStarValue = (index + 1).toDouble();
+
+//         return GestureDetector(
+//           onTapDown: (details) {
+//             final box = context.findRenderObject() as RenderBox;
+//             final localPosition = box.globalToLocal(details.globalPosition);
+
+//             final starWidth = box.size.width / 10;
+//             final tappedHalf = (localPosition.dx % starWidth) < (starWidth / 2);
+
+//             setState(() {
+//               selectedRating = index + (tappedHalf ? 0.5 : 1.0);
+//             });
+
+//             widget.onRatingSelected(selectedRating);
+//           },
+//           child: _buildStar(index),
+//         );
+//       }),
+//     );
+//   }
+
+//   Widget _buildStar(int index) {
+//     double starRating = index + 1.0;
+//     IconData icon;
+
+//     if (selectedRating >= starRating) {
+//       icon = Icons.star;
+//     } else if (selectedRating >= starRating - 0.5) {
+//       icon = Icons.star_half;
+//     } else {
+//       icon = Icons.star_border;
+//     }
+
+//     return Icon(icon, color: Colors.yellow, size: 36);
+//   }
+// }
 
 class ShowRating extends StatelessWidget {
   final double rating;

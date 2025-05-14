@@ -1,4 +1,6 @@
-import 'package:commanderratings/core/utils/constants/app_colors.dart';
+import 'package:commanderratings/core/ratting_a_to_z/ratting.dart';
+import 'package:commanderratings/core/widgets/lebel_and_value_text.dart';
+import 'package:commanderratings/features/leave_a_review/presentation/widgets/text_field_for_take_review.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -12,6 +14,16 @@ class LeaveAReview extends StatefulWidget {
 class _LeaveAReviewState extends State<LeaveAReview> {
   late TextEditingController titleController;
   late TextEditingController descriptionController;
+
+  double _userRating = 0.0;
+
+  void _handleRatingSelected(double rating) {
+    setState(() {
+      _userRating = rating;
+    });
+    // You can do additional logic here (e.g., save rating to backend)
+    print("User selected rating: $_userRating");
+  }
 
   @override
   void initState() {
@@ -39,65 +51,26 @@ class _LeaveAReviewState extends State<LeaveAReview> {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
-              height: 60,
-              child: TextField(
-                controller: titleController,
-                keyboardType: TextInputType.text,
-                style: TextStyle(color: AppColors.context(context).textColor),
-                decoration: InputDecoration(
-                  labelText: 'Title',
-                  labelStyle: TextStyle(color: Colors.grey),
-                  border: OutlineInputBorder(),
-                  isDense: true,
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.grey.shade500,
-                      width: 2.0,
-                    ),
-                  ),
-                ),
-              ),
+            TextFieldForTakeReview(
+              hintText: 'title',
+              controller: titleController,
             ),
             const SizedBox(height: 16),
-            SizedBox(
+            TextFieldForTakeReview(
+              hintText: 'Description',
+              controller: titleController,
               height: 100,
-              child: TextField(
-                controller: descriptionController,
-                keyboardType: TextInputType.text,
-                style: TextStyle(color: AppColors.context(context).textColor),
-                decoration: InputDecoration(
-                  labelText: 'Description',
-                  labelStyle: TextStyle(color: Colors.grey),
-                  border: OutlineInputBorder(),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.grey.shade500,
-                      width: 2.0,
-                    ),
-                  ),
-                ),
-              ),
             ),
-            Container(
-              height: 100,
-              width: double.infinity,
-              padding: EdgeInsets.symmetric(horizontal: 12),
-              decoration: BoxDecoration(
-                color: Colors.grey[400],
-                borderRadius: BorderRadius.circular(6),
-              ),
-              alignment: Alignment.topLeft,
-              child: TextField(
-                controller: descriptionController,
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintText: 'Description',
-                ),
-                maxLines: null,
-                style: TextStyle(fontSize: 16),
-              ),
+            const SizedBox(height: 32),
+            ValueTextAeroMatics(text: 'Rating', fontSize: 18),
+
+            TakeRating(onRatingSelected: _handleRatingSelected),
+            const SizedBox(height: 20),
+            Text(
+              'Selected Rating: $_userRating',
+              style: const TextStyle(fontSize: 20),
             ),
           ],
         ),

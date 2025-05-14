@@ -98,15 +98,15 @@ class MoreScreen extends StatelessWidget {
                   //     );
                   //   },
                   // ),
-                  WideCustomButtonMore(
-                    text: 'LEAVE A REVIEW',
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => LeaveAReview()),
-                      );
-                    },
-                  ),
+                  // WideCustomButtonMore(
+                  //   text: 'LEAVE A REVIEW',
+                  //   onPressed: () {
+                  //     Navigator.push(
+                  //       context,
+                  //       MaterialPageRoute(builder: (context) => LeaveAReview()),
+                  //     );
+                  //   },
+                  // ),
                   WideCustomButtonMore(
                     text: 'THEME',
                     onPressed: () {

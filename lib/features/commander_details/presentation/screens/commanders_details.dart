@@ -7,7 +7,7 @@ import 'package:commanderratings/features/commander_details/presentation/widgets
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import '../widgets/bottom_sheet_leave_a_review.dart';
+import '../../../leave_a_review/presentation/screens/leave_a_review.dart';
 import '../widgets/search_and_recent_widget.dart';
 import '../widgets/user_reveiws_widgets.dart';
 
@@ -236,7 +236,7 @@ class _CommandersDetailsState extends State<CommandersDetails> {
                                       context: context,
                                       builder: (BuildContext contex) {
                                         // ......bottom sheet content..........
-                                        return BottomSheetLeaveAReview();
+                                        return LeaveAReview();
                                       },
                                     );
                                   },

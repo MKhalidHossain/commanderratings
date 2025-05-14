@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 
 import '../../../../app.dart';
 import '../../../../core/widgets/wide_custom_button.dart';
-
 class Onboarding3 extends StatelessWidget {
   const Onboarding3({super.key});
 
@@ -52,7 +51,7 @@ class Onboarding3 extends StatelessWidget {
               Image.asset(
                 'assets/images/onboarding/onboarding3bg.jpg',
                 fit: BoxFit.cover,
-                opacity: const AlwaysStoppedAnimation(0.5),
+                opacity: const AlwaysStoppedAnimation(0.4),
                 height: size.height * 0.61,
               ),
               Positioned(

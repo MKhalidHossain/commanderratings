@@ -52,7 +52,7 @@ class Onboarding2 extends StatelessWidget {
               Image.asset(
                 'assets/images/onboarding/onboarding2bg.jpg',
                 fit: BoxFit.cover,
-                opacity: const AlwaysStoppedAnimation(0.5),
+                opacity: const AlwaysStoppedAnimation(0.4),
                 height: size.height * 0.55,
               ),
               Positioned(

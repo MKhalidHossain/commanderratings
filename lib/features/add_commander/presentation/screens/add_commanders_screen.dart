@@ -2,7 +2,6 @@ import 'package:commanderratings/core/utils/constants/app_colors.dart';
 import 'package:commanderratings/core/widgets/title_with_icon_prefix.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../widgets/add_a_new_commander_widgets.dart';
 
 class AddCommandersScreen extends StatelessWidget {
