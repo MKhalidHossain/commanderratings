@@ -1,7 +1,10 @@
+import 'dart:math' as math;
+
 import 'package:commanderratings/core/widgets/wide_custom_button.dart';
 import 'package:commanderratings/features/all_commanders/core/commanders_card.dart';
 import 'package:commanderratings/features/all_commanders/presentation/widgets/commanders_card_widget.dart';
 import 'package:commanderratings/features/all_commanders/presentation/widgets/filter_buttons_for_commanders.dart';
+import 'package:commanderratings/features/all_commanders/presentation/widgets/vertical_buttton.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:commanderratings/core/widgets/normal_custom_button.dart';
@@ -115,12 +118,13 @@ class _AllCommandersScreenState extends State<AllCommandersScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
         centerTitle: false,
         title: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: EdgeInsets.symmetric(horizontal: size.width * 0.01),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -129,7 +133,7 @@ class _AllCommandersScreenState extends State<AllCommandersScreen> {
                 text: 'Add Commmander +',
                 fontSize: 12,
                 height: 40,
-                weight: 140,
+                weight: 135,
                 onPressed: () {
                   Get.to(() => AddCommandersScreen());
                 },
@@ -137,7 +141,7 @@ class _AllCommandersScreenState extends State<AllCommandersScreen> {
             ],
           ),
         ),
-        leadingWidth: 20,
+        leadingWidth: size.width * 0.05,
       ),
       body: Stack(
         children: [
@@ -226,6 +230,30 @@ class _AllCommandersScreenState extends State<AllCommandersScreen> {
                       ),
                     );
                   }).toList(),
+            ),
+          ),
+
+          Positioned(
+            right: 10,
+            top: 65,
+            bottom: 60,
+            child: Column(
+              children: [
+                VerticalButtton(
+                  text: 'Top Rated',
+                  onPressed: () {},
+                  showIcon: true,
+                  sufixIcon: Icons.arrow_forward,
+                ),
+                VerticalButtton(
+                  height: 125,
+                  quarterTurens: 1,
+                  text: 'Lower Rated',
+                  onPressed: () {},
+                  showIcon: true,
+                  sufixIcon: Icons.arrow_forward,
+                ),
+              ],
             ),
           ),
         ],

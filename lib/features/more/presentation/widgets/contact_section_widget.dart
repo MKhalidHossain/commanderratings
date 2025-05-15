@@ -80,6 +80,7 @@ class _ContactSectionState extends State<ContactSection> {
                 children:
                     contactDetails.map((item) {
                       return Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           const SizedBox(height: 12),
                           Icon(
@@ -90,9 +91,10 @@ class _ContactSectionState extends State<ContactSection> {
                           const SizedBox(height: 12),
                           Text(
                             item['text'],
+                            textAlign: TextAlign.center,
                             style: TextStyle(
                               color: AppColors.context(context).textColor,
-                              fontSize: 16,
+                              fontSize: 15,
                               fontWeight: FontWeight.w500,
                             ),
                           ),
@@ -203,11 +205,15 @@ class _ContactSectionState extends State<ContactSection> {
   }) {
     return TextField(
       controller: controller,
+      textAlign: TextAlign.center,
       maxLines: maxLines,
-      style: TextStyle(color: AppColors.context(context).textColor),
+      style: TextStyle(
+        color: AppColors.context(context).textColor,
+        fontSize: 14,
+      ),
       decoration: InputDecoration(
         hintText: hint,
-        hintStyle: TextStyle(color: Colors.grey[600]),
+        hintStyle: TextStyle(color: Colors.grey[600], fontSize: 14),
         filled: true,
         fillColor: Colors.transparent,
         enabledBorder: OutlineInputBorder(

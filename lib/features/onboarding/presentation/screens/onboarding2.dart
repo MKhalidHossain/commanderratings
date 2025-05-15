@@ -29,7 +29,8 @@ class Onboarding2 extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.white70,
-                    fontSize: 40,
+
+                    fontSize: 32,
                     fontFamily: 'aero_matics',
                     fontWeight: FontWeight.bold,
                   ),
@@ -53,13 +54,14 @@ class Onboarding2 extends StatelessWidget {
                 'assets/images/onboarding/onboarding2bg.jpg',
                 fit: BoxFit.cover,
                 opacity: const AlwaysStoppedAnimation(0.4),
-                height: size.height * 0.55,
+                height: size.height * 0.5,
+                width: double.infinity,
               ),
               Positioned(
                 bottom: 0,
                 left: 0,
                 right: 0,
-                top: size.height * 0.425,
+                top: size.height * 0.375,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 32.0),
                   child: Column(

@@ -10,7 +10,7 @@ class TitleText extends StatefulWidget {
     super.key,
     required this.text,
     this.color,
-    this.fontSize = 15, // default color is black
+    this.fontSize = 18, // default color is black
   });
 
   @override
@@ -51,8 +51,9 @@ class SubTitleText extends StatelessWidget {
         color:
             color ??
             AppColors.context(context).textColor, // fallback to default color
-        fontSize: 11, // subtitle font size (smaller)
-        fontWeight: FontWeight.w500, // subtitle medium weight
+        fontSize: 13, // subtitle font size (smaller)
+        fontWeight: FontWeight.w500,
+        // letterSpacing: 1.0, // subtitle medium weight
       ),
     );
   }

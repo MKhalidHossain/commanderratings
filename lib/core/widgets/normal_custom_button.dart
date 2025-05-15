@@ -8,21 +8,24 @@ class NormalCustomButton extends StatelessWidget {
   final double fontSize;
   final Color textColor;
   final Color fillColor;
+  final bool showIcon;
+  final IconData? sufixIcon;
 
   const NormalCustomButton({
     super.key,
     required this.text,
     required this.onPressed,
-    this.height = 50,
-    this.weight = 200,
+    this.height = 40,
+    this.weight = 140,
     this.fontSize = 14,
     this.textColor = Colors.white,
     this.fillColor = Colors.red,
+    this.showIcon = false,
+    this.sufixIcon,
   });
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return SizedBox(
       height: height,
       width: weight,
@@ -33,9 +36,15 @@ class NormalCustomButton extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
         ),
         onPressed: onPressed,
-        child: Text(
-          text,
-          style: TextStyle(color: textColor, fontSize: fontSize),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(text, style: TextStyle(color: textColor, fontSize: fontSize)),
+            if (showIcon && sufixIcon != null) ...[
+              const SizedBox(width: 5),
+              Icon(sufixIcon, color: Colors.white),
+            ],
+          ],
         ),
       ),
     );

@@ -12,7 +12,7 @@ class LabelText extends StatelessWidget {
     return Text(
       text,
       style: TextStyle(
-        fontWeight: FontWeight.normal,
+        fontWeight: FontWeight.w900,
         fontSize: fontSize,
         color: AppColors.context(context).textColor,
       ),
@@ -27,7 +27,7 @@ class ValueTextAeroMatics extends StatelessWidget {
   const ValueTextAeroMatics({
     super.key,
     required this.text,
-    this.fontSize = 14,
+    this.fontSize = 12,
     this.fontWeight = FontWeight.w500,
   });
 

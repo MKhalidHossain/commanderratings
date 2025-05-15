@@ -56,6 +56,7 @@ class LeaderboardRanking extends StatefulWidget {
 class _LeaderboardContentState extends State<LeaderboardRanking> {
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: ListView.builder(
@@ -66,7 +67,7 @@ class _LeaderboardContentState extends State<LeaderboardRanking> {
         itemBuilder: (context, index) {
           final data = widget.leaderboardData[index];
           return Container(
-            height: 130,
+            // height: size.height * 0.175,
             margin: const EdgeInsets.only(bottom: 10),
             padding: EdgeInsets.all(16.0),
             decoration: BoxDecoration(
@@ -76,7 +77,6 @@ class _LeaderboardContentState extends State<LeaderboardRanking> {
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-
               children: [
                 Text('#' + data['rank'].toString()),
                 const SizedBox(height: 8),

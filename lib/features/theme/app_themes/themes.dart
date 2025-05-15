@@ -9,10 +9,10 @@ import 'text_theme.dart';
 class AppTheme extends GetxController {
   AppTheme();
 
-// Reactive themeMode variable
+  // Reactive themeMode variable
   Rx<ThemeMode> themeMode = ThemeMode.system.obs;
 
-// Corrected dark theme change method
+  // Corrected dark theme change method
   // void changeThemeToDart(ThemeMode mode) {
   //   themeMode.value = ThemeMode.dark;
 
@@ -25,7 +25,7 @@ class AppTheme extends GetxController {
   //   themeMode.value = ThemeMode.light;
   //   update();
   // }
-   void changeThemeToDark() {
+  void changeThemeToDark() {
     themeMode.value = ThemeMode.dark;
     Get.changeThemeMode(ThemeMode.dark);
   }
@@ -34,8 +34,6 @@ class AppTheme extends GetxController {
     themeMode.value = ThemeMode.light;
     Get.changeThemeMode(ThemeMode.light);
   }
-
-
 
   static ThemeData get lightTheme {
     dekhao("light theme called");
@@ -47,7 +45,7 @@ class AppTheme extends GetxController {
       primaryColorLight: AppColors.light().primaryColor,
       primaryColorDark: AppColors.light().primaryColor,
       useMaterial3: true,
-      fontFamily: 'Poppins',
+      fontFamily: 'AeroMatics',
       brightness: Brightness.light,
       colorScheme: ColorScheme.fromSwatch(
         accentColor: AppColors.light().primaryColor,
@@ -79,17 +77,15 @@ class AppTheme extends GetxController {
   static ThemeData get darkTheme {
     dekhao("dark theme called");
     return ThemeData(
-       checkboxTheme: CheckboxThemeData(
+      checkboxTheme: CheckboxThemeData(
         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        visualDensity: VisualDensity(
-          horizontal: 0, vertical: 0
-        )
+        visualDensity: VisualDensity(horizontal: 0, vertical: 0),
       ),
       primaryTextTheme: DTextTheme.darkTextTheme,
       primaryColorLight: AppColors.dark().textColor,
       primaryColorDark: AppColors.dark().backgroundColor,
       useMaterial3: true,
-      fontFamily: 'Poppins',
+      fontFamily: 'AeroMatics',
       brightness: Brightness.dark,
       colorScheme: ColorScheme.fromSwatch(
         accentColor: AppColors.dark().primaryColor,

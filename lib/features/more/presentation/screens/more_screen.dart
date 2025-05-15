@@ -1,7 +1,5 @@
 import 'package:commanderratings/core/widgets/wide_custom_button_more.dart';
 import 'package:commanderratings/features/auth/presentation/screens/log_in.dart';
-import 'package:commanderratings/features/commander_details/presentation/screens/commanders_details.dart';
-import 'package:commanderratings/features/leave_a_review/presentation/screens/leave_a_review.dart';
 import 'package:commanderratings/features/more/presentation/screens/others/about_screen.dart';
 import 'package:commanderratings/features/more/presentation/screens/others/contact_us.dart';
 import 'package:commanderratings/features/commanders_call/presentation/screens/commanders_calls/commanders_call.dart';
@@ -20,6 +18,7 @@ class MoreScreen extends StatelessWidget {
     return Scaffold(
       body: Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           title: Padding(
             padding: const EdgeInsets.all(24.0),
             child: Row(

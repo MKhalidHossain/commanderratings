@@ -34,7 +34,7 @@ class LeadershipCardWidget extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     color: Colors.white,
-                    fontSize: 20,
+                    fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -51,7 +51,7 @@ class LeadershipCardWidget extends StatelessWidget {
             style: TextStyle(
               color: AppColors.context(context).textColor,
               fontFamily: "aero_matics",
-              fontSize: 18,
+              fontSize: 14,
             ),
           ),
         ),

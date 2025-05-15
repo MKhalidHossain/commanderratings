@@ -1,5 +1,6 @@
 import 'package:commanderratings/core/ratting_a_to_z/ratting.dart';
 import 'package:commanderratings/core/widgets/lebel_and_value_text.dart';
+import 'package:commanderratings/core/widgets/title_subtitle_text.dart';
 import 'package:commanderratings/features/leave_a_review/presentation/widgets/text_field_for_take_review.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -37,7 +38,7 @@ class _LeaveAReviewState extends State<LeaveAReview> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: const Text('Leave a Review'),
+        title: TitleText(text: 'Leave a Review'),
         centerTitle: false,
         actions: [
           IconButton(
@@ -64,7 +65,8 @@ class _LeaveAReviewState extends State<LeaveAReview> {
               height: 100,
             ),
             const SizedBox(height: 32),
-            ValueTextAeroMatics(text: 'Rating', fontSize: 18),
+            LabelText(text: 'Select Rating'),
+            const SizedBox(height: 8),
 
             TakeRating(onRatingSelected: _handleRatingSelected),
             const SizedBox(height: 20),

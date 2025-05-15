@@ -54,6 +54,7 @@ class Onboarding1 extends StatelessWidget {
                 fit: BoxFit.cover,
                 opacity: const AlwaysStoppedAnimation(0.4),
                 height: size.height * 0.5,
+                width: double.infinity,
               ),
               Positioned(
                 bottom: 0,

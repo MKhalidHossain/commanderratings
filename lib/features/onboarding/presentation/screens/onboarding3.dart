@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import '../../../../app.dart';
 import '../../../../core/widgets/wide_custom_button.dart';
+
 class Onboarding3 extends StatelessWidget {
   const Onboarding3({super.key});
 
@@ -28,7 +29,7 @@ class Onboarding3 extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.white70,
-                    fontSize: 42,
+                    fontSize: 32,
                     fontFamily: 'aero_matics',
                     fontWeight: FontWeight.bold,
                   ),
@@ -52,13 +53,14 @@ class Onboarding3 extends StatelessWidget {
                 'assets/images/onboarding/onboarding3bg.jpg',
                 fit: BoxFit.cover,
                 opacity: const AlwaysStoppedAnimation(0.4),
-                height: size.height * 0.61,
+                height: size.height * 0.50,
+                width: double.infinity,
               ),
               Positioned(
                 bottom: 0,
                 left: 0,
                 right: 0,
-                top: size.height * 0.48,
+                top: size.height * 0.375,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 32.0),
                   child: Column(

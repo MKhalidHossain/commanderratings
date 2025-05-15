@@ -43,7 +43,7 @@ class _CommandersDetailsState extends State<CommandersDetails> {
             children: [
               const SizedBox(height: 8.0),
               CommanderDetailsHeader(),
-              //.................................... After Banner section CNontent.........................................
+              //.................................... After Banner section Content.........................................
               Padding(
                 padding: const EdgeInsets.all(0.0),
                 child: Container(
@@ -115,7 +115,7 @@ class _CommandersDetailsState extends State<CommandersDetails> {
                                         Text(
                                           'Service Branches: ',
                                           style: TextStyle(
-                                            fontWeight: FontWeight.normal,
+                                            fontWeight: FontWeight.w900,
                                             fontSize: 14,
                                             color: Colors.red,
                                           ),
@@ -139,7 +139,6 @@ class _CommandersDetailsState extends State<CommandersDetails> {
                                         LabelText(text: 'Unit:'),
                                         const SizedBox(width: 20),
                                         ContainerForCommanderDetails(
-                                          width: 210,
                                           text: '36th Security Forces Squadron',
                                         ),
                                       ],
@@ -149,10 +148,9 @@ class _CommandersDetailsState extends State<CommandersDetails> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
                                       children: [
-                                        LabelText(text: 'Unit:'),
+                                        LabelText(text: 'Base:'),
                                         const SizedBox(width: 20),
                                         ContainerForCommanderDetails(
-                                          width: 210,
                                           text: 'Andersen Air Force Base, Guam',
                                         ),
                                       ],
@@ -165,7 +163,6 @@ class _CommandersDetailsState extends State<CommandersDetails> {
                                         LabelText(text: 'Rank:'),
                                         const SizedBox(width: 20),
                                         ContainerForCommanderDetails(
-                                          width: 100,
                                           text: '04 - Major',
                                         ),
                                       ],
@@ -249,7 +246,7 @@ class _CommandersDetailsState extends State<CommandersDetails> {
                                   ),
                                 ),
                                 const SizedBox(height: 32.0),
-                                LabelText(text: 'user Rating (1)'),
+                                LabelText(text: 'User Rating (1)'),
                                 const SizedBox(height: 8.0),
                                 ValueTextAeroMatics(text: 'Overall '),
                                 const SizedBox(height: 32.0),

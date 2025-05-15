@@ -87,7 +87,7 @@ flutter:
   # example:
 
   fonts:
-    - family: aero_matics
+    - family: AeroMatics
       fonts:
         - asset: assets/fonts/aero_matics/Aero-Matics-Light.ttf
           weight: 200

@@ -21,7 +21,7 @@ class ExpansionPannelListFaq extends StatelessWidget {
                       maxLines: 5,
                       faq['question']!,
                       style: TextStyle(
-                        fontSize: 16,
+                        fontSize: 14,
                         fontWeight: FontWeight.bold,
                         color: AppColors.context(context).textColor,
                       ),
@@ -36,7 +36,7 @@ class ExpansionPannelListFaq extends StatelessWidget {
                   maxLines: 15,
                   faq['answer']!,
                   style: TextStyle(
-                    fontSize: 12,
+                    fontSize: 14,
                     color: AppColors.context(context).textColor,
                   ),
                 ),

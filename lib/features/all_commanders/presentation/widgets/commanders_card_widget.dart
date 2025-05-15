@@ -32,16 +32,16 @@ class CommandersCardWidget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         TitleTextAllCommanders(
-                          fontSize: 15,
+                          fontSize: 11,
                           text: card.uploadedTime,
                         ),
                         ValueTextAeroMatics(
-                          fontSize: 22,
+                          fontSize: 20,
                           fontWeight: FontWeight.bold,
                           text: card.name,
                         ),
                         ValueTextAeroMatics(
-                          fontSize: 22,
+                          fontSize: 18,
                           fontWeight: FontWeight.bold,
                           text: card.designation,
                         ),
@@ -74,9 +74,9 @@ class CommandersCardWidget extends StatelessWidget {
                   children: [
                     Container(
                       width: size.width * .40,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 12,
-                        vertical: 4,
+                      padding: EdgeInsets.symmetric(
+                        horizontal: size.width * .01,
+                        vertical: size.height * .001,
                       ),
                       decoration: BoxDecoration(
                         color: AppColors.context(context).contentBoxGreyColor,
@@ -93,11 +93,11 @@ class CommandersCardWidget extends StatelessWidget {
                           Row(
                             children: [
                               ValueTextAeroMatics(
-                                fontSize: 12,
+                                fontSize: 10,
                                 text: 'Individual Rating: ',
                               ),
                               ValueTextAeroMatics(
-                                fontSize: 12,
+                                fontSize: 11,
                                 text: '${card.rating} /10',
                               ),
                             ],
@@ -110,7 +110,7 @@ class CommandersCardWidget extends StatelessWidget {
                       child: NormalCustomButton(
                         height: 40,
                         weight: size.width * .40,
-                        fontSize: 14,
+                        fontSize: 12,
                         text: 'Read More',
                         onPressed: () {
                           Get.to(() => CommandersDetails());

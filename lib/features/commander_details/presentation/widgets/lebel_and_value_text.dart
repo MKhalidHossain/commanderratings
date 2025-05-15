@@ -27,7 +27,7 @@ class ValueTextAeroMatics extends StatelessWidget {
   const ValueTextAeroMatics({
     super.key,
     required this.text,
-    this.fontSize = 14,
+    this.fontSize = 13,
     this.fontWeight = FontWeight.w500,
   });
 
@@ -45,5 +45,3 @@ class ValueTextAeroMatics extends StatelessWidget {
     );
   }
 }
-
-
