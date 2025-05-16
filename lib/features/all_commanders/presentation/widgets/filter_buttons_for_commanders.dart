@@ -16,22 +16,20 @@ class FilterButtonsForCommanders extends StatefulWidget {
 class _FilterButtonsForCommandersState
     extends State<FilterButtonsForCommanders> {
   final List<String> filters = [
-    '4th Air Force',
-    'US Coast Guard',
-    'US Navy',
-    'US Army',
-    'US Air Force',
-    'US MARINES',
+    'Air Force',
+    'Coast Guard',
+    'Navy',
+    'Army',
+    'MARINES',
     'ACC',
     'AETC',
     'AFGSC',
     '11th Wing',
-    'Air Force',
     'Airlift Wing',
     'Uncategorized',
-    'Us Veterans',
+    'Veterans',
     'National Guard',
-    'US Marine',
+    'Marine',
   ];
 
   List<String> selectedFilters = [];
