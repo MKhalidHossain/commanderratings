@@ -1,7 +1,7 @@
 import 'package:commanderratings/core/utils/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/ratting_a_to_z/ratting.dart';
-import '../../data/domain_or_model/models/review.dart';
+import '../../domain/models/review.dart';
 
 class ReviewCard extends StatelessWidget {
   final Review review;

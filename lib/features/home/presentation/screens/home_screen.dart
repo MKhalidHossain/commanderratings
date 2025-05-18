@@ -2,7 +2,7 @@ import 'package:commanderratings/features/theme/app_themes/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../core/widgets/title_subtitle_text.dart';
-import '../../data/domain_or_model/models/review.dart';
+import '../../domain/models/review.dart';
 import '../widgets/anonymous_reviews.dart';
 import '../widgets/banner_section.dart';
 import '../widgets/leadership_section.dart';
