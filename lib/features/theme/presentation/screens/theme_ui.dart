@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/widgets/three_icon_image_for_header.dart';
+
 import '../widgets/theme_change_widget.dart';
 
 class ThemeUi extends StatefulWidget {
@@ -23,7 +24,7 @@ class _ThemeUiState extends State<ThemeUi> {
             const SizedBox(height: 80),
             const ThreeIconImageForHeader(),
             const SizedBox(height: 20),
-            //ThemeChangeWidget(),
+            ThemeChangeWidget(),
           ],
         ),
       ),

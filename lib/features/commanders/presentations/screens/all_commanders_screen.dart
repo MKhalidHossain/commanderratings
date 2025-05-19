@@ -1,7 +1,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../../core/widgets/normal_custom_button.dart';
 import '../../../../core/widgets/title_with_icon_prefix.dart';
 import '../../../../core/widgets/wide_custom_button.dart';

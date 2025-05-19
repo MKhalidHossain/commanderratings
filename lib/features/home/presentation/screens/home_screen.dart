@@ -1,6 +1,4 @@
-import 'package:commanderratings/features/theme/app_themes/themes.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import '../../../../core/widgets/title_subtitle_text.dart';
 import '../../domain/models/review.dart';
 import '../widgets/anonymous_reviews.dart';
@@ -53,28 +51,9 @@ class HomeScreen extends StatelessWidget {
     ),
   ];
 
-  final controller = Get.find<AppTheme>();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        actions: [
-          TextButton(
-            onPressed: () {
-              controller.changeThemeToDark();
-            },
-            child: Center(child: Text('Light')),
-          ),
-          TextButton(
-            onPressed: () {
-              controller.changeThemeToLight();
-            },
-            child: Center(child: Text('Dark')),
-          ),
-        ],
-      ),
       body: SingleChildScrollView(
         child: Column(
           children: [

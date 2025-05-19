@@ -1,4 +1,5 @@
 import 'package:commanderratings/core/utils/constants/app_colors.dart';
+import 'package:commanderratings/core/widgets/normal_custom_button.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/ratting_a_to_z/ratting.dart';
 import '../../domain/models/review.dart';
@@ -20,7 +21,7 @@ class ReviewCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            /// Row: Avatar - Organization - 9 Star
+            /// Row: Avatar - Organization - 10 Star
             Row(
               children: [
                 CircleAvatar(
@@ -30,6 +31,7 @@ class ReviewCard extends StatelessWidget {
                 const SizedBox(width: 10),
                 Expanded(
                   child: Text(
+                    maxLines: 1,
                     review.organization,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
@@ -46,16 +48,25 @@ class ReviewCard extends StatelessWidget {
               style: const TextStyle(color: Colors.grey, fontSize: 12),
             ),
             const SizedBox(height: 8),
-            Text(review.content),
+            Text(maxLines: 5, review.content),
             const SizedBox(height: 8),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  review.reviewerPosition,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.context(context).textColor,
+                // NormalCustomButton(
+                //   fillColor: Colors.grey.shade400,
+                //   textColor: AppColors.context(context).textColor,
+                //   text: review.reviewerPosition,
+                //   onPressed: () {},
+                // ),
+                ElevatedButton(
+                  onPressed: () {},
+                  child: Text(
+                    review.reviewerPosition,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.context(context).textColor,
+                    ),
                   ),
                 ),
                 TextButton(
