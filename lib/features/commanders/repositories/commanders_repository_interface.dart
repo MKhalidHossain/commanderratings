@@ -1,6 +1,13 @@
 abstract class CommandersRepositoryInterface {
-
-  Future<dynamic> createCommander(String name , String yearOfExperience,String serviceBroad ,String unit, String base, String rank, String commanderimage);
+  Future<dynamic> createCommander(
+    String name,
+    String yearOfExperience,
+    String serviceBroad,
+    String unit,
+    String base,
+    String rank,
+    String commanderimage,
+  );
 
   Future<dynamic> getAllCommander();
 
@@ -11,8 +18,6 @@ abstract class CommandersRepositoryInterface {
     String unit,
   );
 
-
   Future<dynamic> getCommandersAllUnit();
   Future<dynamic> getCommandersAllService();
-
 }

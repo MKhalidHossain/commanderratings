@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:http/http.dart';
 import 'commanders_service_interface.dart';
 
@@ -17,6 +15,12 @@ class CommandersService implements CommandersServiceInterface {
   Future<Response> getAllCommander() async {
     return await commandersServiceInterface.getAllCommander();
   }
+  
+    @override
+  Future<Response> getSpecificCommander(String _id) async {
+    return await commandersServiceInterface.getSpecificCommander(_id);
+  }
+
 
   @override
   Future<Response> getCommandersAllService() async {
@@ -28,10 +32,6 @@ class CommandersService implements CommandersServiceInterface {
     return await commandersServiceInterface.getCommandersAllUnit();
   }
 
-  @override
-  Future<Response> getSpecificCommander(String _id) async {
-    return await commandersServiceInterface.getSpecificCommander(_id);
-  }
 
   @override
   Future<Response> filterCommanderWithServiceAndUnits(String service, String unit,) async {

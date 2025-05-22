@@ -1,4 +1,5 @@
 
+import 'package:commanderratings/features/commanders/controllers/commanders_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../core/widgets/normal_custom_button.dart';
@@ -183,6 +184,8 @@ class _AllCommandersScreenState extends State<AllCommandersScreen> {
   void initState() {
     super.initState();
 
+    Get.find<CommandersController>().getAllCommanders();
+
     allCommanders = [
       CommandersCard(
         name: 'Jeffrey Adams',
@@ -302,154 +305,158 @@ class _AllCommandersScreenState extends State<AllCommandersScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        centerTitle: false,
-        title: Padding(
-          padding: EdgeInsets.symmetric(horizontal: size.width * 0.01),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const TitleWithIconPrefix(fontSize: 12, text: 'All commanders'),
-              NormalCustomButton(
-                text: 'Add Commmander +',
-                fontSize: 12,
-                height: 40,
-                weight: 135,
-                onPressed: () {
-                  Get.to(() => const AddCommandersScreen());
-                },
-              ),
-            ],
-          ),
-        ),
-        leadingWidth: size.width * 0.05,
-      ),
-      body: Stack(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: ListView(
-              controller: _scrollController,
-              children: [
-                ServiceMemberWidget(
-                  onSelectionChanged: (selectedFilters) {
-                    if (selectedFilters.isNotEmpty) {
-                      print(selectedFilters.last.toString());
-                      applySearchFilter(selectedFilters.first);
-                    } else if (selectedFilters.isEmpty) {
-                      print(selectedFilters.last.toString());
-                      applySearchFilter(selectedFilters.last);
-                    }
-                  },
-                ),
-                const SizedBox(height: 20),
-                Customboxcontainer(
+    return GetBuilder<CommandersController>(
+        builder: (commandersController){
+          return Scaffold(
+            appBar: AppBar(
+              automaticallyImplyLeading: false,
+              centerTitle: false,
+              title: Padding(
+                padding: EdgeInsets.symmetric(horizontal: size.width * 0.01),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const TitleTextAllCommanders(text: 'Units'),
-                    const SizedBox(height: 10),
-                    FilterButtonsForCommanders(
-                      onSelectionChanged: (selectedFilters) {
-                        if (selectedFilters.isNotEmpty) {
-                          applySearchFilter(selectedFilters.first);
-                        } else {
-                          applyFilter(currentFilter);
-                        }
+                    const TitleWithIconPrefix(fontSize: 12, text: 'All commanders'),
+                    NormalCustomButton(
+                      text: 'Add Commmander +',
+                      fontSize: 12,
+                      height: 40,
+                      weight: 135,
+                      onPressed: () {
+                        Get.to(() => const AddCommandersScreen());
                       },
-                    ),
-                    const SizedBox(height: 20),
-                    WideCustomButton(
-                      showIcon: true,
-                      sufixIcon: Icons.filter_list,
-                      text: 'Filter',
-                      onPressed: onFilterButtonPressed,
                     ),
                   ],
                 ),
-                const SizedBox(height: 36),
-
-                Column(
-                  children:
-                      filteredCommanders.map((card) {
-                        String initial = card.name[0].toUpperCase();
-                        final key =
-                            _letterKeys.containsKey(initial)
-                                ? _letterKeys[initial]
-                                : null;
-
-                        return Container(
-                          key: key,
-                          child: CommandersCardWidget(card: card),
-                        );
-                      }).toList(),
-                ),
-              ],
+              ),
+              leadingWidth: size.width * 0.05,
             ),
-          ),
-          Positioned(
-            right: 4,
-            top: 60,
-            bottom: 60,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children:
-                  _alphabet.map((letter) {
-                    final enabled = _letterKeys.containsKey(letter);
-                    return GestureDetector(
-                      onTap:
-                          enabled
-                              ? () {
-                                final context =
-                                    _letterKeys[letter]?.currentContext;
-                                if (context != null) {
-                                  Scrollable.ensureVisible(
-                                    context,
-                                    duration: const Duration(milliseconds: 300),
-                                    curve: Curves.easeInOut,
-                                  );
-                                }
+            body: Stack(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: ListView(
+                    controller: _scrollController,
+                    children: [
+                      ServiceMemberWidget(
+                        onSelectionChanged: (selectedFilters) {
+                          if (selectedFilters.isNotEmpty) {
+                            print(selectedFilters.last.toString());
+                            applySearchFilter(selectedFilters.first);
+                          } else if (selectedFilters.isEmpty) {
+                            print(selectedFilters.last.toString());
+                            applySearchFilter(selectedFilters.last);
+                          }
+                        },
+                      ),
+                      const SizedBox(height: 20),
+                      Customboxcontainer(
+                        children: [
+                          const TitleTextAllCommanders(text: 'Units'),
+                          const SizedBox(height: 10),
+                          FilterButtonsForCommanders(
+                            onSelectionChanged: (selectedFilters) {
+                              if (selectedFilters.isNotEmpty) {
+                                applySearchFilter(selectedFilters.first);
+                              } else {
+                                applyFilter(currentFilter);
                               }
-                              : null,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 1.0),
-                        child: Text(
-                          letter,
-                          style: TextStyle(
-                            fontSize: 10,
-                            color: enabled ? Colors.blue : Colors.grey,
+                            },
+                          ),
+                          const SizedBox(height: 20),
+                          WideCustomButton(
+                            showIcon: true,
+                            sufixIcon: Icons.filter_list,
+                            text: 'Filter',
+                            onPressed: onFilterButtonPressed,
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 36),
+
+                      Column(
+                        children:
+                        filteredCommanders.map((card) {
+                          String initial = card.name[0].toUpperCase();
+                          final key =
+                          _letterKeys.containsKey(initial)
+                              ? _letterKeys[initial]
+                              : null;
+
+                          return Container(
+                            key: key,
+                            child: CommandersCardWidget(card: card),
+                          );
+                        }).toList(),
+                      ),
+                    ],
+                  ),
+                ),
+                Positioned(
+                  right: 4,
+                  top: 60,
+                  bottom: 60,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children:
+                    _alphabet.map((letter) {
+                      final enabled = _letterKeys.containsKey(letter);
+                      return GestureDetector(
+                        onTap:
+                        enabled
+                            ? () {
+                          final context =
+                              _letterKeys[letter]?.currentContext;
+                          if (context != null) {
+                            Scrollable.ensureVisible(
+                              context,
+                              duration: const Duration(milliseconds: 300),
+                              curve: Curves.easeInOut,
+                            );
+                          }
+                        }
+                            : null,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 1.0),
+                          child: Text(
+                            letter,
+                            style: TextStyle(
+                              fontSize: 10,
+                              color: enabled ? Colors.blue : Colors.grey,
+                            ),
                           ),
                         ),
-                      ),
-                    );
-                  }).toList(),
-            ),
-          ),
-          Positioned(
-            right: 10,
-            top: 65,
-            bottom: 60,
-            child: Column(
-              children: [
-                VerticalButtton(
-                  text: 'Top Rated',
-                  onPressed: () => applyFilter('top'),
-                  showIcon: true,
-                  sufixIcon: Icons.arrow_forward,
+                      );
+                    }).toList(),
+                  ),
                 ),
-                VerticalButtton(
-                  height: 125,
-                  quarterTurens: 1,
-                  text: 'Lower Rated',
-                  onPressed: () => applyFilter('low'),
-                  showIcon: true,
-                  sufixIcon: Icons.arrow_forward,
+                Positioned(
+                  right: 10,
+                  top: 65,
+                  bottom: 60,
+                  child: Column(
+                    children: [
+                      VerticalButtton(
+                        text: 'Top Rated',
+                        onPressed: () => applyFilter('top'),
+                        showIcon: true,
+                        sufixIcon: Icons.arrow_forward,
+                      ),
+                      VerticalButtton(
+                        height: 125,
+                        quarterTurens: 1,
+                        text: 'Lower Rated',
+                        onPressed: () => applyFilter('low'),
+                        showIcon: true,
+                        sufixIcon: Icons.arrow_forward,
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
-          ),
-        ],
-      ),
+          );
+        }
     );
   }
 }

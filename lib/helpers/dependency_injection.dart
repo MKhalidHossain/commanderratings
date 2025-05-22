@@ -3,6 +3,11 @@ import 'package:commanderratings/features/auth/repositories/auth_repository.dart
 import 'package:commanderratings/features/auth/repositories/auth_repository_interface.dart';
 import 'package:commanderratings/features/auth/sevices/auth_service.dart';
 import 'package:commanderratings/features/auth/sevices/auth_service_interface.dart';
+import 'package:commanderratings/features/commanders/controllers/commanders_controller.dart';
+import 'package:commanderratings/features/commanders/repositories/commanders_repository.dart';
+import 'package:commanderratings/features/commanders/repositories/commanders_repository_interface.dart';
+import 'package:commanderratings/features/commanders/service/commanders_service.dart';
+import 'package:commanderratings/features/commanders/service/commanders_service_interface.dart';
 import 'package:commanderratings/helpers/remote/data/api_client.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -35,21 +40,25 @@ Future<void> initDI() async {
 
   //////////// Auth Service, Repository and Controller ////////////////////////////////
 
-  //////////// Setting Service, Repository and Controller ////////////////////////////////
+  //////////// All Commanders Service, Repository and Controller ////////////////////////////////
 
-  // Get.lazyPut(()=> SettingRepository(apiClient: Get.find(), sharedPreferences: prefs));
+  Get.lazyPut(()=> CommandersRepository(apiClient: Get.find(), sharedPreferences: prefs));
 
-  // SettingRepositoryInterface settingRepositoryInterface = SettingRepository(apiClient: Get.find(), sharedPreferences: prefs);
+  CommandersRepositoryInterface commandersRepositoryInterface = CommandersRepository(apiClient: Get.find(), sharedPreferences: prefs);
 
-  // Get.lazyPut(()=> settingRepositoryInterface);
+  Get.lazyPut(()=> commandersRepositoryInterface);
 
-  // SettingsServiceInterface settingsServiceInterface = SettingService(settingRepositoryInterface: Get.find());
+  CommandersService commandersService = CommandersService( commandersServiceInterface: Get.find());
 
-  // Get.lazyPut(() => settingsServiceInterface);
+  CommandersServiceInterface commandersServiceInterface = CommandersService(commandersServiceInterface: Get.find());
 
-  // Get.lazyPut(()=> SettingsController(settingsServiceInterface: Get.find()));
 
-  // Get.lazyPut(()=> SettingService(settingRepositoryInterface: Get.find()));
+  Get.lazyPut(() => commandersService);
+
+  Get.lazyPut(()=> CommandersController(Get.find()));
+
+  Get.lazyPut(() => commandersService);
+
 
   // //////////// Setting Service, Repository and Controller ////////////////////////////////
 
