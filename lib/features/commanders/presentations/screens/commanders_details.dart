@@ -12,7 +12,6 @@ import '../widgets/container_for_commander_details.dart';
 import '../widgets/search_and_recent_widget.dart';
 import '../widgets/user_reveiws_widgets.dart';
 
-
 class CommandersDetails extends StatefulWidget {
   const CommandersDetails({super.key});
 
@@ -214,6 +213,8 @@ class _CommandersDetailsState extends State<CommandersDetails> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
+                                SearchAndRecentWidget(),
+                                const SizedBox(height: 24.0),
                                 //.................................... Leave a Review button..........................
                                 OutlinedButton(
                                   style: OutlinedButton.styleFrom(
@@ -262,11 +263,10 @@ class _CommandersDetailsState extends State<CommandersDetails> {
                                 ),
                                 const SizedBox(height: 32.0),
 
-                                //
-                                const SizedBox(height: 32.0),
+                                // const SizedBox(height: 32.0),
 
                                 //SearchBar(controller: _searchController),
-
+                                
                                 //.................................... Search section with white border..........................
                                 // OutlinedTextFieldWidget(
                                 //   controller: controller,
@@ -274,9 +274,7 @@ class _CommandersDetailsState extends State<CommandersDetails> {
                                 //   textInputType: textInputType,
                                 //   textFieldHeaderName: 'Search',
                                 // ),
-                                SearchAndRecentWidget(),
                                 const SizedBox(height: 32.0),
-
                                 UserReveiwsWidgets(),
                               ],
                             ),

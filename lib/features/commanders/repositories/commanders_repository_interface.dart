@@ -1,16 +1,18 @@
-
-import 'package:http/http.dart';
-
 abstract class CommandersRepositoryInterface {
-  Future<Response> createCommander();
-  Future<Response> getAllCommander();
-  Future<Response> getSpecificCommander(String _id);  
-  Future<Response> filterCommanderWithServiceAndUnits(
-    String sevice,
+
+  Future<dynamic> createCommander(String name , String yearOfExperience,String serviceBroad ,String unit, String base, String rank, String commanderimage);
+
+  Future<dynamic> getAllCommander();
+
+  Future<dynamic> getSpecificCommander(String _id);
+
+  Future<dynamic> filterCommanderWithServiceAndUnits(
+    String service,
     String unit,
   );
 
 
-  Future<Response> getCommadersAllUnit();
-  Future<Response> getCommadersAllService();
+  Future<dynamic> getCommandersAllUnit();
+  Future<dynamic> getCommandersAllService();
+
 }

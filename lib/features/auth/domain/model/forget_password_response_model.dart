@@ -1,7 +1,7 @@
 class ForgetPasswordResponseModel {
   bool? status;
   String? message;
-  Null? data;
+  ForgetPasswordResponseModel? data;
 
   ForgetPasswordResponseModel({this.status, this.message, this.data});
 

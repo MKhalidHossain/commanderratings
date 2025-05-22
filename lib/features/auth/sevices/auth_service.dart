@@ -1,48 +1,113 @@
-import 'package:http/http.dart';
-
+import 'package:commanderratings/features/auth/repositories/auth_repository_interface.dart';
 import 'auth_service_interface.dart';
 
 class AuthService implements AuthServiceInterface {
-  final AuthServiceInterface authServiceInterface;
+  final AuthRepositoryInterface authRepositoryInterface;
 
-  AuthService({required this.authServiceInterface});
+  AuthService(this.authRepositoryInterface);
+
 
   @override
-  Future<Response> register(
-    String fullName,
-    String email,
-    String password,
-  ) async {
-    return await authServiceInterface.register(fullName, email, password);
+  Future register(String fullName, String email, String password) async{
+    return await authRepositoryInterface.register(fullName, email, password);
   }
 
   @override
-  Future<Response> forgetPassword(String email) async {
-    return await authServiceInterface.forgetPassword(email);
+  Future accessAndRefreshToken(String refreshToken) async {
+    return await authRepositoryInterface.accessAndRefreshToken(refreshToken);
   }
 
   @override
-  Future<Response> login(String email, String password) async {
-    return await authServiceInterface.login(email, password);
+  Future login(String email, String password) async{
+    return await authRepositoryInterface.login(email, password);
+
+  }
+  @override
+  Future forgetPassword(String? email) async{
+    return await authRepositoryInterface.forgetPassword(email);
   }
 
   @override
-  Future<Response> refreshAccessToken(String refreshToken) async {
-    return await authServiceInterface.refreshAccessToken(refreshToken);
+  Future verifyCode(String otp, String email) async{
+    return await authRepositoryInterface.verifyCode(otp, email);
   }
 
   @override
-  Future<Response> resetPassword(String email, String newPassword) async {
-    return await authServiceInterface.resetPassword(email, newPassword);
+  Future resetPassword(String email, String newPassword) async{
+    return await authRepositoryInterface.resetPassword(email, newPassword);
   }
 
   @override
-  Future<Response> verifyCode(String otp, String email) async {
-    return await authServiceInterface.verifyCode(otp, email);
+  bool isLoggedIn() {
+   return authRepositoryInterface.isLoggedIn();
   }
 
   @override
-  Future<Response> logOut() async {
-    return await authServiceInterface.logOut();
+  Future logout() {
+    return authRepositoryInterface.logout();
   }
+
+  @override
+  Future<bool?> saveUserToken(String token, String refreshToken) async{
+    return await authRepositoryInterface.saveUserToken(token, refreshToken);
+  }
+
+  @override
+  bool isFirstTimeInstall() {
+   return authRepositoryInterface.isFirstTimeInstall();
+  }
+
+  @override
+  void setFirstTimeInstall() {
+    return authRepositoryInterface.setFirstTimeInstall();
+  }
+
+
+
+
+
+
+
+  @override
+  bool clearSharedAddress() {
+    // TODO: implement clearSharedAddress
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<bool> clearUserCredentials() {
+    // TODO: implement clearUserCredentials
+    throw UnimplementedError();
+  }
+
+  @override
+  String getUserToken() {
+    // TODO: implement getUserToken
+    throw UnimplementedError();
+  }
+
+  @override
+  Future resendOtp(String email) {
+    // TODO: implement resendOtp
+    return authRepositoryInterface.forgetPassword(email);
+  }
+
+  @override
+  Future sendOtp({required String phone}) {
+    // TODO: implement sendOtp
+    throw UnimplementedError();
+  }
+
+  @override
+  Future updateAccessAndRefreshToken() {
+    // TODO: implement updateAccessAndRefreshToken
+    throw UnimplementedError();
+  }
+
+  @override
+  Future updateToken() {
+    // TODO: implement updateToken
+    throw UnimplementedError();
+  }
+
 }

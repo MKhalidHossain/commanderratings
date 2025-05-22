@@ -1,48 +1,173 @@
-
-import 'package:http/src/response.dart';
-
+import 'package:commanderratings/helpers/remote/data/api_client.dart';
+import 'package:commanderratings/utils/app_constants.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../../../core/constants/urls.dart';
 import 'auth_repository_interface.dart';
 
-class AuthRepository implements AuthRepositoryInterface{
+class AuthRepository implements AuthRepositoryInterface {
+
+  final ApiClient apiClient;
+
+  final SharedPreferences sharedPreferences;
+  AuthRepository({required this.apiClient, required this.sharedPreferences});
+
+
   @override
-  Future<Response> forgetPassword(String email) {
-    // TODO: implement forgetPassword
+  Future register( String fullName, String email,  String password) async{
+
+    return await apiClient.postData(Urls.register,
+        {
+          "fullName": fullName,
+          "email": email,
+          "password": password
+        }
+    );
+  }
+
+  @override
+  Future accessAndRefreshToken(String refreshToken) async{
+    return await apiClient.postData(Urls.refreshAccessToken,
+        {
+          "refreshToken":refreshToken
+
+        }
+    );
+  }
+
+  @override
+  Future login(String email, String password) async{
+    return await apiClient.postData(Urls.login,
+        {
+          "email" : email,
+          "password" : password
+        });
+  }
+
+  @override
+  Future forgetPassword(String? email) async{
+    return await apiClient.postData(Urls.forgetPassword,
+        {
+          "email": email,
+        }
+    );
+  }
+
+  @override
+  Future verifyCode( String otp,  String email) async{
+    return await apiClient.postData(Urls.verifyCode,
+        {
+          "otp": int.tryParse(otp),
+          "email": email,
+        }
+    );
+  }
+
+  @override
+  Future resetPassword(String email, String newPassword) async{
+    return await apiClient.postData(Urls.resetPassword,
+        {
+          "email": email,
+          "newPassword": newPassword,
+        }
+    );
+  }
+
+  @override
+  bool isLoggedIn() {
+    String? val = sharedPreferences.getString(AppConstants.token);
+    bool isLoggedIn = sharedPreferences.getBool('IsLoggedIn') ?? false;
+    if (isLoggedIn){
+      return true;
+    }
+    return false;
+  }
+
+  @override
+  Future logout() {
+    sharedPreferences.setBool('IsLoggedIn', false);
+    return apiClient.getData(AppConstants.logout);
+  }
+
+  @override
+  Future<bool?> saveUserToken(String token, String refreshToken) async{
+    apiClient.token =token;
+    apiClient.updateHeader(token);
+    await sharedPreferences.setString(AppConstants.refreshToken, token);
+    return await sharedPreferences.setString(AppConstants.token, token);
+  }
+
+  //...............................for update RefreshToken...............................
+
+  // @override
+  // Future updateAccessAndRefreshToken() async{
+  //   String? refresh = sharedPreferences.getString('refreshToken');
+  //   return await apiClient.postData(Urls.updateRefreshAccessToken,
+  //       {
+  //         "refreshToken" : refresh
+  //       }
+  //
+  //   );
+  // }
+
+  @override
+  bool isFirstTimeInstall() {
+    if(sharedPreferences.getBool('firstTimeInstall')== true){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+  @override
+  void setFirstTimeInstall() {
+    sharedPreferences.setBool('firstTimeInstall', true);
+  }
+
+  @override
+  bool clearSharedAddress() {
     throw UnimplementedError();
   }
 
   @override
-  Future<Response> logOut() {
-    // TODO: implement logOut
+  Future<bool> clearUserCredentials() {
     throw UnimplementedError();
   }
 
   @override
-  Future<Response> login(String email, String password) {
-    // TODO: implement login
+  String getUserToken() {
+    throw UnimplementedError();
+  }
+
+
+  @override
+  Future resendOtp(String email) {
+    return apiClient.postData(Urls.forgetPassword,
+    {
+      "email" : email
+    });
+  }
+
+
+  @override
+  Future sendOtp({required String phone}) {
+    throw UnimplementedError();
+  }
+
+
+  @override
+  Future updateToken() {
+    throw UnimplementedError();
+  }
+
+
+  @override
+  Future changePassword(String oldPassword, String password) {
     throw UnimplementedError();
   }
 
   @override
-  Future<Response> refreshAccessToken(String refreshToken) {
-    // TODO: implement refreshAccessToken
+  Future updateAccessAndRefreshToken() {
     throw UnimplementedError();
   }
 
-  @override
-  Future<Response> register(String fullName, String email, String password) {
-    // TODO: implement register
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<Response> resetPassword(String email, String newPassword) {
-    // TODO: implement resetPassword
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<Response> verifyCode(String otp, String email) {
-    // TODO: implement verifyCode
-    throw UnimplementedError();
-  }
 }

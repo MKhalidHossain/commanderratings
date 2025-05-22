@@ -1,7 +1,7 @@
 class RefreshTokenResponseModel {
   bool? status;
   String? message;
-  Null? data;
+  RefreshTokenResponseModel? data;
 
   RefreshTokenResponseModel({this.status, this.message, this.data});
 

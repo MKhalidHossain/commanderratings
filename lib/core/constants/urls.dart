@@ -3,12 +3,14 @@ class Urls {
   static const String register = '/api/v1/auth/register';
   static const String login = '/api/v1/auth/login';
   static const String refreshAccessToken = '/api/v1/auth/refresh-access-token';
+  // static const String updateAccessAndRefreshToken = '/api/v1/auth/refresh-access-token';
   static const String forgetPassword = '/api/v1/auth/forget-password';
   static const String resetPassword = '/api/v1/auth/reset-password';
   static const String verifyCode = '/api/v1/auth/verify-code';
   static const String logOut = '/api/v1/auth/logout';
 
   //commanders
+  static const String createCommander ='/api/v1/commander';
   static const String getAllCommanders =
       '/api/v1/commander?page=1&limit=8&service=Army&unit=101st Division&rated=low';
   static const String getSpecificCommanders =

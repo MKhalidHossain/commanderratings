@@ -1,7 +1,10 @@
+import 'package:commanderratings/features/auth/controllers/auth_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../../../core/headers/header_for_auth_three_man.dart';
 import '../../../../core/widgets/wide_custom_button.dart';
 import '../../../../core/widgets/outlined_text_field_widget.dart';
+import '../../../../helpers/custom_snackbar.dart';
 import '../../domain/model/authentication_model.dart';
 
 class LostPasswordScreen extends StatefulWidget {
@@ -16,103 +19,71 @@ class _LostPasswordScreenState extends State<LostPasswordScreen> {
 
   bool isRemember = false;
 
-  late TextEditingController emailContoller;
+  late TextEditingController emailController;
 
   @override
   void initState() {
-    emailContoller = TextEditingController();
+    emailController = TextEditingController();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
-      body: Column(
-        children: [
-          HeaderForAuthThreeMan(text: 'LOST PASSWORD'),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+    return GetBuilder<AuthController>(
+        builder: (authController){
+          return Scaffold(
+            backgroundColor: Colors.black,
+            body: Column(
+              children: [
+                HeaderForAuthThreeMan(text: 'LOST PASSWORD'),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24.0),
 
-            child: Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.all(Radius.circular(8.0)),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16.0,
-                  vertical: 16.0,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(height: 8.0),
-                    OutlinedTextFieldWidget(
-                      name: 'Username or Email',
-                      // lebel: 'Enter eamil or username',
-                      controller: emailContoller,
-
-                      textInputType: TextInputType.text,
-                      textFieldHeaderName: 'Username or Email',
+                  child: Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(Radius.circular(8.0)),
                     ),
-                    const SizedBox(height: 24),
-                    WideCustomButton(
-                      text: 'RESET PASSWORD',
-                      onPressed: () {
-                        if (emailContoller.text.isNotEmpty) {
-                          authenticaion = Authenticaion(
-                            email: emailContoller.text,
-                            name: 'name',
-                          );
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16.0,
+                        vertical: 16.0,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(height: 8.0),
+                          OutlinedTextFieldWidget(
+                            name: 'Username or Email',
+                            // lebel: 'Enter eamil or username',
+                            controller: emailController,
 
-                          showDialog(
-                            context: context,
-                            builder: (context) {
-                              return AlertDialog(
-                                title: Text('Error'),
-                                content: Text('${authenticaion.email} '),
-                                actions: [
-                                  TextButton(
-                                    child: Text('OK'),
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                  ),
-                                ],
-                              );
+                            textInputType: TextInputType.text,
+                            textFieldHeaderName: 'Username or Email',
+                          ),
+                          const SizedBox(height: 24),
+                          WideCustomButton(
+                            text: 'RESET PASSWORD',
+                            onPressed: (){
+                              String email = emailController.text;
+                              if(email.isEmpty){
+                                showCustomSnackBar('email is required'.tr);
+                              }else{
+                                authController.resendOtp(email);
+                            }
                             },
-                          );
-                        } else {
-                          showDialog(
-                            context: context,
-                            builder: (context) {
-                              return AlertDialog(
-                                title: Text('Error'),
-                                content: Text('Please fill all the fields'),
-                                actions: [
-                                  TextButton(
-                                    child: Text('OK'),
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                  ),
-                                ],
-                              );
-                            },
-                          );
-                        }
-                      },
+                          ),
+                          const SizedBox(height: 10),
+                        ],
+                      ),
                     ),
-                    const SizedBox(height: 10),
-                  ],
+                  ),
                 ),
-              ),
+              ],
             ),
-          ),
-        ],
-      ),
+          );
+        }
     );
   }
 }

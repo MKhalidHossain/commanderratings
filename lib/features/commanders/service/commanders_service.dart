@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:http/http.dart';
 import 'commanders_service_interface.dart';
 
@@ -7,8 +9,8 @@ class CommandersService implements CommandersServiceInterface {
   CommandersService({required this.commandersServiceInterface});
 
   @override
-  Future<Response> createCommander() async {
-    return await commandersServiceInterface.createCommander();
+  Future<Response> createCommander(String name , String yearOfExperience,String serviceBroad ,String unit, String base, String rank, String commanderimage) async {
+    return await commandersServiceInterface.createCommander( name ,  yearOfExperience, serviceBroad , unit, base, rank, commanderimage );
   }
 
   @override
@@ -17,13 +19,13 @@ class CommandersService implements CommandersServiceInterface {
   }
 
   @override
-  Future<Response> getCommadersAllService() async {
-    return await commandersServiceInterface.getCommadersAllService();
+  Future<Response> getCommandersAllService() async {
+    return await commandersServiceInterface.getCommandersAllService();
   }
 
   @override
-  Future<Response> getCommadersAllUnit() async {
-    return await commandersServiceInterface.getCommadersAllUnit();
+  Future<Response> getCommandersAllUnit() async {
+    return await commandersServiceInterface.getCommandersAllUnit();
   }
 
   @override
@@ -32,13 +34,12 @@ class CommandersService implements CommandersServiceInterface {
   }
 
   @override
-  Future<Response> filterCommanderWithServiceAndUnits(
-    String sevice,
-    String unit,
-  ) async {
+  Future<Response> filterCommanderWithServiceAndUnits(String service, String unit,) async {
     return await commandersServiceInterface.filterCommanderWithServiceAndUnits(
-      sevice,
+      service,
       unit,
     );
   }
+
+
 }
