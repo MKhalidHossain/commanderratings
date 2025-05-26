@@ -2,11 +2,15 @@ import 'package:commanderratings/core/utils/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 
 import '../../../commanders/domain/leadership_card_model.dart';
+import '../../domain/model/get_all_blog_service_model.dart';
 
 class LeadershipCardWidget extends StatelessWidget {
-  final LeadershipCard card;
 
-  const LeadershipCardWidget({super.key, required this.card});
+  final Blogs blog;
+
+  const LeadershipCardWidget({super.key, required this.blog});
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +20,7 @@ class LeadershipCardWidget extends StatelessWidget {
           alignment: Alignment.center,
           children: [
             Image.network(
-              card.imageUrl,
+              blog.image!,
               width: double.infinity,
               height: 180,
               fit: BoxFit.cover,
@@ -30,7 +34,7 @@ class LeadershipCardWidget extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 12),
                 child: Text(
                   maxLines: 5,
-                  card.centerText,
+                  blog.imageText!,
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     color: Colors.white,
@@ -43,18 +47,22 @@ class LeadershipCardWidget extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 2),
+
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 8),
           child: Text(
             maxLines: 10,
-            card.title,
+            blog.title!,
             style: TextStyle(
               color: AppColors.context(context).textColor,
+
               fontFamily: "aero_matics",
+
               fontSize: 14,
             ),
           ),
         ),
+
         const SizedBox(height: 24),
       ],
     );

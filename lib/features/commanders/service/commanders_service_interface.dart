@@ -1,7 +1,9 @@
+import 'package:get/get_connect/http/src/response/response.dart';
+
 abstract class CommandersServiceInterface {
   // Future<Response> createCommander();
 
-  Future<dynamic> createCommander(
+  Future<Response> createCommander(
     String name,
     String yearOfExperience,
     String serviceBroad,
@@ -11,15 +13,15 @@ abstract class CommandersServiceInterface {
     String commanderimage,
   );
 
-  Future<dynamic> getAllCommander();
+  Future<Response> getAllCommander();
 
-  Future<dynamic> getSpecificCommander(String _id);
+  Future<Response> getSpecificCommander(String _id);
 
-  Future<dynamic> filterCommanderWithServiceAndUnits(
+  Future<Response> filterCommanderWithServiceAndUnits(
     String service,
     String unit,
   );
 
-  Future<dynamic> getCommandersAllUnit();
-  Future<dynamic> getCommandersAllService();
+  Future<Response> getCommandersAllUnit();
+  Future<Response> getCommandersAllService();
 }

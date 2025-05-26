@@ -3,7 +3,7 @@ import 'package:commanderratings/features/auth/controllers/auth_controller.dart'
 import 'package:commanderratings/features/auth/presentation/screens/log_in.dart';
 import 'package:commanderratings/features/more/presentation/screens/others/about_screen.dart';
 import 'package:commanderratings/features/more/presentation/screens/others/contact_us.dart';
-import 'package:commanderratings/features/commanders_call/presentations/screens/commanders_call.dart';
+import 'package:commanderratings/features/commanders_call/presentations/screens/commanders_call_screen.dart';
 import 'package:commanderratings/core/onboarding/presentation/screens/onboarding1.dart';
 import 'package:commanderratings/features/theme/presentation/screens/theme_ui.dart';
 import 'package:flutter/material.dart';
@@ -74,42 +74,12 @@ class MoreScreen extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => CommandersCall(),
+                                builder: (context) => CommandersCallScreen(),
                               ),
                             );
                           },
                         ),
-                        // WideCustomButtonMore(
-                        //   text: 'CALL OF COMMANDER',
-                        //   onPressed: () {
-                        //     Navigator.push(
-                        //       context,
-                        //       MaterialPageRoute(
-                        //         builder: (context) => CallOfCommnder(),
-                        //       ),
-                        //     );
-                        //   },
-                        // ),
-                        // WideCustomButtonMore(
-                        //   text: 'COMMANDERS DETAILS',
-                        //   onPressed: () {
-                        //     Navigator.push(
-                        //       context,
-                        //       MaterialPageRoute(
-                        //         builder: (context) => CommandersDetails(),
-                        //       ),
-                        //     );
-                        //   },
-                        // ),
-                        // WideCustomButtonMore(
-                        //   text: 'LEAVE A REVIEW',
-                        //   onPressed: () {
-                        //     Navigator.push(
-                        //       context,
-                        //       MaterialPageRoute(builder: (context) => LeaveAReview()),
-                        //     );
-                        //   },
-                        // ),
+
                         WideCustomButtonMore(
                           text: 'THEME',
                           onPressed: () {

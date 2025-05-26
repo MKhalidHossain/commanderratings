@@ -1,5 +1,6 @@
 import 'package:commanderratings/core/constants/urls.dart';
 import 'package:commanderratings/helpers/remote/data/api_client.dart';
+import 'package:get/get_connect/http/src/response/response.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'commanders_repository_interface.dart';
 
@@ -13,7 +14,7 @@ class CommandersRepository implements CommandersRepositoryInterface {
   });
 
   @override
-  Future createCommander(
+  Future<Response> createCommander(
     String name,
     String yearOfExperience,
     String serviceBroad,
@@ -34,28 +35,28 @@ class CommandersRepository implements CommandersRepositoryInterface {
   }
 
   @override
-  Future getAllCommander() async {
-    return apiClient.getData(Urls.getAllCommanders);
+  Future<Response> getAllCommander() async {
+    return await apiClient.getData(Urls.getAllCommanders);
   }
 
   @override
-  Future getSpecificCommander(String _id) async {
-    return await apiClient.postData(Urls.getSpecificCommanders, {"_id": _id});
+  Future<Response> getSpecificCommander(String _id) async {
+    return await apiClient.getData(Urls.getSpecificCommanders+'$_id',);
   }
 
   @override
-  Future filterCommanderWithServiceAndUnits(String service, String unit) {
+  Future<Response> filterCommanderWithServiceAndUnits(String service, String unit) {
     throw UnimplementedError();
   }
 
   @override
-  Future getCommandersAllService() {
+  Future<Response> getCommandersAllService() {
     // TODO: implement getCommandersAllService
-    throw UnimplementedError();
+    return apiClient.getData(Urls.getAllServices);
   }
 
   @override
-  Future getCommandersAllUnit() {
-    throw UnimplementedError();
+  Future<Response> getCommandersAllUnit() {
+    return apiClient.getData(Urls.getAllUnits);
   }
 }

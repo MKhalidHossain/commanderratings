@@ -5,11 +5,31 @@ class AllCommandersListModel {
 
   AllCommandersListModel({this.status, this.message, this.data});
 
-  AllCommandersListModel.fromJson(Map<String, dynamic> json) {
-    status = json['status'];
-    message = json['message'];
-    data = json['data'] != null ? Data.fromJson(json['data']) : null;
+  factory AllCommandersListModel.fromJson(Map<String, dynamic> json) {
+    print('checking from json');
+    try {
+      return AllCommandersListModel(
+        status: json['status'],
+        message: json['message'],
+        data: json['data'] != null ? Data.fromJson(json['data']) : Data(commanders: [], pagination:
+        Pagination(
+          hasPrevPage: false,
+          hasNextPage: false,
+          totalPages: 1,
+          totalData: 1,
+          currentPage: 1,
+        )),
+      );
+      // status = json['status'];
+      // message = json['message'];
+      // data = json['data'] != null ? Data.fromJson(json['data']) : null;
+    } catch (e) {
+      print("Exception in AllCommandersListModel: $e");
+      rethrow;
+    }
   }
+
+  get commanders => null;
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
@@ -21,6 +41,8 @@ class AllCommandersListModel {
     return data;
   }
 }
+
+
 
 class Data {
   List<Commanders>? commanders;
@@ -41,6 +63,8 @@ class Data {
             : null;
   }
 
+  get allCommanders => null;
+
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     if (commanders != null) {
@@ -54,9 +78,9 @@ class Data {
 }
 
 class Commanders {
-  String? sId;
+  String? id;
   String? name;
-  int? yearOfExperience;
+  num? yearOfExperience;
   String? serviceBroad;
   String? unit;
   String? base;
@@ -64,11 +88,11 @@ class Commanders {
   String? profileImage;
   String? createdAt;
   String? updatedAt;
-  int? avgRating;
+  num? avgRating;
   String? image;
 
   Commanders({
-    this.sId,
+    this.id,
     this.name,
     this.yearOfExperience,
     this.serviceBroad,
@@ -83,7 +107,7 @@ class Commanders {
   });
 
   Commanders.fromJson(Map<String, dynamic> json) {
-    sId = json['_id'];
+    id = json['_id'];
     name = json['name'];
     yearOfExperience = json['yearOfExperience'];
     serviceBroad = json['serviceBroad'];
@@ -93,13 +117,17 @@ class Commanders {
     profileImage = json['profileImage'];
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
-    avgRating = json['avgRating'];
-    image = json['image'];
+    avgRating = json['avgRating'] ?? 0.0;
+    image = json['image'] ?? 'https://picsum.photos/200/300';
   }
+
+  get service => null;
+
+  get rating => null;
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['_id'] = sId;
+    data['id'] = id;
     data['name'] = name;
     data['yearOfExperience'] = yearOfExperience;
     data['serviceBroad'] = serviceBroad;

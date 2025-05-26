@@ -1,53 +1,14 @@
 import 'package:commanderratings/core/utils/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 
-class LeaderboardRanking extends StatefulWidget {
-  const LeaderboardRanking({super.key});
+import '../../../review/domain/get_top_five_reviews_response_model.dart';
 
-  final List<Map<String, dynamic>> leaderboardData = const [
-    {
-      'name': 'Daniel J. Markh',
-      'rank': 1,
-      'score': 2800,
-      'commanderCatagory': 'Air Force',
-      'speciality': 'None',
-    },
-    {
-      'name': 'Lawrance Wyatt, Jr. (Rat)',
-      'rank': 1,
-      'score': 2730,
-      'commanderCatagory': 'Air Force',
-      'speciality': 'None',
-    },
-    {
-      'name': 'Jeffray Adoms (Rat)',
-      'rank': 1,
-      'score': 1518,
-      'commanderCatagory': 'Air Force',
-      'speciality': 'None',
-    },
-    {
-      'name': 'Alexander D. Vanlear (Rat)',
-      'rank': 1,
-      'score': 875,
-      'commanderCatagory': 'Air Force',
-      'speciality': 'None',
-    },
-    {
-      'name': 'Daniel J. Markh',
-      'rank': 1,
-      'score': 830,
-      'commanderCatagory': 'Air Force',
-      'speciality': 'None',
-    },
-    {
-      'name': 'Daniel J. Markh',
-      'rank': 1,
-      'score': 770,
-      'commanderCatagory': 'Air Force',
-      'speciality': 'None',
-    },
-  ];
+class LeaderboardRanking extends StatefulWidget {
+  final GetTopFiveReviewsResponseModel getTopFiveReviewsResponseModel;
+
+
+   LeaderboardRanking({super.key, required this.getTopFiveReviewsResponseModel});
+
 
   @override
   State<LeaderboardRanking> createState() => _LeaderboardContentState();
@@ -63,9 +24,10 @@ class _LeaderboardContentState extends State<LeaderboardRanking> {
         shrinkWrap: true,
         padding: EdgeInsets.all(0),
         physics: const NeverScrollableScrollPhysics(),
-        itemCount: widget.leaderboardData.length,
+
+        itemCount: widget.getTopFiveReviewsResponseModel.data!.topCommanders!.length,
+
         itemBuilder: (context, index) {
-          final data = widget.leaderboardData[index];
           return Container(
             // height: size.height * 0.175,
             margin: const EdgeInsets.only(bottom: 10),
@@ -78,12 +40,15 @@ class _LeaderboardContentState extends State<LeaderboardRanking> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('#' + data['rank'].toString()),
+
+                Text('#${widget.getTopFiveReviewsResponseModel.data!.topCommanders![index].rank!}'),
+
                 const SizedBox(height: 8),
+
                 Row(
                   children: [
                     Text(
-                      data['score'].toString(),
+                      widget.getTopFiveReviewsResponseModel.data!.topCommanders![index].sumRating!.toStringAsFixed(0)!,
                       style: const TextStyle(
                         fontFamily: 'aero_matics',
                         fontWeight: FontWeight.bold,
@@ -94,7 +59,9 @@ class _LeaderboardContentState extends State<LeaderboardRanking> {
                     const SizedBox(width: 8),
 
                     Text(
-                      data['name'],
+                      //data['name'],
+                       widget.getTopFiveReviewsResponseModel.data!.topCommanders![index].name!
+              ,
                       style: const TextStyle(
                         fontFamily: 'aero_matics',
                         fontSize: 14,
@@ -104,9 +71,13 @@ class _LeaderboardContentState extends State<LeaderboardRanking> {
                     ),
                   ],
                 ),
+
                 const SizedBox(height: 8),
-                Text(data['commanderCatagory']),
-                Text(data['speciality']),
+
+                Text(widget.getTopFiveReviewsResponseModel.data!.topCommanders![index].serviceBroad!),
+
+                Text(widget.getTopFiveReviewsResponseModel.data!.topCommanders![index].unit!),
+
               ],
             ),
           );

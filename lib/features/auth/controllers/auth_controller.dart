@@ -4,15 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../../app.dart';
 import '../../../helpers/custom_snackbar.dart';
 import '../../../helpers/remote/data/api_checker.dart';
 import '../../../helpers/remote/data/api_client.dart';
-import '../../../helpers/signup_body.dart';
 import '../../../utils/app_constants.dart';
 import '../presentation/screens/log_in.dart';
-import '../presentation/screens/lost_password.dart';
 import '../presentation/screens/otp_screen.dart';
 import '../presentation/screens/reset_password.dart';
 

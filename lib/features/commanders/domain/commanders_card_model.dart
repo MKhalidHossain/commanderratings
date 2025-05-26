@@ -14,4 +14,6 @@ class CommandersCard {
     required this.rating,
     required this.uploadedTime,
   });
+
+
 }

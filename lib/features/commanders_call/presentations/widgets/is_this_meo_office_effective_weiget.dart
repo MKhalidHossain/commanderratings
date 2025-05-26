@@ -5,6 +5,7 @@ import '../../../../core/widgets/normal_custom_button.dart';
 import '../../../../core/widgets/title_subtitle_text.dart';
 
 class IsThisMeoOfficeEffectiveWeiget extends StatefulWidget {
+
   const IsThisMeoOfficeEffectiveWeiget({super.key});
 
   @override
@@ -23,11 +24,13 @@ class _IsThisMeoOfficeEffectiveWeigetState
   final List<Map<String, String>> submittedMessages = [];
 
   void handleSubmit() {
+
     final name = nameController.text.trim();
     final email = emailController.text.trim();
     final message = messageController.text.trim();
 
     if (name.isNotEmpty && email.isNotEmpty && message.isNotEmpty) {
+
       setState(() {
         submittedMessages.add({
           'name': name,
@@ -42,6 +45,7 @@ class _IsThisMeoOfficeEffectiveWeigetState
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(const SnackBar(content: Text('Message submitted!')));
+
     }
   }
 

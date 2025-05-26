@@ -1,14 +1,14 @@
-class GetTopFiveReviewsResponseModel {
+class FeaturedReviewsResponseModel {
   bool? status;
   String? message;
   Data? data;
 
-  GetTopFiveReviewsResponseModel({this.status, this.message, this.data});
+  FeaturedReviewsResponseModel({this.status, this.message, this.data});
 
-  GetTopFiveReviewsResponseModel.fromJson(Map<String, dynamic> json) {
+  FeaturedReviewsResponseModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
-    data = json['data'] != null ? Data.fromJson(json['data']) : null;
+    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -31,7 +31,7 @@ class Data {
     if (json['topCommanders'] != null) {
       topCommanders = <TopCommanders>[];
       json['topCommanders'].forEach((v) {
-        topCommanders!.add(TopCommanders.fromJson(v));
+        topCommanders!.add(new TopCommanders.fromJson(v));
       });
     }
   }
@@ -49,7 +49,7 @@ class Data {
 class TopCommanders {
   String? sId;
   String? name;
-  double? yearOfExperience;
+  int? yearOfExperience;
   String? serviceBroad;
   String? unit;
   String? base;
@@ -57,8 +57,9 @@ class TopCommanders {
   String? image;
   String? createdAt;
   String? updatedAt;
-  double? iV;
+  int? iV;
   double? sumRating;
+  HighestRatedReview? highestRatedReview;
 
   TopCommanders(
       {this.sId,
@@ -72,12 +73,13 @@ class TopCommanders {
         this.createdAt,
         this.updatedAt,
         this.iV,
-        this.sumRating});
+        this.sumRating,
+        this.highestRatedReview});
 
   TopCommanders.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
     name = json['name'];
-    yearOfExperience = (json['yearOfExperience'] as num?)?.toDouble();
+    yearOfExperience = json['yearOfExperience'];
     serviceBroad = json['serviceBroad'];
     unit = json['unit'];
     base = json['base'];
@@ -85,8 +87,11 @@ class TopCommanders {
     image = json['image'];
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
-    iV = (json['__v'] as num?)?.toDouble();
-    sumRating = (json['sumRating'] as num?)?.toDouble(); // ✅ fix for int/double
+    iV = json['__v'];
+    sumRating = json['sumRating'] != null ? json['sumRating'].toDouble() : null;
+    highestRatedReview = json['highestRatedReview'] != null
+        ? new HighestRatedReview.fromJson(json['highestRatedReview'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -103,6 +108,31 @@ class TopCommanders {
     data['updatedAt'] = updatedAt;
     data['__v'] = iV;
     data['sumRating'] = sumRating;
+    if (highestRatedReview != null) {
+      data['highestRatedReview'] = highestRatedReview!.toJson();
+    }
+    return data;
+  }
+}
+
+class HighestRatedReview {
+  String? title;
+  String? description;
+  double? rating;
+
+  HighestRatedReview({this.title, this.description, this.rating});
+
+  HighestRatedReview.fromJson(Map<String, dynamic> json) {
+    title = json['title'];
+    description = json['description'];
+    rating = json['rating'] != null ? json['rating'].toDouble() : null;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['title'] = title;
+    data['description'] = description;
+    data['rating'] = rating;
     return data;
   }
 }

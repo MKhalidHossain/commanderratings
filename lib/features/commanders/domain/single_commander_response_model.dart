@@ -27,8 +27,10 @@ class Data {
   List<Reviews>? reviews;
   String? averageRating;
   int? totalReviews;
+  int? position;
+  int? totalCommanders;
 
-  Data({this.commander, this.reviews, this.averageRating, this.totalReviews});
+  Data({this.commander, this.reviews, this.averageRating, this.totalReviews, this.position,this.totalCommanders});
 
   Data.fromJson(Map<String, dynamic> json) {
     commander = json['commander'] != null
@@ -41,7 +43,9 @@ class Data {
       });
     }
     averageRating = json['averageRating'];
-    totalReviews = json['totalReviews'];
+    totalReviews = int.tryParse(json['totalReviews'].toString());
+    position = int.tryParse(json['position'].toString());
+    totalCommanders = int.tryParse(json['totalCommanders'].toString());
   }
 
   Map<String, dynamic> toJson() {
@@ -54,6 +58,8 @@ class Data {
     }
     data['averageRating'] = averageRating;
     data['totalReviews'] = totalReviews;
+    data['position'] = position;
+    data['totalCommanders'] = totalCommanders;
     return data;
   }
 }
@@ -135,7 +141,7 @@ class Reviews {
     sId = json['_id'];
     title = json['title'];
     description = json['description'];
-    rating = json['rating'];
+    rating = int.tryParse(json['rating'].toString());
     userId =
         json['userId'] != null ? UserId.fromJson(json['userId']) : null;
     commanderId = json['commanderId'];

@@ -1,13 +1,36 @@
-import 'package:commanderratings/core/utils/constants/app_colors.dart';
-import 'package:commanderratings/core/widgets/normal_custom_button.dart';
+
 import 'package:flutter/material.dart';
+
 import '../../../../core/ratting_a_to_z/ratting.dart';
-import '../../domain/models/review.dart';
+import '../../../../core/utils/constants/app_colors.dart';
+import '../../../review/domain/featured_reviews_response_model.dart';
+
 
 class ReviewCard extends StatelessWidget {
-  final Review review;
+  final TopCommanders review;
 
   const ReviewCard({super.key, required this.review});
+
+
+  String timeAgoSinceDate(String dateString) {
+    final date = DateTime.parse(dateString).toLocal();
+    final now = DateTime.now();
+    final difference = now.difference(date);
+
+    if (difference.inSeconds < 60) {
+      return '${difference.inSeconds}s ago';
+    } else if (difference.inMinutes < 60) {
+      return '${difference.inMinutes}m ago';
+    } else if (difference.inHours < 24) {
+      return '${difference.inHours}h ago';
+    } else if (difference.inDays < 7) {
+      return '${difference.inDays}d ago';
+    } else {
+      // Optional: Format full date if more than a week ago
+      return '${date.day}/${date.month}/${date.year}';
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -26,29 +49,29 @@ class ReviewCard extends StatelessWidget {
               children: [
                 CircleAvatar(
                   radius: 20,
-                  backgroundImage: NetworkImage(review.avatarUrl),
+                  backgroundImage: NetworkImage(review.image!),
                 ),
                 const SizedBox(width: 10),
                 Expanded(
                   child: Text(
                     maxLines: 1,
-                    review.organization,
+                    review.serviceBroad!,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: AppColors.context(context).textColor,
                     ),
                   ),
                 ),
-                ShowRating(rating: review.tenStarRating),
+                ShowRating(rating: double.tryParse(review.highestRatedReview!.rating.toString())!),
               ],
             ),
             const SizedBox(height: 8),
             Text(
-              review.timeAgo,
+              timeAgoSinceDate(review.updatedAt.toString()),
               style: const TextStyle(color: Colors.grey, fontSize: 12),
             ),
             const SizedBox(height: 8),
-            Text(maxLines: 5, review.content),
+            Text(maxLines: 5, review.highestRatedReview!.description!),
             const SizedBox(height: 8),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -62,7 +85,7 @@ class ReviewCard extends StatelessWidget {
                 ElevatedButton(
                   onPressed: () {},
                   child: Text(
-                    review.reviewerPosition,
+                    review.serviceBroad!,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: AppColors.context(context).textColor,

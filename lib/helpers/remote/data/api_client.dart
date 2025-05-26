@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'package:file_picker/file_picker.dart';
-import 'package:get/get_connect/http/src/request/request.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -54,6 +53,7 @@ class ApiClient extends GetxService {
         Uri.parse(appBaseUrln+uri),
         headers: headers ?? _mainHeaders,
       ).timeout(Duration(seconds: timeoutInSeconds));
+      print('Commanders Calls');
       return handleResponse(response, uri);
     } catch (e) {
       return Response(statusCode: 1, statusText: noInternetMessage);
@@ -284,33 +284,25 @@ class ApiClient extends GetxService {
 
   Response handleResponse(http.Response response, String uri) {
     dynamic body;
+
     try {
       body = jsonDecode(response.body);
-    // ignore: empty_catches
-    }catch(e) {}
+      print(body.toString());
+
+    }catch(e) {
+      print(e.toString() + 'fuck you');
+    }
     Response localResponse = Response(
       body: body ?? response.body, bodyString: response.body.toString(),
-      request: Request(headers: response.request!.headers, method: response.request!.method, url: response.request!.url),
+      //request: http.Request(headers: response.request!.headers, method: response.request!.method, url: response.request!.url),
       headers: response.headers, statusCode: response.statusCode, statusText: response.reasonPhrase,
     );
 
-    // if(localResponse.statusCode != 200 && localResponse.body != null && localResponse.body is !String) {
-    //   if(localResponse.body.toString().startsWith('{errors: [{code:')) {
-    //     ErrorResponse errorResponse = ErrorResponse.fromJson(localResponse.body);
-    //     localResponse = Response(statusCode: localResponse.statusCode, body: localResponse.body, statusText: errorResponse.errors![0].message);
-    //   }else if(localResponse.body.toString().startsWith('{message')) {
-    //     localResponse = Response(statusCode: localResponse.statusCode, body: localResponse.body, statusText: localResponse.body['message']);
-    //   }
-    // }
-    // else if(localResponse.statusCode != 200 ) {
-    //
-    //   localResponse = Response(statusCode: localResponse.statusCode, body: localResponse.body, statusText: localResponse.body['message']);
-    //
-    // }
-
     if(kDebugMode) {
-      log('====> API Response: [${localResponse.statusCode}] $uri\n${localResponse.body}');
+
+      // log('====> API Response: [${localResponse.statusCode}] $uri\n${localResponse.body} ==========');
     }
+   // log('====> API Response: [${localResponse.statusCode}] $uri\n${localResponse.body} ==========');
     return localResponse;
   }
 }
@@ -326,3 +318,4 @@ class MultipartDocument {
   PlatformFile? file;
   MultipartDocument(this.key, this.file);
 }
+

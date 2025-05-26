@@ -50,13 +50,13 @@ class FeaturedReviewsSection extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           Column(
-            children:
-                reviews.map((review) {
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 16.0),
-                    child: ReviewCard(review: review),
-                  );
-                }).toList(),
+            children:[]
+                // reviews.map((review) {
+                //   return Padding(
+                //     padding: const EdgeInsets.only(bottom: 16.0),
+                //     child: ReviewCard(review: review),
+                //   );
+                // }).toList(),
           ),
         ],
       ),

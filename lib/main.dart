@@ -3,8 +3,6 @@ import 'package:commanderratings/features/theme/app_themes/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'features/auth/controllers/auth_controller.dart';
-import 'features/auth/presentation/screens/otp_screen.dart';
-import 'features/auth/presentation/screens/reset_password.dart';
 import 'helpers/dependency_injection.dart';
 
 
@@ -29,6 +27,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
+      
       //print(controller.themeMode.value.toString());
       return GetMaterialApp(
         debugShowCheckedModeBanner: false,
@@ -37,6 +36,8 @@ class MyApp extends StatelessWidget {
         theme: AppTheme.lightTheme,
         darkTheme: AppTheme.darkTheme,
         home:  const LogIn(),
+        
+        //authController.isFirstTimeInstall() ? OnboardingScreen() : const LogIn(),
 
 
         //const ResetPassword(),
