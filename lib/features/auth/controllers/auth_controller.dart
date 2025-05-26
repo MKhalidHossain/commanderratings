@@ -1,3 +1,4 @@
+import 'package:commanderratings/features/auth/domain/model/login_response_model.dart';
 import 'package:commanderratings/features/auth/presentation/screens/sign_up.dart';
 import 'package:commanderratings/features/auth/sevices/auth_service_interface.dart';
 import 'package:flutter/material.dart';
@@ -56,6 +57,8 @@ class AuthController extends GetxController implements GetxService{
       FocusNode addressNode = FocusNode();
       FocusNode identityNumberNode = FocusNode();
 
+      late LogInResponseModel logInResponseModel;
+
 
       void addImageAndRemoveMultiParseData(){
             multipartList.clear();
@@ -105,13 +108,22 @@ class AuthController extends GetxController implements GetxService{
 
                   print(token.toString());
 
-                  token = response.body['accessToken'].toString();
-                  refreshToken = response.body['refreshToken'].toString();
 
-                  print('accessToken $token NOWW Jonhnney  Bruites');
+
+
+
+
+                  logInResponseModel = LogInResponseModel.fromJson(response.body);
+
+                  refreshToken = logInResponseModel.data!.user!.refreshToken!;
+
+                  token = logInResponseModel.data!.accessToken!;
+
+                  print('accessToken ${logInResponseModel.data!.accessToken} NOWW Jonhnney  Bruites');
                   print('refreshToken $refreshToken NOWW Jonhnney  Bruites');
-
+                  print('User Token $token  ================================== from comtroller ');
                   setUserToken(token, refreshToken);
+
                   Get.offAll(MainScreen());
 
                   showCustomSnackBar('Welcome you have successfully Logged In');

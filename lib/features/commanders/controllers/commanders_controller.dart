@@ -1,3 +1,4 @@
+import 'package:commanderratings/features/commanders/domain/add_a_new_commander_response_model.dart';
 import 'package:commanderratings/features/commanders/domain/all_commanders_list_model.dart';
 import 'package:commanderratings/features/commanders/domain/get_all_service_response_model.dart';
 import 'package:commanderratings/features/commanders/domain/get_all_unit_response_model.dart';
@@ -17,6 +18,7 @@ class CommandersController extends GetxController implements GetxService {
 
   late GetAllServicesResponseModel getAllServicesResponseModel;
   late GetAllUnitResponseModel getAllUnitResponseModel;
+  late AddANewCommanderResponseModel addANewCommanderResponseModel;
 
   bool isLoading = false;
 
@@ -37,6 +39,48 @@ class CommandersController extends GetxController implements GetxService {
         allCommandersListModel = AllCommandersListModel.fromJson(
 
           response.body
+        );
+        print('Call from Controller after model calls.');
+
+
+      } else {
+        // Get.find<AuthController>().logOut();
+        // print(response.statusCode.toString());
+        // throw Exception('Failed to load Users All Imported Route List');
+      }
+    } catch (e) {
+      if (e is Exception) {
+        // print('⚠️ Exception in getAllCommanders: $e dddddddddddd');
+      } else {
+        print(e);
+      }
+    }
+    isLoading = false;
+    update();
+  }
+
+
+  Future<void> createCommander(String name,
+      String yearOfExperience,
+      String serviceBroad,
+      String unit,
+      String base,
+      String rank,
+      String commanderimage,) async {
+    try {
+      isLoading = true;
+      print("Getting all commanders\n\n\n");
+
+      var response = await commandersServiceInterface.createCommander(name, yearOfExperience, serviceBroad, unit, base, rank, commanderimage);
+      if (response.statusCode == 201) {
+
+        print('All Commanders are fetched successfully.');
+        print("HTTP Status: ${response.statusCode}");
+        print("Raw Response: ${response.body}");
+
+        addANewCommanderResponseModel = AddANewCommanderResponseModel.fromJson(
+
+            response.body
         );
         print('Call from Controller after model calls.');
 

@@ -1,9 +1,11 @@
 import 'dart:convert';
+import 'package:commanderratings/features/review/domain/create_review_response_model.dart';
 import 'package:commanderratings/features/review/domain/featured_reviews_response_model.dart';
 import 'package:commanderratings/features/review/domain/get_all_review_response_model.dart';
 import 'package:commanderratings/features/review/services/review_service.dart';
 import 'package:commanderratings/features/review/services/review_service_interface.dart';
 import 'package:get/get.dart';
+import '../../../helpers/custom_snackbar.dart';
 import '../domain/get_top_five_reviews_response_model.dart';
 
 
@@ -18,6 +20,8 @@ class ReviewController extends GetxController{
   late GetTopFiveReviewsResponseModel getTopFiveReviewsResponseModel;
 
   late FeaturedReviewsResponseModel featuredReviewsResponseModel;
+
+  late CreateReviewsResponseModel createReviewsResponseModel;
 
   bool isLoading = false;
 
@@ -119,6 +123,23 @@ class ReviewController extends GetxController{
       } else {
         print(e);
       }
+    }
+    isLoading = false;
+    update();
+  }
+
+  Future<void> createReview(String commanderId, double rating, String title, String description)async {
+    isLoading = true;
+    var response = await reviewServiceInterface.createReviews(commanderId, rating, title, description);
+
+    if (response.statusCode == 201) {
+
+      createReviewsResponseModel = CreateReviewsResponseModel.fromJson(response.body);
+
+      showCustomSnackBar(createReviewsResponseModel.data!.description.toString());
+    }
+    else {
+
     }
     isLoading = false;
     update();

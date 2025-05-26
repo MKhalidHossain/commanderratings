@@ -41,6 +41,8 @@ class ApiClient extends GetxService {
       'Authorization': 'Bearer $token',
 
     };
+
+    print('User Token ${token.toString()} ================================== from api Client ');
     _mainHeaders = header;
   }
 

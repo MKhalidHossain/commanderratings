@@ -78,6 +78,7 @@ class _CommandersDetailsState extends State<CommandersDetails> {
                       const SizedBox(height: 8.0),
                       CommanderDetailsHeader(),
                       //.................................... After Banner section Content.........................................
+
                       Padding(
                         padding: const EdgeInsets.all(0.0),
                         child: Container(
@@ -265,6 +266,7 @@ class _CommandersDetailsState extends State<CommandersDetails> {
 
                               //.................................... Leave a Review section with white border..........................
                               const SizedBox(height: 16.0),
+
                               Padding(
                                 padding: const EdgeInsets.all(16.0),
                                 child: Container(
@@ -314,7 +316,7 @@ class _CommandersDetailsState extends State<CommandersDetails> {
                                               context: context,
                                               builder: (BuildContext contex) {
                                                 // ......bottom sheet content..........
-                                                return LeaveAReview();
+                                                return LeaveAReview(commanderId: commandersResponseModel.data!.commander!.sId!);
                                               },
                                             );
                                           },
@@ -333,16 +335,27 @@ class _CommandersDetailsState extends State<CommandersDetails> {
                                         ),
                                         const SizedBox(height: 8.0),
                                         ValueTextAeroMatics(text: 'Overall '),
-                                        const SizedBox(height: 32.0),
-                                        ShowRating(rating: 8.5),
-                                        const SizedBox(height: 8),
-                                        ValueTextAeroMatics(text: '8.5'),
-                                        const SizedBox(height: 8.0),
-                                        ValueTextAeroMatics(
-                                          text:
-                                              'Tactical Competence: Now Effectively Does the commander make operational decisions during Mission: Or Exercise? Are they tactically sound and capable of leading during high pressure Solution',
-                                        ),
-                                        const SizedBox(height: 32.0),
+                                       Column(
+                                         children: List.generate(
+                                             commandersResponseModel.data!.reviews!.length,
+                                             (index){
+                                           return  Column(
+                                             crossAxisAlignment: CrossAxisAlignment.start,
+                                             children: [
+                                               const SizedBox(height: 32.0),
+                                               ShowRating(rating: double.tryParse(commandersResponseModel.data!.reviews![index].rating.toString()) ?? 0.0),
+                                               const SizedBox(height: 8),
+                                               ValueTextAeroMatics(text: commandersResponseModel.data!.reviews![index].rating.toString() ?? '0.0'),
+                                               const SizedBox(height: 8.0),
+                                               ValueTextAeroMatics(
+                                                 text: commandersResponseModel.data!.reviews![index].description.toString()
+                                               ),
+                                               const SizedBox(height: 32.0),
+                                             ],
+                                           );
+                                             }
+                                         ),
+                                       )
                                         //const SizedBox(height: 32.0),
                                         // UserReveiwsWidgets(),
                                       ],
@@ -350,10 +363,12 @@ class _CommandersDetailsState extends State<CommandersDetails> {
                                   ),
                                 ),
                               ),
+
                             ],
                           ),
                         ),
                       ),
+
                     ],
                   ),
                 ),
