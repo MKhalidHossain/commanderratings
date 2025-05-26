@@ -102,6 +102,23 @@ class CommandersController extends GetxController implements GetxService {
   }
 
 
+  // Future<void> reportABug(String projectName, String screenName, String messages) async{
+  //   isLoading = true;
+  //   var response = await settingsServiceInterface.reportABug(projectName, screenName, messages, pickedProfileFile1);
+  //
+  //   if (response.statusCode == 200) {
+  //     showCustomSnackBar('Your bug report successfully sent!!!');
+  //     print('Your bug report successfully sent!!!');
+  //   }
+  //   else {
+  //     Get.find<AuthController>().logOut();
+  //   }
+  //   isLoading = false;
+  //   update();
+  //
+  // }
+
+
   Future<void> getACommander(String _id) async {
     try {
       isLoading = true;
