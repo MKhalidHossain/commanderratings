@@ -6,4 +6,6 @@ abstract class CommandersCallServiceInterface {
   Future<Response> getSpecificCommandersCall(String _id );
   Future<Response> getAllContact();
 
+  Future<Response> giveCommentUnderBlog( String blogId, String name, String email, String comment);
+
 }

@@ -1,15 +1,16 @@
 import 'package:get/get_connect/http/src/response/response.dart';
+import 'package:image_picker/image_picker.dart';
 
 abstract class CommandersRepositoryInterface {
   Future<Response> createCommander(
-    String name,
-    String yearOfExperience,
-    String serviceBroad,
-    String unit,
-    String base,
-    String rank,
-    String commanderimage,
-  );
+      String name,
+      String yearOfExperience,
+      String serviceBroad,
+      String unit,
+      String base,
+      String rank,
+      XFile? commanderImage,
+      );
 
   Future<Response> getAllCommander();
 

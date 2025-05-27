@@ -1,5 +1,8 @@
 
+import 'package:commanderratings/features/commanders/domain/all_commanders_list_model.dart';
+import 'package:commanderratings/features/commanders/presentations/screens/commanders_details.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../../core/ratting_a_to_z/ratting.dart';
 import '../../../../core/utils/constants/app_colors.dart';
@@ -94,7 +97,7 @@ class ReviewCard extends StatelessWidget {
                 ),
                 TextButton(
                   onPressed: () {
-                    // View full review action
+                    Get.to(CommandersDetails(commandersId: review.sId!));
                   },
                   child: Text(
                     'See full review',

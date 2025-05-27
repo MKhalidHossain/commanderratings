@@ -22,4 +22,12 @@ class CommandersCallService implements CommandersCallServiceInterface {
   Future<Response> getAllContact() {
     return commandersCallRepositoryInterface.getAllContact();
   }
+
+  @override
+  Future<Response> giveCommentUnderBlog(String blogId, String name, String email, String comment
+      ) {
+    return commandersCallRepositoryInterface.createCommentUnderBlog(blogId, name, email, comment);
+  }
+
 }
+

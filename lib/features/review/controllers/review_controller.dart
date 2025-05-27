@@ -136,6 +136,8 @@ class ReviewController extends GetxController{
 
       createReviewsResponseModel = CreateReviewsResponseModel.fromJson(response.body);
 
+      showCustomSnackBar('Your comment has been add for this post Successfully');
+
       showCustomSnackBar(createReviewsResponseModel.data!.description.toString());
     }
     else {

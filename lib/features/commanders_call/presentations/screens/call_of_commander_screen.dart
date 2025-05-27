@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/headers/header_for_others_one_man.dart';
-import '../widgets/is_this_meo_office_effective_weiget.dart';
+import '../widgets/call_of_commander_body_widget.dart';
 
 
 class CallOfCommanderScreen extends StatefulWidget {
@@ -45,20 +45,17 @@ class _CallOfCommanderScreenState
   @override
   Widget build(BuildContext context) {
 
-
-
     return GetBuilder<CommandersCallsController>(
         builder: (commandersCallsController){
 
-          // print(getOneBlog.data!.blog!.title.toString());
           return !commandersCallsController.isLoading ?
           Scaffold(
             body: SingleChildScrollView(
               child: Column(
                 children: [
-                  HeaderForOthers(text: getOneBlog.data!.blog!.title!),
+                  HeaderForOthers(text: getOneBlog.data!.blog!.title!, image: getOneBlog.data!.blog!.image!,),
                   const SizedBox(height: 24),
-                  IsThisMeoOfficeEffectiveWeiget(),
+                  CallOfCommanderBodyWidget(getOneBlog: getOneBlog, blog:getOneBlog.data!.blog! ,),
                 ],
               ),
             ),

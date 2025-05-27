@@ -205,7 +205,7 @@ class _AllCommandersScreenState extends State<AllCommandersScreen> {
                   children: [
                     if (getAllServicesResponseModel.data?.services != null)
                       ServiceMemberWidget(
-                        //services: getAllServicesResponseModel.data!.services!,
+                        services: commandersController.getAllServicesResponseModel.data!.services!,
                         onSelectionChanged: (selectedFilters) {
                           if (selectedFilters.isNotEmpty) {
                             applySearchFilter(selectedFilters.first);
@@ -221,7 +221,7 @@ class _AllCommandersScreenState extends State<AllCommandersScreen> {
                           const TitleTextAllCommanders(text: 'Units'),
                           const SizedBox(height: 10),
                           FilterButtonsForCommanders(
-                            // units: getAllUnitResponseModel.data!.units!,
+                            units: commandersController.getAllUnitResponseModel.data!.units!,
                             onSelectionChanged: (selectedFilters) {
                               if (selectedFilters.isNotEmpty) {
                                 applySearchFilter(selectedFilters.first);

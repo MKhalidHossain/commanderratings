@@ -13,7 +13,7 @@ class AboutScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            HeaderForOthers(text: 'About'),
+            HeaderForOthers(text: 'About', image: '',),
             const SizedBox(height: 24),
             Row(
               children: [

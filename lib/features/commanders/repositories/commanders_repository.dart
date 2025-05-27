@@ -1,6 +1,7 @@
 import 'package:commanderratings/core/constants/urls.dart';
 import 'package:commanderratings/helpers/remote/data/api_client.dart';
 import 'package:get/get_connect/http/src/response/response.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'commanders_repository_interface.dart';
 
@@ -21,17 +22,31 @@ class CommandersRepository implements CommandersRepositoryInterface {
     String unit,
     String base,
     String rank,
-    String commanderimage,
+    XFile? commanderImage,
   ) async {
-    return await apiClient.postData(Urls.createCommander, {
-      "name": name,
-      "yearOfExperience": yearOfExperience,
-      "serviceBroad": serviceBroad,
-      "unit": unit,
-      "base": base,
-      "rank": rank,
-      "image": commanderimage,
-    });
+    // return await apiClient.postData(Urls.createCommander, {
+    //   "name": name,
+    //   "yearOfExperience": yearOfExperience,
+    //   "serviceBroad": serviceBroad,
+    //   "unit": unit,
+    //   "base": base,
+    //   "rank": rank,
+    //   "image": commanderImage,
+    // }
+    // );
+
+    return await apiClient.postMultipartDataBug(Urls.createCommander,
+        {
+          "name": name,
+          "yearOfExperience": yearOfExperience,
+          "serviceBroad": serviceBroad,
+          "unit": unit,
+          "base": base,
+          "rank": rank,
+        }
+        , MultipartBody('profile_image', commanderImage)
+
+    );
   }
 
   @override

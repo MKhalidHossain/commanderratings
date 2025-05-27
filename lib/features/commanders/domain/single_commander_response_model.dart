@@ -96,7 +96,7 @@ class Commander {
     unit = json['unit'];
     base = json['base'];
     rank = json['rank'];
-    profileImage = json['profileImage'];
+    profileImage = json['image'];
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
   }
@@ -110,7 +110,7 @@ class Commander {
     data['unit'] = unit;
     data['base'] = base;
     data['rank'] = rank;
-    data['profileImage'] = profileImage;
+    data['image'] = profileImage;
     data['createdAt'] = createdAt;
     data['updatedAt'] = updatedAt;
     return data;

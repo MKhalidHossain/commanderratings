@@ -79,7 +79,7 @@ class AppColors {
       errorColor = Colors.red,
       tabBarColor = Colors.white,
       smallContainerColor = Colors.grey.shade100,
-      iconOutsideFillColor = Colors.white,
+      iconOutsideFillColor = Colors.grey.shade200,
       starIconColor = Colors.blueGrey.shade400,
       filterSelectedTextColor = Colors.white,
       filterUnselectedTextColor = Colors.black;

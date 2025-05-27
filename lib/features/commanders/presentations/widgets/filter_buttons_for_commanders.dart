@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import '../../../../core/utils/constants/app_colors.dart';
+import '../../domain/get_all_unit_response_model.dart';
 
 class FilterButtonsForCommanders extends StatefulWidget {
+  final List<Units> units;
   final Function(List<String>) onSelectionChanged;
   const FilterButtonsForCommanders({
     super.key,
-    required this.onSelectionChanged,
+    required this.onSelectionChanged, required this.units,
   });
 
   @override
@@ -15,24 +17,24 @@ class FilterButtonsForCommanders extends StatefulWidget {
 
 class _FilterButtonsForCommandersState
     extends State<FilterButtonsForCommanders> {
-  final List<String> filters = [
-    'Air Force',
-    'Coast Guard',
-    'Navy',
-    'Army',
-    'MARINES',
-    'ACC',
-    'AETC',
-    'AFGSC',
-    '11th Wing',
-    'Airlift Wing',
-    'Uncategorized',
-    'Veterans',
-    'National Guard',
-    'Marine',
-  ];
+  final List<String> filters =[];
+  
 
   List<String> selectedFilters = [];
+
+  // void addDataToServiceMembers(){
+  //   for (var S in widget.){
+  //     filters.add();
+  //   }
+  // }
+  
+  void addDataToUnits(){
+    for(var d in widget.units){
+      filters.add(d.name!);
+    }
+  }
+
+
 
   void _toggleFilter(String label) {
     setState(() {
@@ -43,6 +45,12 @@ class _FilterButtonsForCommandersState
       }
       widget.onSelectionChanged(selectedFilters);
     });
+  }
+
+  @override
+  void initState() {
+    addDataToUnits();
+    super.initState();
   }
 
   @override

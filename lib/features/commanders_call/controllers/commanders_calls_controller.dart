@@ -4,6 +4,7 @@ import 'package:commanderratings/features/commanders_call/service/commaders_call
 import 'package:get/get.dart';
 
 import '../domain/model/get_one_blog_response_model.dart';
+import '../domain/model/post_comment_under_blog.dart';
 import 'commanders_calls_controller.dart' as commandersCallServiceInterface;
 
 class CommandersCallsController extends GetxController implements GetxService {
@@ -14,6 +15,7 @@ class CommandersCallsController extends GetxController implements GetxService {
   late GetAllBlogResponseModel getAllBlogResponseModel;
   late GetOneBlog getOneBlog;
   late GetAllContactResponse getAllContactResponse;
+  late PostCommentUnderBlogResponceModel postCommentUnderBlogResponceModel;
 
   bool isLoading = false;
 
@@ -129,5 +131,43 @@ class CommandersCallsController extends GetxController implements GetxService {
     isLoading = false;
     update();
   }
+  Future<void> createCommentUnderBlog(
+      String blogId, String name, String email, String comment
+      ) async {
+    try {
+      isLoading = true;
+      print("Getting all commanders\n\n\n");
+
+      var response = await commandersCallServiceInterface.giveCommentUnderBlog( blogId, name, email, comment);
+
+      if (response.statusCode == 201) {
+
+        print('Create comment of a post are fetched successfully.');
+        print("HTTP Status: ${response.statusCode}");
+        print("Raw Response: ${response.body}");
+
+        postCommentUnderBlogResponceModel = PostCommentUnderBlogResponceModel.fromJson(
+
+            response.body
+        );
+        print('Call from Controller after model calls.');
+
+
+      } else {
+        // Get.find<AuthController>().logOut();
+        // print(response.statusCode.toString());
+        // throw Exception('Failed to load Users All Imported Route List');
+      }
+    } catch (e) {
+      if (e is Exception) {
+        // print('⚠️ Exception in getAllCommanders: $e dddddddddddd');
+      } else {
+        print(e);
+      }
+    }
+    isLoading = false;
+    update();
+  }
+
 
 }

@@ -4,7 +4,10 @@ import 'package:commanderratings/features/commanders/domain/get_all_service_resp
 import 'package:commanderratings/features/commanders/domain/get_all_unit_response_model.dart';
 import 'package:commanderratings/features/commanders/service/commanders_service_interface.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
+import '../../../helpers/custom_snackbar.dart';
+import '../../../helpers/remote/data/api_client.dart';
 import '../domain/single_commander_response_model.dart';
 
 class CommandersController extends GetxController implements GetxService {
@@ -23,6 +26,38 @@ class CommandersController extends GetxController implements GetxService {
   bool isLoading = false;
 
   get commandersList => null;
+
+  XFile? _pickedProfileFile ;
+  XFile? _pickedProfileFile1 ;
+
+  XFile? get pickedProfileFile => _pickedProfileFile;
+  XFile? get pickedProfileFile1 => _pickedProfileFile1;
+
+  XFile identityImage = XFile('');
+
+  List<XFile> identityImages = [];
+
+  List<MultipartBody> multipartList = [];
+
+  void clearPickedImage() {
+    _pickedProfileFile = null;
+    update();
+  }
+
+  void pickImage(bool isBack, bool isProfile) async {
+    if(isProfile){
+
+      _pickedProfileFile = (await ImagePicker().pickImage(source: ImageSource.gallery))!;
+
+    } else{
+
+      identityImage = (await ImagePicker().pickImage(source: ImageSource.gallery))!;
+      identityImages.add(identityImage);
+      multipartList.add(MultipartBody('identity_images[]', identityImage));
+
+    }
+    update();
+  }
 
   Future<void> getAllCommanders() async {
     try {
@@ -66,12 +101,12 @@ class CommandersController extends GetxController implements GetxService {
       String unit,
       String base,
       String rank,
-      String commanderimage,) async {
+      ) async {
     try {
       isLoading = true;
       print("Getting all commanders\n\n\n");
 
-      var response = await commandersServiceInterface.createCommander(name, yearOfExperience, serviceBroad, unit, base, rank, commanderimage);
+      var response = await commandersServiceInterface.createCommander(name, yearOfExperience, serviceBroad, unit, base, rank, _pickedProfileFile);
       if (response.statusCode == 201) {
 
         print('All Commanders are fetched successfully.');
@@ -102,21 +137,21 @@ class CommandersController extends GetxController implements GetxService {
   }
 
 
-  // Future<void> reportABug(String projectName, String screenName, String messages) async{
-  //   isLoading = true;
-  //   var response = await settingsServiceInterface.reportABug(projectName, screenName, messages, pickedProfileFile1);
-  //
-  //   if (response.statusCode == 200) {
-  //     showCustomSnackBar('Your bug report successfully sent!!!');
-  //     print('Your bug report successfully sent!!!');
-  //   }
-  //   else {
-  //     Get.find<AuthController>().logOut();
-  //   }
-  //   isLoading = false;
-  //   update();
-  //
-  // }
+  Future<void> reportABug(String projectName, String screenName, String messages) async{
+    isLoading = true;
+    // var response = await settingsServiceInterface.reportABug(projectName, screenName, messages, pickedProfileFile1);
+    //
+    // if (response.statusCode == 200) {
+    //   showCustomSnackBar('Your bug report successfully sent!!!');
+    //   print('Your bug report successfully sent!!!');
+    // }
+    // else {
+    //   // Get.find<AuthController>().logOut();
+    // }
+    isLoading = false;
+    update();
+
+  }
 
 
   Future<void> getACommander(String _id) async {

@@ -149,10 +149,10 @@ class ApiClient extends GetxService {
       String apiUrl = "https://backend-david-weijian.onrender.com/api/v1/user/update-userProfile";
 
       if (kDebugMode) {
-        log('API Call: $apiUrl\nHeaders: ${headers ?? _mainHeaders}\nBody: $body');
+        log('API Call: $appBaseUrln+$uri\nHeaders: ${headers ?? _mainHeaders}\nBody: $body');
       }
 
-      var request = http.MultipartRequest('PUT', Uri.parse(apiUrl));
+      var request = http.MultipartRequest('POST', Uri.parse(appBaseUrln+uri));
 
       // Add headers
       request.headers.addAll(headers ?? _mainHeaders);
@@ -167,7 +167,7 @@ class ApiClient extends GetxService {
         var file = image.file!;
         request.files.add(
           http.MultipartFile(
-            'image', // This must match the backend field name
+            'commanderImage', // This must match the backend field name
             file.readAsBytes().asStream(),
             await file.length(),
             filename: file.path.split('/').last, // Extract filename from path

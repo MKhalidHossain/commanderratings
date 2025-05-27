@@ -66,7 +66,7 @@ class FaqScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            HeaderForOthers(text: 'FAQ'),
+            HeaderForOthers(text: 'FAQ', image: '',),
             const SizedBox(height: 20),
             ExpansionPannelListFaq(faqs: faqs),
             const SizedBox(height: 24),

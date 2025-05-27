@@ -20,8 +20,6 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
 
 
-
-
   @override
   void initState() {
     Get.find<ReviewController>().getAllFeaturedReviews().then((_) {
@@ -35,45 +33,6 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
   }
 
-  // Sample list of reviews
-  final List<Review> featuredReviews = [
-    Review(
-      organization: 'US Navy',
-      timeAgo: '2 Days Ago',
-      content:
-          'Exceptional leadership during our deployment. Created a positive environment while maintaining high standards.',
-      reviewerPosition: 'Squadron Commander',
-      tenStarRating: 9.5,
-      avatarUrl: 'https://randomuser.me/api/portraits/men/1.jpg',
-    ),
-    Review(
-      organization: 'US Army',
-      timeAgo: '1 Week Ago',
-      content:
-          'Demonstrated outstanding strategic planning during joint operations. Always put the team first.',
-      reviewerPosition: 'Battalion Commander',
-      tenStarRating: 8.5,
-      avatarUrl: 'https://randomuser.me/api/portraits/women/2.jpg',
-    ),
-    Review(
-      organization: 'US Air Force',
-      timeAgo: '3 Weeks Ago',
-      content:
-          'Innovative approach to problem-solving that improved our squadron efficiency by 30%.',
-      reviewerPosition: 'Wing Commander',
-      tenStarRating: 9,
-      avatarUrl: 'https://randomuser.me/api/portraits/men/3.jpg',
-    ),
-    Review(
-      organization: 'US Marines',
-      timeAgo: '1 Month Ago',
-      content:
-          'Led with courage and integrity in challenging conditions. Inspired the entire unit.',
-      reviewerPosition: 'Company Commander',
-      tenStarRating: 7.5,
-      avatarUrl: 'https://randomuser.me/api/portraits/women/4.jpg',
-    ),
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -113,8 +72,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                 }
                             ),
                           ) :
-                          Center(
-                            child: CircularProgressIndicator(),
+                          Container(
+                            height: 300,
+                            child: Center(
+                              child: CircularProgressIndicator(),
+                            ),
                           );
                         }
                     ),

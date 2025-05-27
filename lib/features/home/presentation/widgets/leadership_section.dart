@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import '../../../../core/widgets/title_subtitle_text.dart';
 import '../../../commanders_call/domain/model/get_all_blog_service_model.dart';
 import '../../../commanders_call/presentations/screens/call_of_commander_screen.dart';
+import '../../../commanders_call/presentations/screens/commanders_call_screen.dart';
 
 
 class LeadershipSection extends StatefulWidget {
@@ -17,37 +18,6 @@ class LeadershipSection extends StatefulWidget {
 }
 
 class _LeadershipSectionState extends State<LeadershipSection> {
-  // List of military branches with placeholder image URLs
-  final List<Map<String, String>> militaryBranches = const [
-    {
-      'imageUrl': 'https://via.placeholder.com/300x200/0000FF/FFFFFF?text=NAVY',
-      'label': 'NAVY',
-    },
-    {
-      'imageUrl':
-          'https://via.placeholder.com/300x200/87CEEB/FFFFFF?text=AIR+FORCE',
-      'label': 'AIR FORCE',
-    },
-    {
-      'imageUrl':
-          'https://via.placeholder.com/300x200/1E90FF/FFFFFF?text=COAST+GUARD',
-      'label': 'COAST GUARD',
-    },
-    {
-      'imageUrl':
-          'https://via.placeholder.com/300x200/8B0000/FFFFFF?text=US+MARINES',
-      'label': 'US MARINES',
-    },
-    {
-      'imageUrl':
-          'https://via.placeholder.com/300x200/000000/FFFFFF?text=SPACE+FORCE',
-      'label': 'SPACE FORCE',
-    },
-    {
-      'imageUrl': 'https://via.placeholder.com/300x200/228B22/FFFFFF?text=ARMY',
-      'label': 'ARMY',
-    },
-  ];
 
 
   late GetAllBlogResponseModel getAllBlogResponseModel;
@@ -120,7 +90,10 @@ class _LeadershipSectionState extends State<LeadershipSection> {
                 ),
                 const SizedBox(height: 10),
                 Center(
-                  child: NormalCustomButton(text: "View More", onPressed: () {}),
+                  child: NormalCustomButton(text: "View More", onPressed: () {
+                    Get.to(CommandersCallScreen());
+
+                  }),
                 ),
               ],
             ),

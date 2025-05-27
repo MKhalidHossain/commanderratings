@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 
 class HeaderForOthers extends StatelessWidget {
   final String text;
-  const HeaderForOthers({super.key, required this.text});
+  final String? image;
+  const HeaderForOthers({
+    super.key, required this.text, required this.image});
 
   @override
   Widget build(BuildContext context) {
@@ -12,8 +14,15 @@ class HeaderForOthers extends StatelessWidget {
         const SizedBox(height: 55),
         Stack(
           children: [
-            Image.asset(
-              'assets/images/banner/banner_for_others.jpg', // replace with your image
+            image != null && image!.isNotEmpty
+                ? Image.network(
+              image!,
+              width: double.infinity,
+              height: 300,
+              fit: BoxFit.cover,
+            )
+                : Image.asset(
+              'assets/images/banner/banner_for_others.jpg',
               width: double.infinity,
               height: 300,
               fit: BoxFit.cover,

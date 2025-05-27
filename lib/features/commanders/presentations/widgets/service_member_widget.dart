@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import '../../domain/get_all_service_response_model.dart';
 import 'buttion_for_sevice_branches.dart';
 import 'customBoxContainer.dart';
 import 'title_text_all_commanders.dart';
 
 class ServiceMemberWidget extends StatefulWidget {
+
+  final List<Services> services;
   final Function(Set<String>) onSelectionChanged;
 
-  const ServiceMemberWidget({super.key, required this.onSelectionChanged});
+  const ServiceMemberWidget({super.key, required this.onSelectionChanged, required this.services});
 
   @override
   State<ServiceMemberWidget> createState() => _ServiceMemberWidgetState();

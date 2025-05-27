@@ -1,6 +1,8 @@
 import 'package:commanderratings/core/utils/constants/app_colors.dart';
 import 'package:commanderratings/core/widgets/title_subtitle_text.dart';
+import 'package:commanderratings/features/leaderboard/presentation/screens/leaderboard_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../../../core/widgets/wide_custom_button.dart';
 
 class ServiceVeteranSection extends StatelessWidget {
@@ -76,7 +78,9 @@ class ServiceVeteranSection extends StatelessWidget {
                   const SizedBox(height: 10),
                   WideCustomButton(
                     text: "GET THE LATEST REVIEWS",
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.to(LeaderboardScreen());
+                    },
                   ),
                 ],
               ),

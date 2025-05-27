@@ -39,5 +39,6 @@ class Urls {
   static const String getAllContact = '/api/v1/contact/';
   static const String getAllFeaturedReview = '/api/v1/review/featured-top-five';
 
+  static const String commentUnderBlog = '/api/v1/blog/comment';
   //static const String getCommanderById = '/api/v1/commanders/';
 }

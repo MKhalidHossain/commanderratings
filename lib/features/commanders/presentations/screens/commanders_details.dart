@@ -12,6 +12,7 @@ import '../../domain/single_commander_response_model.dart';
 import '../widgets/commander_details_header.dart';
 import '../widgets/container_for_commander_details.dart';
 import '../widgets/search_and_recent_widget.dart';
+import '../widgets/user_reveiws_widgets.dart';
 
 
 class CommandersDetails extends StatefulWidget {
@@ -76,7 +77,8 @@ class _CommandersDetailsState extends State<CommandersDetails> {
                   child: Column(
                     children: [
                       const SizedBox(height: 8.0),
-                      CommanderDetailsHeader(),
+                      CommanderDetailsHeader(commanderImage: commandersResponseModel.data!.commander!.profileImage!,),
+
                       //.................................... After Banner section Content.........................................
 
                       Padding(
@@ -175,13 +177,15 @@ class _CommandersDetailsState extends State<CommandersDetails> {
                                                     color: Colors.red,
                                                   ),
                                                 ),
-                                                SvgPicture.asset(
-                                                  'assets/images/commander/commander_bedge.svg',
-                                                  semanticsLabel:
-                                                      'My SVG image asset',
-                                                  height: 30,
-                                                  width: 30,
-                                                ),
+
+                                                // SvgPicture.asset(
+                                                //   'assets/images/commander/commander_bedge.svg',
+                                                //   semanticsLabel:
+                                                //       'My SVG image asset',
+                                                //   height: 30,
+                                                //   width: 30,
+                                                // ),
+
                                                 ContainerForCommanderDetails(
                                                   text:
                                                       commandersResponseModel
