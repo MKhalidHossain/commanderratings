@@ -1,3 +1,4 @@
+import 'package:commanderratings/features/auth/presentation/screens/log_in.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -69,7 +70,7 @@ class Onboarding3 extends StatelessWidget {
                         height: 45,
                         text: 'Explore Now',
                         onPressed: () {
-                          Get.to(MainScreen());
+                          Get.to(LogIn());
                         },
                       ),
                     ],

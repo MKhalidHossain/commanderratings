@@ -49,6 +49,14 @@ class _AllCommandersScreenState extends State<AllCommandersScreen> {
     initializeData();
   }
 
+  List<String> filterString = [];
+
+  void addFilterString(String query){
+    if(!filterString.contains(query)){
+      filterString.add(query);
+    }
+  }
+
   Future<void> initializeData() async {
 
     final commandersController = Get.find<CommandersController>();
@@ -161,6 +169,49 @@ class _AllCommandersScreenState extends State<AllCommandersScreen> {
         .trim();
   }
 
+
+
+  void applyFilterButton(String filterType, List<String>? unitFilters) {
+    setState(() {
+      isFilterApplied = true;
+      currentFilter = filterType;
+
+      // Defensive copy of allCommanders, fallback to empty list if null
+      List<Commanders> matches = List.from(allCommanders ?? []);
+
+      for(var data in matches){
+
+        print('${data.unit} Units');
+
+      }
+
+      if (unitFilters != null && unitFilters.isNotEmpty) {
+        // Normalize filter strings
+        final lowerCaseUnits = unitFilters
+            .map((u) => u.toLowerCase().trim())
+            .where((u) => u.isNotEmpty)
+            .toList();
+
+        // Filter matches by unit list - partial case-insensitive matching
+        matches = matches.where((card) {
+          final unit = card.unit?.toLowerCase() ?? '';
+          print((card.unit.toString()));
+          return lowerCaseUnits.any((filter) => unit.contains(filter));
+        }).toList();
+      }
+      filteredCommanders = matches;
+      print('Filtered commanders count: ${filteredCommanders!.length}');
+    });
+
+    // Scroll to top
+    _scrollController.animateTo(
+      0,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
+    );
+  }
+
+
   // void applyFilterButton(String filterType, List<String>? serviceFilters) {
   //   setState(() {
   //     isFilterApplied = true;
@@ -237,8 +288,6 @@ class _AllCommandersScreenState extends State<AllCommandersScreen> {
         if (commandersController.isLoading) {
           return const Center(child: CircularProgressIndicator());
         }
-
-
         return Scaffold(
           appBar: AppBar(
             automaticallyImplyLeading: false,
@@ -295,6 +344,7 @@ class _AllCommandersScreenState extends State<AllCommandersScreen> {
                         children: [
                           const TitleTextAllCommanders(text: 'Units'),
                           const SizedBox(height: 10),
+
                           FilterButtonsForCommanders(
                             units:
                                 commandersController
@@ -303,26 +353,22 @@ class _AllCommandersScreenState extends State<AllCommandersScreen> {
                                     .units!,
                             onSelectionChanged: (selectedFilters) {
                               setState(() {
-                                selectedUnits = selectedFilters.toSet();
-                                applyFilter(currentFilter, "Air Force");
+                                addFilterString(selectedFilters);
                               });
                             },
-
-                            // onSelectionChanged: (selectedFilters) {
-                            //   if (selectedFilters.isNotEmpty) {
-                            //     applySearchFilter(selectedFilters.first);
-                            //   } else {
-                            //     applyFilter(currentFilter);
-                            //   }
-                            // },
                           ),
+
                           const SizedBox(height: 20),
+
                           WideCustomButton(
                             showIcon: true,
                             sufixIcon: Icons.filter_list,
                             text: 'Filter',
-                            onPressed: () {},
+                            onPressed: () {
+                              applyFilterButton('', filterString);
+                            },
                           ),
+
                         ],
                       ),
                     const SizedBox(height: 36),

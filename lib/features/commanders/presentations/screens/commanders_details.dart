@@ -42,15 +42,17 @@ class _CommandersDetailsState extends State<CommandersDetails> {
 
   @override
   Widget build(BuildContext context) {
-    print('Commanders Id ${widget.commandersId}');
-    print(
-      'Commanders Id ${commandersResponseModel.data!.averageRating.toString()}',
-    );
+    // print('Commanders Id ${widget.commandersId}');
+    // print(
+    //   'Commanders Id ${commandersResponseModel.data!.averageRating.toString()}',
+    // );
 
+    Size size = MediaQuery.of(context).size;
     return GetBuilder<CommandersController>(
       builder: (commandersController) {
         return !commandersController.isLoading
             ? Scaffold(
+          backgroundColor: Colors.white,
               appBar: AppBar(
                 automaticallyImplyLeading: false,
                 leading: IconButton(
@@ -409,7 +411,11 @@ class _CommandersDetailsState extends State<CommandersDetails> {
                 ),
               ),
             )
-            : Center(child: CircularProgressIndicator());
+            : Container(
+          height: size.height,
+            width: size.width,
+            color: AppColors.context(context).backgroundColor,
+            child: Center(child: CircularProgressIndicator()));
       },
     );
   }

@@ -2,6 +2,8 @@ import 'package:commanderratings/features/auth/presentation/screens/log_in.dart'
 import 'package:commanderratings/features/theme/app_themes/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'core/onboarding/presentation/screens/onboarding1.dart';
+import 'core/onboarding/presentation/screens/spashScreen.dart';
 import 'features/auth/controllers/auth_controller.dart';
 import 'helpers/dependency_injection.dart';
 
@@ -35,7 +37,10 @@ class MyApp extends StatelessWidget {
         themeMode: controller.themeMode.value,
         theme: AppTheme.lightTheme,
         darkTheme: AppTheme.darkTheme,
-        home:  const LogIn(),
+        home:  VideoSplashScreen(
+          nextScreen: const Onboarding1(),
+        )
+        //const LogIn(),
         
         //authController.isFirstTimeInstall() ? OnboardingScreen() : const LogIn(),
 

@@ -4,7 +4,7 @@ import '../../domain/get_all_unit_response_model.dart';
 
 class FilterButtonsForCommanders extends StatefulWidget {
   final List<Units> units;
-  final Function(List<String>) onSelectionChanged;
+  final Function(String) onSelectionChanged;
   
   const FilterButtonsForCommanders({
     super.key,
@@ -38,14 +38,14 @@ class _FilterButtonsForCommandersState extends State<FilterButtonsForCommanders>
       } else {
         selectedFilters.add(label);
       }
-      widget.onSelectionChanged(List.from(selectedFilters)); // Send a copy
+      widget.onSelectionChanged(label); // Send a copy
     });
   }
 
   void _clearAllFilters() {
     setState(() {
       selectedFilters.clear();
-      widget.onSelectionChanged([]);
+      widget.onSelectionChanged('');
     });
   }
 

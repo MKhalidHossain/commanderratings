@@ -120,6 +120,7 @@ class CommandersCardWidget extends StatelessWidget {
                         text: 'Read More',
                         onPressed: () {
                           Get.to(
+                            transition: Transition.fadeIn,
                             () => CommandersDetails(
                               commandersId: card.id.toString()!,
                             ),
