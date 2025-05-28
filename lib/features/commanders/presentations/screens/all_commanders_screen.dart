@@ -50,6 +50,7 @@ class _AllCommandersScreenState extends State<AllCommandersScreen> {
   }
 
   Future<void> initializeData() async {
+
     final commandersController = Get.find<CommandersController>();
 
     // Load commanders data
@@ -62,11 +63,9 @@ class _AllCommandersScreenState extends State<AllCommandersScreen> {
           commandersController.allCommandersListModel.data!.commanders!,
         );
         filteredCommanders = List.from(allCommanders!);
-        _initializeLetterKeys();
+        //_initializeLetterKeys();
       });
 
-      // allCommanders =
-      //     commandersController.allCommandersListModel.data?.commanders;
     }
 
     // Load services data
@@ -92,80 +91,55 @@ class _AllCommandersScreenState extends State<AllCommandersScreen> {
     }
   }
 
-  void _initializeLetterKeys() {
-    final source = isFilterApplied ? filteredCommanders! : allCommanders!;
-    final initials =
-        filteredCommanders!.map((c) => c.name![0].toUpperCase()).toSet();
-    for (var letter in initials) {
-      _letterKeys[letter] = GlobalKey();
-    }
-  }
+  // void _initializeLetterKeys() {
+  //   final source = isFilterApplied ? filteredCommanders! : allCommanders!;
+  //   final initials =
+  //       filteredCommanders!.map((c) => c.name![0].toUpperCase()).toSet();
+  //   for (var letter in initials) {
+  //     _letterKeys[letter] = GlobalKey();
+  //   }
+  // }
 
-  void applyFilter(String filterType) {
+
+  void applyFilter(String filterType, String? serviceFilter) {
     setState(() {
       isFilterApplied = true;
       currentFilter = filterType;
       List<Commanders> matches = List.from(allCommanders!);
 
+      // Sort by rating
       if (filterType == 'top') {
-        matches.sort((a, b) => (b.rating ?? 0).compareTo(a.rating ?? 0));
+        matches.sort((a, b) => (b.avgRating ?? 0).compareTo(a.avgRating ?? 0));
       } else if (filterType == 'low') {
-        matches.sort((a, b) => (a.rating ?? 0).compareTo(b.rating ?? 0));
+        matches.sort((a, b) => (a.avgRating ?? 0).compareTo(b.avgRating ?? 0));
       }
 
-      // Filter by selected service
-      if (selectedService != null && selectedService!.isNotEmpty) {
-        matches =
-            matches
-                .where(
-                  (c) =>
-                      c.service?.toLowerCase() ==
-                      selectedService!.toLowerCase(),
-                )
-                .toList();
+      // Filter by serviceBroad
+      if (serviceFilter != null && serviceFilter.isNotEmpty) {
+        matches = matches.where((c) {
+          final service = c.serviceBroad?.toLowerCase() ?? '';
+          final filter = serviceFilter.toLowerCase();
+          return service.contains(filter); // Partial match
+        }).toList();
       }
 
-      // Filter by selected units
-      if (selectedUnits.isNotEmpty) {
-        matches =
-            matches
-                .where(
-                  (c) => selectedUnits.contains(c.unit?.toLowerCase() ?? ''),
-                )
-                .toList();
-      }
-
-      // Search query filtering
+      // Search filtering (includes partial and full match — duplicates allowed)
       if (searchQuery.isNotEmpty) {
-        final exactMatches =
-            matches
-                .where(
-                  (card) =>
-                      card.name!.toLowerCase() == searchQuery.toLowerCase() ||
-                      card.service?.toLowerCase() ==
-                          searchQuery.toLowerCase() ||
-                      card.unit?.toLowerCase() == searchQuery.toLowerCase(),
-                )
-                .toList();
+        final query = searchQuery.toLowerCase();
 
-        final partialMatches =
-            matches
-                .where(
-                  (card) =>
-                      card.name!.toLowerCase().contains(
-                        searchQuery.toLowerCase(),
-                      ) ||
-                      (card.service?.toLowerCase() ?? '').contains(
-                        searchQuery.toLowerCase(),
-                      ) ||
-                      (card.unit?.toLowerCase() ?? '').contains(
-                        searchQuery.toLowerCase(),
-                      ),
-                )
-                .where((card) => !exactMatches.contains(card))
-                .toList();
+        final exactMatches = matches.where((c) =>
+        (c.name?.toLowerCase() == query) ||
+            (c.serviceBroad?.toLowerCase() == query) ||
+            (c.unit?.toLowerCase() == query)
+        ).toList();
 
-        filteredCommanders = [...exactMatches, ...partialMatches];
+        final partialMatches = matches.where((c) =>
+        (c.name?.toLowerCase().contains(query) ?? false) ||
+            (c.serviceBroad?.toLowerCase().contains(query) ?? false) ||
+            (c.unit?.toLowerCase().contains(query) ?? false)
+        ).toList();
+
+        filteredCommanders = [...partialMatches];
       } else {
         filteredCommanders = matches;
       }
@@ -178,52 +152,62 @@ class _AllCommandersScreenState extends State<AllCommandersScreen> {
     );
   }
 
-  // void applyFilter(String filterType) {
+
+// Normalize strings: lowercase + remove punctuation
+  String _normalizeString(String input) {
+    return input
+        .toLowerCase()
+        .replaceAll(RegExp(r'[^\w\s]'), '') // remove symbols like ()
+        .trim();
+  }
+
+  // void applyFilterButton(String filterType, List<String>? serviceFilters) {
   //   setState(() {
+  //     isFilterApplied = true;
   //     currentFilter = filterType;
   //     List<Commanders> matches = List.from(allCommanders!);
-
+  //
+  //     // Sort by rating solved
   //     if (filterType == 'top') {
-  //       matches.sort((a, b) => (b.rating ?? 0).compareTo(a.rating ?? 0));
+  //       matches.sort((a, b) => (b.avgRating ?? 0).compareTo(a.avgRating ?? 0));
   //     } else if (filterType == 'low') {
-  //       matches.sort((a, b) => (a.rating ?? 0).compareTo(b.rating ?? 0));
+  //       matches.sort((a, b) => (a.avgRating ?? 0).compareTo(b.avgRating ?? 0));
   //     }
-
+  //     // Sort by rating solved
+  //
+  //     // Filter by serviceBroad
+  //     if (serviceFilter != null && serviceFilter.isNotEmpty) {
+  //       matches = matches
+  //           .where((c) =>
+  //       (c.serviceBroad ?? '').toLowerCase() ==
+  //           serviceFilter.toLowerCase())
+  //           .toList();
+  //     }
+  //
+  //     // Apply search query if needed
   //     if (searchQuery.isNotEmpty) {
-  //       final exactMatches =
-  //           matches
-  //               .where(
-  //                 (card) =>
-  //                     card.name!.toLowerCase() == searchQuery.toLowerCase() ||
-  //                     card.service?.toLowerCase() ==
-  //                         searchQuery.toLowerCase() ||
-  //                     card.unit?.toLowerCase() == searchQuery.toLowerCase(),
-  //               )
-  //               .toList();
-
-  //       final partialMatches =
-  //           matches
-  //               .where(
-  //                 (card) =>
-  //                     card.name!.toLowerCase().contains(
-  //                       searchQuery.toLowerCase(),
-  //                     ) ||
-  //                     (card.service?.toLowerCase() ?? '').contains(
-  //                       searchQuery.toLowerCase(),
-  //                     ) ||
-  //                     (card.unit?.toLowerCase() ?? '').contains(
-  //                       searchQuery.toLowerCase(),
-  //                     ),
-  //               )
-  //               .where((card) => !exactMatches.contains(card))
-  //               .toList();
-
+  //       final exactMatches = matches.where((card) {
+  //         return card.name!.toLowerCase() == searchQuery.toLowerCase() ||
+  //             card.serviceBroad?.toLowerCase() == searchQuery.toLowerCase() ||
+  //             card.unit?.toLowerCase() == searchQuery.toLowerCase();
+  //       }).toList();
+  //
+  //       final partialMatches = matches
+  //           .where((card) =>
+  //       card.name!.toLowerCase().contains(searchQuery.toLowerCase()) ||
+  //           (card.serviceBroad?.toLowerCase() ?? '')
+  //               .contains(searchQuery.toLowerCase()) ||
+  //           (card.unit?.toLowerCase() ?? '')
+  //               .contains(searchQuery.toLowerCase()))
+  //           .where((card) => !exactMatches.contains(card))
+  //           .toList();
+  //
   //       filteredCommanders = [...exactMatches, ...partialMatches];
   //     } else {
   //       filteredCommanders = matches;
   //     }
   //   });
-
+  //
   //   _scrollController.animateTo(
   //     0,
   //     duration: const Duration(milliseconds: 300),
@@ -234,13 +218,13 @@ class _AllCommandersScreenState extends State<AllCommandersScreen> {
   void applySearchFilter(String query) {
     setState(() {
       searchQuery = query;
-      applyFilter(currentFilter);
+      applyFilter(currentFilter, query);
     });
   }
 
   void onFilterButtonPressed() {
     setState(() {
-      applyFilter(currentFilter);
+      applyFilter(currentFilter, 'Air Force');
     });
   }
 
@@ -253,8 +237,7 @@ class _AllCommandersScreenState extends State<AllCommandersScreen> {
         if (commandersController.isLoading) {
           return const Center(child: CircularProgressIndicator());
         }
-        // final displayCommanders =
-        //     isFilterApplied ? filteredCommanders : allCommanders;
+
 
         return Scaffold(
           appBar: AppBar(
@@ -291,20 +274,9 @@ class _AllCommandersScreenState extends State<AllCommandersScreen> {
                   controller: _scrollController,
                   children: [
                     if (getAllServicesResponseModel.data?.services != null)
-                      // ServiceMemberWidget(
-                      //   services:
-                      //       commandersController
-                      //           .getAllServicesResponseModel
-                      //           .data!
-                      //           .services!,
-                      //   onSelectionChanged: (selectedFilters) {
-                      //     if (selectedFilters.isNotEmpty) {
-                      //       applySearchFilter(selectedFilters.first);
-                      //     } else {
-                      //       applySearchFilter('');
-                      //     }
-                      //   },
-                      // ),
+
+
+
                       ServiceMemberWidget(
                         services:
                             commandersController
@@ -318,6 +290,7 @@ class _AllCommandersScreenState extends State<AllCommandersScreen> {
 
                     const SizedBox(height: 20),
                     if (getAllUnitResponseModel.data?.units != null)
+
                       Customboxcontainer(
                         children: [
                           const TitleTextAllCommanders(text: 'Units'),
@@ -331,7 +304,7 @@ class _AllCommandersScreenState extends State<AllCommandersScreen> {
                             onSelectionChanged: (selectedFilters) {
                               setState(() {
                                 selectedUnits = selectedFilters.toSet();
-                                applyFilter(currentFilter);
+                                applyFilter(currentFilter, "Air Force");
                               });
                             },
 
@@ -364,7 +337,7 @@ class _AllCommandersScreenState extends State<AllCommandersScreen> {
                             .isNotEmpty)
                       Column(
                         children:
-                            allCommanders!.map((card) {
+                        (isFilterApplied ? filteredCommanders! : allCommanders!).map((card) {
                               String initial = card.name![0].toUpperCase();
                               final key =
                                   _letterKeys.containsKey(initial)
@@ -430,7 +403,7 @@ class _AllCommandersScreenState extends State<AllCommandersScreen> {
                   children: [
                     VerticalButtton(
                       text: 'Top Rated',
-                      onPressed: () {},
+                      onPressed: () => applyFilter('top', ""),
                       showIcon: true,
                       sufixIcon: Icons.arrow_forward,
                     ),
@@ -438,7 +411,7 @@ class _AllCommandersScreenState extends State<AllCommandersScreen> {
                       height: 125,
                       quarterTurens: 1,
                       text: 'Lower Rated',
-                      onPressed: () {},
+                      onPressed: () => applyFilter('low', ""),
                       showIcon: true,
                       sufixIcon: Icons.arrow_forward,
                     ),
