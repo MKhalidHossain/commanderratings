@@ -3,7 +3,6 @@ import 'package:commanderratings/features/commanders_call/controllers/commanders
 import 'package:commanderratings/features/commanders_call/domain/model/get_one_blog_response_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../../core/headers/header_for_others_one_man.dart';
 import '../widgets/call_of_commander_body_widget.dart';
 

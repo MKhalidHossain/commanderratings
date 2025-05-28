@@ -1,5 +1,4 @@
 import 'package:commanderratings/core/utils/constants/app_colors.dart';
-import 'package:commanderratings/features/commanders/controllers/commanders_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../core/widgets/title_with_icon_prefix.dart';

@@ -1,7 +1,5 @@
 import 'package:commanderratings/core/utils/constants/app_colors.dart';
 import 'package:flutter/material.dart';
-
-import '../../../commanders/domain/leadership_card_model.dart';
 import '../../domain/model/get_all_blog_service_model.dart';
 
 class LeadershipCardWidget extends StatelessWidget {

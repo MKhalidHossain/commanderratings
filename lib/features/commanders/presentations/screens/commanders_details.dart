@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-
 import '../../../../core/ratting_a_to_z/ratting.dart';
 import '../../../../core/utils/constants/app_colors.dart';
 import '../../../../core/widgets/lebel_and_value_text.dart';
@@ -12,8 +10,6 @@ import '../../domain/single_commander_response_model.dart';
 import '../widgets/commander_details_header.dart';
 import '../widgets/container_for_commander_details.dart';
 import '../widgets/search_and_recent_widget.dart';
-import '../widgets/user_reveiws_widgets.dart';
-
 
 class CommandersDetails extends StatefulWidget {
   final String commandersId;
@@ -77,10 +73,15 @@ class _CommandersDetailsState extends State<CommandersDetails> {
                   child: Column(
                     children: [
                       const SizedBox(height: 8.0),
-                      CommanderDetailsHeader(commanderImage: commandersResponseModel.data!.commander!.profileImage!,),
+                      CommanderDetailsHeader(
+                        commanderImage:
+                            commandersResponseModel
+                                .data!
+                                .commander!
+                                .profileImage!,
+                      ),
 
                       //.................................... After Banner section Content.........................................
-
                       Padding(
                         padding: const EdgeInsets.all(0.0),
                         child: Container(
@@ -185,7 +186,6 @@ class _CommandersDetailsState extends State<CommandersDetails> {
                                                 //   height: 30,
                                                 //   width: 30,
                                                 // ),
-
                                                 ContainerForCommanderDetails(
                                                   text:
                                                       commandersResponseModel
@@ -320,7 +320,13 @@ class _CommandersDetailsState extends State<CommandersDetails> {
                                               context: context,
                                               builder: (BuildContext contex) {
                                                 // ......bottom sheet content..........
-                                                return LeaveAReview(commanderId: commandersResponseModel.data!.commander!.sId!);
+                                                return LeaveAReview(
+                                                  commanderId:
+                                                      commandersResponseModel
+                                                          .data!
+                                                          .commander!
+                                                          .sId!,
+                                                );
                                               },
                                             );
                                           },
@@ -339,27 +345,54 @@ class _CommandersDetailsState extends State<CommandersDetails> {
                                         ),
                                         const SizedBox(height: 8.0),
                                         ValueTextAeroMatics(text: 'Overall '),
-                                       Column(
-                                         children: List.generate(
-                                             commandersResponseModel.data!.reviews!.length,
-                                             (index){
-                                           return  Column(
-                                             crossAxisAlignment: CrossAxisAlignment.start,
-                                             children: [
-                                               const SizedBox(height: 32.0),
-                                               ShowRating(rating: double.tryParse(commandersResponseModel.data!.reviews![index].rating.toString()) ?? 0.0),
-                                               const SizedBox(height: 8),
-                                               ValueTextAeroMatics(text: commandersResponseModel.data!.reviews![index].rating.toString() ?? '0.0'),
-                                               const SizedBox(height: 8.0),
-                                               ValueTextAeroMatics(
-                                                 text: commandersResponseModel.data!.reviews![index].description.toString()
-                                               ),
-                                               const SizedBox(height: 32.0),
-                                             ],
-                                           );
-                                             }
-                                         ),
-                                       )
+                                        Column(
+                                          children: List.generate(
+                                            commandersResponseModel
+                                                .data!
+                                                .reviews!
+                                                .length,
+                                            (index) {
+                                              return Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  const SizedBox(height: 32.0),
+                                                  ShowRating(
+                                                    rating:
+                                                        double.tryParse(
+                                                          commandersResponseModel
+                                                              .data!
+                                                              .reviews![index]
+                                                              .rating
+                                                              .toString(),
+                                                        ) ??
+                                                        0.0,
+                                                  ),
+                                                  const SizedBox(height: 8),
+                                                  ValueTextAeroMatics(
+                                                    text:
+                                                        commandersResponseModel
+                                                            .data!
+                                                            .reviews![index]
+                                                            .rating
+                                                            .toString() ??
+                                                        '0.0',
+                                                  ),
+                                                  const SizedBox(height: 8.0),
+                                                  ValueTextAeroMatics(
+                                                    text:
+                                                        commandersResponseModel
+                                                            .data!
+                                                            .reviews![index]
+                                                            .description
+                                                            .toString(),
+                                                  ),
+                                                  const SizedBox(height: 32.0),
+                                                ],
+                                              );
+                                            },
+                                          ),
+                                        ),
                                         //const SizedBox(height: 32.0),
                                         // UserReveiwsWidgets(),
                                       ],
@@ -367,12 +400,10 @@ class _CommandersDetailsState extends State<CommandersDetails> {
                                   ),
                                 ),
                               ),
-
                             ],
                           ),
                         ),
                       ),
-
                     ],
                   ),
                 ),

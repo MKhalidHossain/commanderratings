@@ -1,9 +1,7 @@
 import 'package:commanderratings/features/commanders_call/controllers/commanders_calls_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../../core/headers/header_for_others_one_man.dart';
-import '../../../commanders/domain/leadership_card_model.dart';
 import '../../domain/model/get_all_blog_service_model.dart';
 import '../widgets/filter_buttons.dart';
 import '../widgets/leadership_card_widget.dart';
