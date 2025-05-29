@@ -43,11 +43,26 @@ dependencies:
   path: ^1.9.1
   intl: ^0.18.1
   video_player: ^2.9.5
+  get_storage: ^2.1.1
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: ^0.14.3
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/headers/star_logo.png"
+
+
+
+
+
+
+
+
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

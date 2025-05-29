@@ -1,4 +1,6 @@
 import 'package:commanderratings/core/widgets/normal_custom_button.dart';
+import 'package:commanderratings/features/commanders/presentations/screens/all_commanders_screen.dart';
+import 'package:commanderratings/features/review/presentation/screens/leave_a_review.dart';
 import 'package:flutter/material.dart';
 
 class BannerSection extends StatelessWidget {
@@ -49,7 +51,9 @@ class BannerSection extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 20),
-                NormalCustomButton(text: "START REVIEWING", onPressed: () {}),
+                NormalCustomButton(text: "START REVIEWING", onPressed: () {
+                  AllCommandersScreen();
+                }),
               ],
             ),
           ),

@@ -9,7 +9,6 @@ import '../../../../core/widgets/outlined_text_field_widget.dart';
 import '../../../../core/widgets/wide_custom_button.dart';
 import '../../../../helpers/custom_snackbar.dart';
 import '../../domain/model/authentication_model.dart';
-import 'lost_password.dart';
 import 'sign_up.dart';
 class ResetPassword extends StatefulWidget {
   const ResetPassword({super.key});

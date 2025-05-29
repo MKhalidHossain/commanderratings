@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="commanderratings"
+        android:label="Commande Rratings"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

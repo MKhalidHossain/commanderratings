@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import '../../../../core/ratting_a_to_z/ratting.dart';
 import '../../../../core/utils/constants/app_colors.dart';
@@ -52,7 +53,6 @@ class _CommandersDetailsState extends State<CommandersDetails> {
       builder: (commandersController) {
         return !commandersController.isLoading
             ? Scaffold(
-          backgroundColor: Colors.white,
               appBar: AppBar(
                 automaticallyImplyLeading: false,
                 leading: IconButton(
@@ -181,13 +181,13 @@ class _CommandersDetailsState extends State<CommandersDetails> {
                                                   ),
                                                 ),
 
-                                                // SvgPicture.asset(
-                                                //   'assets/images/commander/commander_bedge.svg',
-                                                //   semanticsLabel:
-                                                //       'My SVG image asset',
-                                                //   height: 30,
-                                                //   width: 30,
-                                                // ),
+                                                SvgPicture.asset(
+                                                  'assets/images/commander/commander_bedge.svg',
+                                                  semanticsLabel:
+                                                      'My SVG image asset',
+                                                  height: 30,
+                                                  width: 30,
+                                                ),
                                                 ContainerForCommanderDetails(
                                                   text:
                                                       commandersResponseModel
@@ -412,10 +412,11 @@ class _CommandersDetailsState extends State<CommandersDetails> {
               ),
             )
             : Container(
-          height: size.height,
-            width: size.width,
-            color: AppColors.context(context).backgroundColor,
-            child: Center(child: CircularProgressIndicator()));
+              height: size.height,
+              width: size.width,
+              color: AppColors.context(context).backgroundColor,
+              child: Center(child: CircularProgressIndicator()),
+            );
       },
     );
   }

@@ -1,3 +1,3 @@
 class AppNames {
-  static const String appName = "commander ratings";
+  static const String appName = "Commander Ratings";
 }

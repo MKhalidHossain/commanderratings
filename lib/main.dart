@@ -1,10 +1,11 @@
-import 'package:commanderratings/features/auth/presentation/screens/log_in.dart';
+import 'package:commanderratings/app.dart';
 import 'package:commanderratings/features/theme/app_themes/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'core/onboarding/presentation/screens/onboarding1.dart';
 import 'core/onboarding/presentation/screens/spashScreen.dart';
 import 'features/auth/controllers/auth_controller.dart';
+import 'features/auth/presentation/screens/log_in.dart';
 import 'helpers/dependency_injection.dart';
 
 
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      
+
       //print(controller.themeMode.value.toString());
       return GetMaterialApp(
         debugShowCheckedModeBanner: false,
@@ -38,20 +39,34 @@ class MyApp extends StatelessWidget {
         theme: AppTheme.lightTheme,
         darkTheme: AppTheme.darkTheme,
         home:  VideoSplashScreen(
-          nextScreen: const Onboarding1(),
+          nextScreen: const Home(),
         )
-        //const LogIn(),
-        
-        //authController.isFirstTimeInstall() ? OnboardingScreen() : const LogIn(),
-
-
-        //const ResetPassword(),
-
-
-
-
-        //HomeScreen(),
       );
     });
+  }
+}
+
+class Home extends StatelessWidget {
+  const Home({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return GetBuilder<AuthController>(
+        builder: (authController){
+          // return OnBoard();
+
+          if(authController.isLoggedIn()){
+            return MainScreen();
+          }
+          else if(authController.isFirstTimeInstall()){
+            return LogIn();
+          }
+          else{
+            return Onboarding1();
+          }
+
+
+        }
+    );
   }
 }

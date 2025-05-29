@@ -27,7 +27,6 @@ class _HomeScreenState extends State<HomeScreen> {
       if (controller.featuredReviewsResponseModel != null &&
           controller.featuredReviewsResponseModel.data != null &&
           controller.featuredReviewsResponseModel.data!.topCommanders != null) {
-
       }
     });
     super.initState();
@@ -41,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const SizedBox(height: 55),
+            //const SizedBox(height: 55),
             const BannerSection(),
 
             const LeadershipSection(),

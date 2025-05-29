@@ -43,6 +43,22 @@ class _AllCommandersScreenState extends State<AllCommandersScreen> {
   late GetAllServicesResponseModel getAllServicesResponseModel;
   late GetAllUnitResponseModel getAllUnitResponseModel;
 
+  Set<String> addedKeys = {};
+
+  void _initializeLetterKeys() {
+    _letterKeys.clear();
+    final commanders = isFilterApplied ? filteredCommanders! : allCommanders!;
+    final seenLetters = <String>{};
+
+    for (var commander in commanders) {
+      final initial = commander.name![0].toUpperCase();
+      if (!seenLetters.contains(initial)) {
+        _letterKeys[initial] = GlobalKey();
+        seenLetters.add(initial);
+      }
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -71,9 +87,8 @@ class _AllCommandersScreenState extends State<AllCommandersScreen> {
           commandersController.allCommandersListModel.data!.commanders!,
         );
         filteredCommanders = List.from(allCommanders!);
-        //_initializeLetterKeys();
       });
-
+      _initializeLetterKeys();
     }
 
     // Load services data
@@ -99,14 +114,7 @@ class _AllCommandersScreenState extends State<AllCommandersScreen> {
     }
   }
 
-  // void _initializeLetterKeys() {
-  //   final source = isFilterApplied ? filteredCommanders! : allCommanders!;
-  //   final initials =
-  //       filteredCommanders!.map((c) => c.name![0].toUpperCase()).toSet();
-  //   for (var letter in initials) {
-  //     _letterKeys[letter] = GlobalKey();
-  //   }
-  // }
+
 
 
   void applyFilter(String filterType, String? serviceFilter) {
@@ -211,61 +219,6 @@ class _AllCommandersScreenState extends State<AllCommandersScreen> {
     );
   }
 
-
-  // void applyFilterButton(String filterType, List<String>? serviceFilters) {
-  //   setState(() {
-  //     isFilterApplied = true;
-  //     currentFilter = filterType;
-  //     List<Commanders> matches = List.from(allCommanders!);
-  //
-  //     // Sort by rating solved
-  //     if (filterType == 'top') {
-  //       matches.sort((a, b) => (b.avgRating ?? 0).compareTo(a.avgRating ?? 0));
-  //     } else if (filterType == 'low') {
-  //       matches.sort((a, b) => (a.avgRating ?? 0).compareTo(b.avgRating ?? 0));
-  //     }
-  //     // Sort by rating solved
-  //
-  //     // Filter by serviceBroad
-  //     if (serviceFilter != null && serviceFilter.isNotEmpty) {
-  //       matches = matches
-  //           .where((c) =>
-  //       (c.serviceBroad ?? '').toLowerCase() ==
-  //           serviceFilter.toLowerCase())
-  //           .toList();
-  //     }
-  //
-  //     // Apply search query if needed
-  //     if (searchQuery.isNotEmpty) {
-  //       final exactMatches = matches.where((card) {
-  //         return card.name!.toLowerCase() == searchQuery.toLowerCase() ||
-  //             card.serviceBroad?.toLowerCase() == searchQuery.toLowerCase() ||
-  //             card.unit?.toLowerCase() == searchQuery.toLowerCase();
-  //       }).toList();
-  //
-  //       final partialMatches = matches
-  //           .where((card) =>
-  //       card.name!.toLowerCase().contains(searchQuery.toLowerCase()) ||
-  //           (card.serviceBroad?.toLowerCase() ?? '')
-  //               .contains(searchQuery.toLowerCase()) ||
-  //           (card.unit?.toLowerCase() ?? '')
-  //               .contains(searchQuery.toLowerCase()))
-  //           .where((card) => !exactMatches.contains(card))
-  //           .toList();
-  //
-  //       filteredCommanders = [...exactMatches, ...partialMatches];
-  //     } else {
-  //       filteredCommanders = matches;
-  //     }
-  //   });
-  //
-  //   _scrollController.animateTo(
-  //     0,
-  //     duration: const Duration(milliseconds: 300),
-  //     curve: Curves.easeInOut,
-  //   );
-  // }
-
   void applySearchFilter(String query) {
     setState(() {
       searchQuery = query;
@@ -346,8 +299,7 @@ class _AllCommandersScreenState extends State<AllCommandersScreen> {
                           const SizedBox(height: 10),
 
                           FilterButtonsForCommanders(
-                            units:
-                                commandersController
+                            units: commandersController
                                     .getAllUnitResponseModel
                                     .data!
                                     .units!,
@@ -373,6 +325,7 @@ class _AllCommandersScreenState extends State<AllCommandersScreen> {
                       ),
                     const SizedBox(height: 36),
 
+
                     // if (displayCommanders != null &&
                     //     displayCommanders.isNotEmpty)
                     if ((isFilterApplied
@@ -384,12 +337,22 @@ class _AllCommandersScreenState extends State<AllCommandersScreen> {
                       Column(
                         children:
                         (isFilterApplied ? filteredCommanders! : allCommanders!).map((card) {
-                              String initial = card.name![0].toUpperCase();
-                              final key =
-                                  _letterKeys.containsKey(initial)
-                                      ? _letterKeys[initial]
-                                      : null;
+                              // String initial = card.name![0].toUpperCase();
+                              // final key =
+                              //     _letterKeys.containsKey(initial)
+                              //         ? _letterKeys[initial]
+                              //         : null;
+                          String initial = card.name![0].toUpperCase();
+
+                          // Assign key only once for each letter
+                          Key? key;
+                          if (!addedKeys.contains(initial)) {
+                            key = _letterKeys[initial] ?? GlobalKey();
+                            _letterKeys[initial] = key as GlobalKey; // ensure stored properly
+                            addedKeys.add(initial);
+                          }
                               return Container(
+                                key: key,
                                 child: CommandersCardWidget(card: card),
                               );
                             }).toList(),

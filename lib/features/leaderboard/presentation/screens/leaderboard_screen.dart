@@ -40,7 +40,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const SizedBox(height: 95),
+                  const SizedBox(height: 60),
                   TitleWithIconPrefix(
                     color: AppColors.context(context).textColor,
                     text: 'Leaderboard',
