@@ -1,7 +1,6 @@
 import 'package:commanderratings/core/utils/constants/app_colors.dart';
 import 'package:commanderratings/core/widgets/normal_custom_button.dart';
 import 'package:commanderratings/features/commanders_call/controllers/commanders_calls_controller.dart';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../core/widgets/title_subtitle_text.dart';
@@ -26,8 +25,7 @@ class _LeadershipSectionState extends State<LeadershipSection> {
   void initState() {
     Get.find<CommandersCallsController>().getAllCommandersCall().then((_) {
       final controller = Get.find<CommandersCallsController>();
-      if (controller.getAllBlogResponseModel != null &&
-          controller.getAllBlogResponseModel.data != null &&
+      if (controller.getAllBlogResponseModel.data != null &&
           controller.getAllBlogResponseModel.data!.blogs != null) {
         setState(() {
           getAllBlogResponseModel =

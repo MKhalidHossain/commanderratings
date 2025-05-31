@@ -1,5 +1,4 @@
 
-import 'package:commanderratings/features/commanders/domain/all_commanders_list_model.dart';
 import 'package:commanderratings/features/commanders/presentations/screens/commanders_details.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

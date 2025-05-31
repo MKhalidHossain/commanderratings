@@ -2,7 +2,6 @@ import 'package:commanderratings/features/review/controllers/review_controller.d
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../core/widgets/title_subtitle_text.dart';
-import '../../domain/models/review.dart';
 import '../widgets/anonymous_reviews.dart';
 import '../widgets/banner_section.dart';
 import '../widgets/leadership_section.dart';

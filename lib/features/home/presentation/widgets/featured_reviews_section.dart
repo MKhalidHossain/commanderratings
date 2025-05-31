@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../domain/models/review.dart';
-import 'review_card.dart'; // Your ReviewCard widget
 
 class FeaturedReviewsSection extends StatelessWidget {
   const FeaturedReviewsSection({super.key});

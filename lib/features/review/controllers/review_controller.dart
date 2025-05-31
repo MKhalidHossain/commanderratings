@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:commanderratings/features/review/domain/create_review_response_model.dart';
 import 'package:commanderratings/features/review/domain/featured_reviews_response_model.dart';
 import 'package:commanderratings/features/review/domain/get_all_review_response_model.dart';
-import 'package:commanderratings/features/review/services/review_service.dart';
 import 'package:commanderratings/features/review/services/review_service_interface.dart';
 import 'package:get/get.dart';
 import '../../../helpers/custom_snackbar.dart';

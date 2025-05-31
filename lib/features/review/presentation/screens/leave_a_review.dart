@@ -1,6 +1,5 @@
 import 'package:commanderratings/core/ratting_a_to_z/ratting.dart';
 import 'package:commanderratings/core/widgets/lebel_and_value_text.dart';
-import 'package:commanderratings/core/widgets/normal_custom_button.dart';
 import 'package:commanderratings/core/widgets/title_subtitle_text.dart';
 import 'package:commanderratings/core/widgets/wide_custom_button.dart';
 import 'package:commanderratings/features/review/controllers/review_controller.dart';
