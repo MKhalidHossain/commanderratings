@@ -35,113 +35,115 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<AuthController>(
-        builder: (authController){
-          return Scaffold(
-            backgroundColor: Colors.black,
-            body: Column(
-              children: [
-                HeaderForAuthThreeMan(text: 'SIGN UP'),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24.0),
+      builder: (authController) {
+        return Scaffold(
+          backgroundColor: Colors.black,
+          body: Column(
+            children: [
+              HeaderForAuthThreeMan(text: 'SIGN UP'),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24.0),
 
-                  child: Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                child: Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16.0,
+                      vertical: 16.0,
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 16.0,
-                        vertical: 16.0,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const SizedBox(height: 8.0),
-                          OutlinedTextFieldWidget(
-                            name: 'name',
-                            // lebel: 'Enter your username',
-                            controller: nameController,
-                            textInputType: TextInputType.text,
-                            textFieldHeaderName: 'Username',
-                          ),
-                          const SizedBox(height: 20.0),
-                          OutlinedTextFieldWidget(
-                            name: 'Email',
-                            // lebel: 'Enter your email.',
-                            controller: emailController,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(height: 8.0),
+                        OutlinedTextFieldWidget(
+                          name: 'name',
+                          // lebel: 'Enter your username',
+                          controller: nameController,
+                          textInputType: TextInputType.text,
+                          textFieldHeaderName: 'Username',
+                        ),
+                        const SizedBox(height: 20.0),
+                        OutlinedTextFieldWidget(
+                          name: 'Email',
+                          // lebel: 'Enter your email.',
+                          controller: emailController,
 
-                            textInputType: TextInputType.text,
-                            textFieldHeaderName: 'Email',
-                          ),
-                          const SizedBox(height: 20.0),
-                          OutlinedTextFieldWidget(
-                            name: 'Password',
-                            //lebel: 'Enter a valid password',
-                            controller: passwordController,
-                            textInputType: TextInputType.text,
-                            textFieldHeaderName: 'Password',
-                          ),
-                          const SizedBox(height: 24.0),
-                          WideCustomButton(
-                            text: 'SIGN UP',
-                            onPressed: (){
-                              String name = nameController.text;
-                              String password = passwordController.text;
-                              String email = emailController.text;
+                          textInputType: TextInputType.text,
+                          textFieldHeaderName: 'Email',
+                        ),
+                        const SizedBox(height: 20.0),
+                        OutlinedTextFieldWidget(
+                          name: 'Password',
+                          //lebel: 'Enter a valid password',
+                          isObsecure: true,
+                          controller: passwordController,
+                          textInputType: TextInputType.text,
+                          textFieldHeaderName: 'Password',
+                        ),
+                        const SizedBox(height: 24.0),
+                        WideCustomButton(
+                          text: 'SIGN UP',
+                          onPressed: () {
+                            String name = nameController.text;
+                            String password = passwordController.text;
+                            String email = emailController.text;
 
-                              if(email.isEmpty){
-                                showCustomSnackBar('email is required'.tr);
-                              }else if(password.length<5){
-                                showCustomSnackBar('minimum password length is 8'.tr);
-                              }
-                              else{
-                                authController.register( name,  email,  password);
-                              }
+                            if (email.isEmpty) {
+                              showCustomSnackBar('email is required'.tr);
+                            } else if (password.length < 5) {
+                              showCustomSnackBar(
+                                'minimum password length is 8'.tr,
+                              );
+                            } else {
+                              authController.register(name, email, password);
                             }
-                          ),
-                          const SizedBox(height: 5),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              TextButton(
-                                onPressed: () {
-                                  Get.to(LostPasswordScreen());
-                                },
-                                child: Text(
-                                  'Lost your password?',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(color: Colors.grey),
-                                ),
+                          },
+                        ),
+                        const SizedBox(height: 5),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            TextButton(
+                              onPressed: () {
+                                Get.to(LostPasswordScreen());
+                              },
+                              child: Text(
+                                'Lost your password?',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(color: Colors.grey),
                               ),
-                            ],
-                          ),
-                        ],
-                      ),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                   ),
                 ),
-                const SizedBox(height: 20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    TextButton(
-                      onPressed: () {
-                        Get.to(LogIn());
-                      },
-                      child: Text(
-                        'Already have an account! Log In',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.red),
-                      ),
+              ),
+              const SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  TextButton(
+                    onPressed: () {
+                      Get.to(LogIn());
+                    },
+                    child: Text(
+                      'Already have an account! Log In',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Colors.red),
                     ),
-                  ],
-                ),
-              ],
-            ),
-          );
-        }
+                  ),
+                ],
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

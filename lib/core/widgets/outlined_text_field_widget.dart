@@ -1,13 +1,14 @@
 import 'package:commanderratings/core/utils/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 
-class OutlinedTextFieldWidget extends StatelessWidget {
+class OutlinedTextFieldWidget extends StatefulWidget {
   final TextEditingController controller;
   final String name;
   final bool isLable;
   // final String? lebel;
   final TextInputType textInputType;
   final String textFieldHeaderName;
+  final bool isObsecure;
 
   const OutlinedTextFieldWidget({
     super.key,
@@ -17,15 +18,23 @@ class OutlinedTextFieldWidget extends StatelessWidget {
     // this.lebel,
     required this.textInputType,
     required this.textFieldHeaderName,
+    this.isObsecure = false,
   });
 
   @override
+  State<OutlinedTextFieldWidget> createState() =>
+      _OutlinedTextFieldWidgetState();
+}
+
+class _OutlinedTextFieldWidgetState extends State<OutlinedTextFieldWidget> {
+  @override
+  bool _obscureText = false;
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          textFieldHeaderName,
+          widget.textFieldHeaderName,
           textAlign: TextAlign.start,
           style: TextStyle(
             color: Colors.grey.shade500,
@@ -37,15 +46,31 @@ class OutlinedTextFieldWidget extends StatelessWidget {
         SizedBox(
           height: 40,
           child: TextField(
-            controller: controller,
-            keyboardType: textInputType,
+            controller: widget.controller,
+            keyboardType: widget.textInputType,
             style: TextStyle(color: AppColors.context(context).textColor),
+            obscureText: _obscureText,
             decoration: InputDecoration(
               // labelText: isLable && lebel != null ? lebel : null,
 
               //labelText: lebel,
               labelStyle: TextStyle(color: Colors.grey),
               border: OutlineInputBorder(),
+              suffixIcon:
+                  widget.isObsecure
+                      ? IconButton(
+                        icon: Icon(
+                          _obscureText
+                              ? Icons.visibility
+                              : Icons.visibility_off,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            _obscureText = !_obscureText;
+                          });
+                        },
+                      )
+                      : null,
               enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.grey.shade500, width: 2.0),
               ),

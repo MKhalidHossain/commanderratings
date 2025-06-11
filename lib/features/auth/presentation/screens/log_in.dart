@@ -36,7 +36,7 @@ class _LogInState extends State<LogIn> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<AuthController>(
-      builder: (authController){
+      builder: (authController) {
         return Scaffold(
           backgroundColor: Colors.black,
           body: Column(
@@ -71,6 +71,7 @@ class _LogInState extends State<LogIn> {
                         const SizedBox(height: 24),
                         OutlinedTextFieldWidget(
                           name: 'Password',
+                          isObsecure: true,
                           // lebel: 'Enter valid password',
                           controller: passwordController,
                           textInputType: TextInputType.text,
@@ -115,18 +116,18 @@ class _LogInState extends State<LogIn> {
 
                         WideCustomButton(
                           text: 'LOG IN',
-                          onPressed: (){
+                          onPressed: () {
                             String email = emailContoller.text;
                             String password = passwordController.text;
-                            if(email.isEmpty){
+                            if (email.isEmpty) {
                               showCustomSnackBar('email is required'.tr);
-
-                            }else if(password.isEmpty){
+                            } else if (password.isEmpty) {
                               showCustomSnackBar('password_is_required'.tr);
-                            }else if(password.length<5){
-                              showCustomSnackBar('minimum password length is 8');
-
-                            }else{
+                            } else if (password.length < 5) {
+                              showCustomSnackBar(
+                                'minimum password length is 8',
+                              );
+                            } else {
                               authController.login(email, password);
                             }
                           },

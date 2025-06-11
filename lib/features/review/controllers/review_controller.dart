@@ -8,7 +8,7 @@ import '../../../helpers/custom_snackbar.dart';
 import '../domain/get_top_five_reviews_response_model.dart';
 
 
-class ReviewController extends GetxController{
+class ReviewController extends GetxController implements GetxService {
 
   final ReviewServiceInterface reviewServiceInterface;
 
@@ -43,9 +43,7 @@ class ReviewController extends GetxController{
         print('Call from Controller Reviews after model calls.');
 
       } else {
-        // Get.find<AuthController>().logOut();
-        // print(response.statusCode.toString());
-        // throw Exception('Failed to load Users All Imported Route List');
+
       }
     } catch (e) {
       if (e is Exception) {

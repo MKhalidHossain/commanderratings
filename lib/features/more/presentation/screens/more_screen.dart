@@ -104,7 +104,7 @@ class MoreScreen extends StatelessWidget {
                       text: 'LOGOUT',
                       onPressed: (){
                         authController.logOut();
-                        showCustomSnackBar('You have logout Successfully');
+                        
                         Get.offAll(LogIn());
                       },
                     ),

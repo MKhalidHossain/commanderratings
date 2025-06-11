@@ -1,7 +1,7 @@
 import 'package:commanderratings/core/utils/constants/app_colors.dart';
 import 'package:commanderratings/core/widgets/normal_custom_button.dart';
 import 'package:flutter/material.dart';
-
+import 'package:url_launcher/url_launcher.dart';
 import '../../../../core/widgets/title_subtitle_text.dart';
 
 class QrCodeDonation extends StatefulWidget {
@@ -30,9 +30,56 @@ class _QrCodeDonationState extends State<QrCodeDonation> {
                 const SizedBox(height: 8),
                 SubTitleText(text: 'Scan the QR code to make a donation'),
                 const SizedBox(height: 16),
-                Image.asset('assets/images/qr/qr_code.png', height: 200),
+                Image.asset(
+                  'assets/images/qr/buy_cofee.png',
+                  fit: BoxFit.cover,
+                  width: 200,
+                  height: 200,
+                ),
                 const SizedBox(height: 16),
-                NormalCustomButton(text: 'Buy Me A Coffee', onPressed: () {}),
+                NormalCustomButton(
+                  text: 'Buy Me A Coffee',
+                  onPressed: () async {
+                    final url = Uri.parse(
+                      "https://www.buymeacoffee.com/commanderratings",
+                    );
+                    final canLaunch = await canLaunchUrl(url);
+                    print("Can launch URL? $canLaunch");
+
+                    if (!canLaunch) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Device cannot launch browser.'),
+                        ),
+                      );
+                      return;
+                    }
+
+                    final launched = await launchUrl(
+                      url,
+                      mode: LaunchMode.externalApplication,
+                    );
+                    if (!launched) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Could not open the donation link.'),
+                        ),
+                      );
+                    }
+                  },
+                ),
+
+                // NormalCustomButton(text: 'Buy Me A Coffee', onPressed: () async{
+                //   final url = Uri.parse("https://buymeacoffee.com/commanderratings");
+                //   if (await canLaunchUrl(url)){
+                //     await launchUrl(url,mode: LaunchMode.externalApplication);
+                //   }
+                //   else{
+                //     throw "Could not launch $url";
+                //   }
+                // },
+                //
+                // ),
               ],
             ),
           ),

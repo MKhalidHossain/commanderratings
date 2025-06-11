@@ -298,7 +298,11 @@ class _CommandersDetailsState extends State<CommandersDetails> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        SearchAndRecentWidget(),
+                                        SearchAndRecentWidget(commanderId: 
+                                                      commandersResponseModel
+                                                          .data!
+                                                          .commander!
+                                                          .sId!,),
                                         const SizedBox(height: 24.0),
                                         //.................................... Leave a Review button..........................
                                         OutlinedButton(

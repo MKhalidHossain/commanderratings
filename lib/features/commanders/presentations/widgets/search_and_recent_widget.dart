@@ -3,7 +3,12 @@ import 'package:commanderratings/core/widgets/custom_dropdawon_field_widget.dart
 import 'package:flutter/material.dart';
 
 class SearchAndRecentWidget extends StatefulWidget {
-  const SearchAndRecentWidget({super.key});
+  final String commanderId;
+
+  const SearchAndRecentWidget({super.key, required this.commanderId});
+
+
+
 
   @override
   State<SearchAndRecentWidget> createState() => _SearchAndRecentWidgetState();
@@ -31,11 +36,11 @@ class _SearchAndRecentWidgetState extends State<SearchAndRecentWidget> {
                   color: AppColors.context(context).borderColor,
                 ),
               ),
-              // focusedBorder: OutlineInputBorder(
-              //   borderSide: BorderSide(
-              //     color: AppColors.context(context).borderColor,
-              //   ),
-              // ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: AppColors.context(context).borderColor,
+                ),
+              ),
               enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(
                   color: AppColors.context(context).borderColor,

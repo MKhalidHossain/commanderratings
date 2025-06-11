@@ -1,9 +1,7 @@
 import 'dart:io';
-
 import 'package:commanderratings/features/commanders/controllers/commanders_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../../core/utils/constants/app_colors.dart';
 import '../../../../core/widgets/custom_dropdawon_field_widget.dart';
 import '../../../../core/widgets/normal_custom_button.dart';
@@ -312,7 +310,10 @@ class _AddANewCommanderWidgetsState extends State<AddANewCommanderWidgets> {
                                                     child: Center(
                                                       child: Icon(
                                                         Icons.close,
-                                                        color: AppColors.context(context).iconColor,
+                                                        color:
+                                                            AppColors.context(
+                                                              context,
+                                                            ).iconColor,
                                                         size: 30,
                                                       ),
                                                     ),
@@ -346,7 +347,7 @@ class _AddANewCommanderWidgetsState extends State<AddANewCommanderWidgets> {
                                       return AlertDialog(
                                         title: Text('Opps ! '),
                                         content: Text(
-                                          'Please Fill the required data',
+                                          'Please Fill the required Commander Name',
                                         ),
                                         actions: [
                                           TextButton(
@@ -366,7 +367,7 @@ class _AddANewCommanderWidgetsState extends State<AddANewCommanderWidgets> {
                                       return AlertDialog(
                                         title: Text('Opps ! '),
                                         content: Text(
-                                          'Please Fill the required data',
+                                          'Please Fill the Year of Service ',
                                         ),
                                         actions: [
                                           TextButton(
@@ -386,7 +387,7 @@ class _AddANewCommanderWidgetsState extends State<AddANewCommanderWidgets> {
                                       return AlertDialog(
                                         title: Text('Opps ! '),
                                         content: Text(
-                                          'Please Fill the required data',
+                                          'Please Fill the required Service Branch ',
                                         ),
                                         actions: [
                                           TextButton(
@@ -399,15 +400,14 @@ class _AddANewCommanderWidgetsState extends State<AddANewCommanderWidgets> {
                                       );
                                     },
                                   );
-                                }
-                                else if (unit.isEmpty) {
+                                } else if (unit.isEmpty) {
                                   showDialog(
                                     context: context,
                                     builder: (context) {
                                       return AlertDialog(
                                         title: Text('Opps ! '),
                                         content: Text(
-                                          'Please Fill the required data',
+                                          'Please Fill the required Unit',
                                         ),
                                         actions: [
                                           TextButton(
@@ -427,7 +427,7 @@ class _AddANewCommanderWidgetsState extends State<AddANewCommanderWidgets> {
                                       return AlertDialog(
                                         title: Text('Opps ! '),
                                         content: Text(
-                                          'Please Fill the required data',
+                                          'Please Fill the required base',
                                         ),
                                         actions: [
                                           TextButton(
@@ -447,7 +447,7 @@ class _AddANewCommanderWidgetsState extends State<AddANewCommanderWidgets> {
                                       return AlertDialog(
                                         title: Text('Opps ! '),
                                         content: Text(
-                                          'Please Fill the required data',
+                                          'Please Fill the required rank',
                                         ),
                                         actions: [
                                           TextButton(

@@ -5,8 +5,6 @@ import 'package:commanderratings/features/commanders/domain/get_all_unit_respons
 import 'package:commanderratings/features/commanders/service/commanders_service_interface.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-
-import '../../../helpers/custom_snackbar.dart';
 import '../../../helpers/remote/data/api_client.dart';
 import '../domain/single_commander_response_model.dart';
 

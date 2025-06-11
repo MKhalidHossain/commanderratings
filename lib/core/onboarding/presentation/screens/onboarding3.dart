@@ -1,8 +1,6 @@
 import 'package:commanderratings/features/auth/presentation/screens/log_in.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../../app.dart';
 import '../../../widgets/wide_custom_button.dart';
 
 class Onboarding3 extends StatelessWidget {

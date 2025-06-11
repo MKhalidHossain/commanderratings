@@ -72,6 +72,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                           OutlinedTextFieldWidget(
                             name: 'Password',
                             // lebel: 'Enter valid password',
+                            isObsecure: true,
                             controller: newpasswordController,
                             textInputType: TextInputType.text,
                             textFieldHeaderName: 'password',
