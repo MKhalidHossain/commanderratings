@@ -39,152 +39,154 @@ class _LogInState extends State<LogIn> {
       builder: (authController) {
         return Scaffold(
           backgroundColor: Colors.black,
-          body: Column(
-            children: [
-              HeaderForAuthThreeMan(text: 'LOG IN'),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24.0),
+          body: SingleChildScrollView(
+            child: Column(
+              children: [
+                HeaderForAuthThreeMan(text: 'LOG IN'),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24.0),
 
-                child: Container(
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16.0,
-                      vertical: 16.0,
+                  child: Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(Radius.circular(8.0)),
                     ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SizedBox(height: 8.0),
-                        OutlinedTextFieldWidget(
-                          name: 'Username or Email',
-                          //lebel: 'Enter eamil or username',
-                          controller: emailContoller,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16.0,
+                        vertical: 16.0,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(height: 8.0),
+                          OutlinedTextFieldWidget(
+                            name: 'Username or Email',
+                            //lebel: 'Enter eamil or username',
+                            controller: emailContoller,
 
-                          textInputType: TextInputType.text,
-                          textFieldHeaderName: 'Username or Email',
-                        ),
-                        const SizedBox(height: 24),
-                        OutlinedTextFieldWidget(
-                          name: 'Password',
-                          isObsecure: true,
-                          // lebel: 'Enter valid password',
-                          controller: passwordController,
-                          textInputType: TextInputType.text,
-                          textFieldHeaderName: 'password',
-                        ),
-                        const SizedBox(height: 30),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Container(
-                              height: 18,
-                              width: 18,
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: Colors.grey.shade500,
-                                  width: 3,
+                            textInputType: TextInputType.text,
+                            textFieldHeaderName: 'Username or Email',
+                          ),
+                          const SizedBox(height: 24),
+                          OutlinedTextFieldWidget(
+                            name: 'Password',
+                            isObsecure: true,
+                            // lebel: 'Enter valid password',
+                            controller: passwordController,
+                            textInputType: TextInputType.text,
+                            textFieldHeaderName: 'password',
+                          ),
+                          const SizedBox(height: 30),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Container(
+                                height: 18,
+                                width: 18,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: Colors.grey.shade500,
+                                    width: 3,
+                                  ),
+                                  color: Colors.white,
                                 ),
-                                color: Colors.white,
+                                child: Checkbox(
+                                  checkColor: Colors.white,
+                                  activeColor: Colors.grey.shade500,
+                                  value: isRemember,
+                                  onChanged: (bool? value) {
+                                    setState(() {
+                                      isRemember = value!;
+                                    });
+                                  },
+                                ),
                               ),
-                              child: Checkbox(
-                                checkColor: Colors.white,
-                                activeColor: Colors.grey.shade500,
-                                value: isRemember,
-                                onChanged: (bool? value) {
-                                  setState(() {
-                                    isRemember = value!;
-                                  });
-                                },
+                              const SizedBox(width: 10),
+                              Text(
+                                'Remember Me',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.grey.shade500,
+                                ),
                               ),
-                            ),
-                            const SizedBox(width: 10),
-                            Text(
-                              'Remember Me',
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.grey.shade500,
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 20.0),
+                            ],
+                          ),
+                          const SizedBox(height: 20.0),
 
-                        WideCustomButton(
-                          text: 'LOG IN',
-                          onPressed: () {
-                            String email = emailContoller.text;
-                            String password = passwordController.text;
-                            if (email.isEmpty) {
-                              showCustomSnackBar('email is required'.tr);
-                            } else if (password.isEmpty) {
-                              showCustomSnackBar('password_is_required'.tr);
-                            } else if (password.length < 5) {
-                              showCustomSnackBar(
-                                'minimum password length is 8',
-                              );
-                            } else {
-                              authController.login(email, password);
-                            }
-                          },
-                        ),
-                        const SizedBox(height: 10),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            TextButton(
-                              onPressed: () {
-                                Get.to(LostPasswordScreen());
-                              },
-                              child: Text(
-                                'Lost your password?',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(color: Colors.grey),
+                          WideCustomButton(
+                            text: 'LOG IN',
+                            onPressed: () {
+                              String email = emailContoller.text;
+                              String password = passwordController.text;
+                              if (email.isEmpty) {
+                                showCustomSnackBar('email is required'.tr);
+                              } else if (password.isEmpty) {
+                                showCustomSnackBar('password_is_required'.tr);
+                              } else if (password.length < 5) {
+                                showCustomSnackBar(
+                                  'minimum password length is 8',
+                                );
+                              } else {
+                                authController.login(email, password);
+                              }
+                            },
+                          ),
+                          const SizedBox(height: 10),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              TextButton(
+                                onPressed: () {
+                                  Get.to(LostPasswordScreen());
+                                },
+                                child: Text(
+                                  'Lost your password?',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(color: Colors.grey),
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                      ],
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-              const SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  TextButton(
-                    onPressed: () {
-                      Get.to(SignUp());
-                    },
-                    child: Text(
-                      'Not have an account? SignUp!',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.red),
+                const SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    TextButton(
+                      onPressed: () {
+                        Get.to(SignUp());
+                      },
+                      child: Text(
+                        'Not have an account? SignUp!',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: Colors.red),
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  TextButton(
-                    onPressed: () {
-                      Get.to(MainScreen());
-                    },
-                    child: Text(
-                      'SKIP',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.red),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    TextButton(
+                      onPressed: () {
+                        Get.to(MainScreen());
+                      },
+                      child: Text(
+                        'SKIP',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: Colors.red),
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+              ],
+            ),
           ),
         );
       },
