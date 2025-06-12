@@ -2,13 +2,13 @@ import 'package:commanderratings/features/commanders_call/controllers/commanders
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../core/headers/header_for_others_one_man.dart';
+import '../../../../core/utils/constants/app_colors.dart';
 import '../../domain/model/get_all_blog_service_model.dart';
 import '../widgets/filter_buttons.dart';
 import '../widgets/leadership_card_widget.dart';
 import 'call_of_commander_screen.dart';
 
 class CommandersCallScreen extends StatefulWidget {
-
   const CommandersCallScreen({super.key});
 
   @override
@@ -16,9 +16,13 @@ class CommandersCallScreen extends StatefulWidget {
 }
 
 class _CommandersCallScreenState extends State<CommandersCallScreen> {
-
-
   late GetAllBlogResponseModel getAllBlogResponseModel;
+
+  // Search and filter variables
+  final TextEditingController _searchController = TextEditingController();
+  List<Blogs> filteredBlogs = [];
+  List<String> selectedCategories = [];
+  String searchQuery = '';
 
   @override
   void initState() {
@@ -28,63 +32,322 @@ class _CommandersCallScreenState extends State<CommandersCallScreen> {
           controller.getAllBlogResponseModel.data != null &&
           controller.getAllBlogResponseModel.data!.blogs != null) {
         setState(() {
-          getAllBlogResponseModel =
-              controller.getAllBlogResponseModel;
+          getAllBlogResponseModel = controller.getAllBlogResponseModel;
+          filteredBlogs = getAllBlogResponseModel.data!.blogs!;
         });
       }
     });
+
+    // Add listener for search text changes
+    _searchController.addListener(_onSearchChanged);
     super.initState();
   }
 
   @override
+  void dispose() {
+    _searchController.removeListener(_onSearchChanged);
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  // Handle search text changes
+  void _onSearchChanged() {
+    setState(() {
+      searchQuery = _searchController.text;
+      _filterBlogs();
+    });
+  }
+
+  // Handle category filter changes
+  void _onCategoryFilterChanged(List<String> selectedFilters) {
+    setState(() {
+      selectedCategories = selectedFilters;
+      _filterBlogs();
+    });
+  }
+
+  // Filter blogs based on search query and selected categories
+  void _filterBlogs() {
+    if (getAllBlogResponseModel.data == null ||
+        getAllBlogResponseModel.data!.blogs == null) {
+      return;
+    }
+
+    List<Blogs> result = getAllBlogResponseModel.data!.blogs!;
+
+    // Filter by search query if not empty
+    if (searchQuery.isNotEmpty) {
+      result =
+          result.where((blog) {
+            final titleMatch =
+                blog.title != null &&
+                blog.title!.toLowerCase().contains(searchQuery.toLowerCase());
+            final descriptionMatch =
+                blog.description != null &&
+                blog.description!.toLowerCase().contains(
+                  searchQuery.toLowerCase(),
+                );
+            return titleMatch || descriptionMatch;
+          }).toList();
+    }
+
+    // Filter by selected categories if any
+    if (selectedCategories.isNotEmpty) {
+      // Note: This is a placeholder. You'll need to adjust this based on how
+      // your blog categories are structured. If blogs have a category field,
+      // you would filter based on that.
+      // For now, I'm assuming the filter might match against title or description
+      result =
+          result.where((blog) {
+            for (var category in selectedCategories) {
+              if ((blog.title != null &&
+                      blog.title!.toLowerCase().contains(
+                        category.toLowerCase(),
+                      )) ||
+                  (blog.description != null &&
+                      blog.description!.toLowerCase().contains(
+                        category.toLowerCase(),
+                      ))) {
+                return true;
+              }
+            }
+            return false;
+          }).toList();
+    }
+
+    filteredBlogs = result;
+  }
+
+  @override
   Widget build(BuildContext context) {
-
     return GetBuilder<CommandersCallsController>(
+      builder: (commandersCallsController) {
+        return !commandersCallsController.isLoading
+            ? Scaffold(
+              body: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    HeaderForOthers(text: 'Commanders Call', image: ''),
+                    const SizedBox(height: 10),
 
-        builder: (commandersCallsController){
-          return !commandersCallsController.isLoading ? Scaffold(
-            body: SingleChildScrollView(
-              child: Column(
-                children: [
-                  HeaderForOthers(text: 'Commanders Call', image: '',),
-                  const SizedBox(height: 10),
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: FilterButtons(
-                      onSelectionChanged: (selectedFilters) {
-                        print("Selected: $selectedFilters");
-                      },
-                    ),
-                  ), //
-                  // Horizontal filter button list
-                  const SizedBox(height: 10),
+                    // Search bar
+                    // Padding(
+                    //   padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    //   child: Container(
+                    //     decoration: BoxDecoration(
+                    //       color: Colors.white,
+                    //       borderRadius: BorderRadius.circular(8),
+                    //       border: Border.all(
+                    //         color: AppColors.context(context).borderColor,
+                    //       ),
+                    //     ),
+                    //     child: TextField(
+                    //       controller: _searchController,
+                    //       decoration: InputDecoration(
+                    //         hintText: 'Search blogs by title or description...',
+                    //         prefixIcon: Icon(Icons.search),
+                    //         suffixIcon:
+                    //             _searchController.text.isNotEmpty
+                    //                 ? IconButton(
+                    //                   icon: Icon(Icons.clear),
+                    //                   onPressed: () {
+                    //                     _searchController.clear();
+                    //                   },
+                    //                 )
+                    //                 : null,
+                    //         border: InputBorder.none,
+                    //         contentPadding: EdgeInsets.symmetric(vertical: 12),
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
+                    const SizedBox(height: 10),
 
-                  Padding(
-
-                    padding: const EdgeInsets.all(20.0),
-
-                    child: Column(
-                      children: List.generate(
-                        getAllBlogResponseModel.data!.blogs!.length,
-                            (index) => GestureDetector(
-                          onTap: () {
-                            Get.to(CallOfCommanderScreen(id: getAllBlogResponseModel.data!.blogs![index].sId!,));
-                          },
-                          child: LeadershipCardWidget(blog: getAllBlogResponseModel.data!.blogs![index]),
-                        ),
+                    // Filter buttons
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: FilterButtons(
+                        onSelectionChanged: _onCategoryFilterChanged,
                       ),
                     ),
-                  ),
 
-                ],
+                    // Search results info
+                    if (searchQuery.isNotEmpty || selectedCategories.isNotEmpty)
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        child: Row(
+                          children: [
+                            Text(
+                              'Found ${filteredBlogs.length} results',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey[700],
+                              ),
+                            ),
+                            Spacer(),
+                            if (searchQuery.isNotEmpty ||
+                                selectedCategories.isNotEmpty)
+                              TextButton(
+                                onPressed: () {
+                                  setState(() {
+                                    _searchController.clear();
+                                    selectedCategories = [];
+                                    _filterBlogs();
+                                  });
+                                },
+                                child: Text('Clear filters'),
+                              ),
+                          ],
+                        ),
+                      ),
+
+                    const SizedBox(height: 10),
+
+                    // Blog list
+                    filteredBlogs.isEmpty
+                        ? Center(
+                          child: Padding(
+                            padding: const EdgeInsets.all(40.0),
+                            child: Column(
+                              children: [
+                                Icon(
+                                  Icons.search_off,
+                                  size: 64,
+                                  color: Colors.grey[400],
+                                ),
+                                SizedBox(height: 16),
+                                Text(
+                                  'No blogs found matching your search',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    color: Colors.grey[600],
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ],
+                            ),
+                          ),
+                        )
+                        : Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: Column(
+                            children: List.generate(
+                              filteredBlogs.length,
+                              (index) => GestureDetector(
+                                onTap: () {
+                                  Get.to(
+                                    CallOfCommanderScreen(
+                                      id: filteredBlogs[index].sId!,
+                                    ),
+                                  );
+                                },
+                                child: LeadershipCardWidget(
+                                  blog: filteredBlogs[index],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                  ],
+                ),
               ),
-            ),
-          ) :
-
-          Center(
-            child: CircularProgressIndicator(),
-          );
-        }
+            )
+            : Center(child: CircularProgressIndicator());
+      },
     );
   }
 }
+
+
+
+
+// import 'package:commanderratings/features/commanders_call/controllers/commanders_calls_controller.dart';
+// import 'package:flutter/material.dart';
+// import 'package:get/get.dart';
+// import '../../../../core/headers/header_for_others_one_man.dart';
+// import '../../domain/model/get_all_blog_service_model.dart';
+// import '../widgets/filter_buttons.dart';
+// import '../widgets/leadership_card_widget.dart';
+// import 'call_of_commander_screen.dart';
+
+// class CommandersCallScreen extends StatefulWidget {
+
+//   const CommandersCallScreen({super.key});
+
+//   @override
+//   State<CommandersCallScreen> createState() => _CommandersCallScreenState();
+// }
+
+// class _CommandersCallScreenState extends State<CommandersCallScreen> {
+
+
+//   late GetAllBlogResponseModel getAllBlogResponseModel;
+
+//   @override
+//   void initState() {
+//     Get.find<CommandersCallsController>().getAllCommandersCall().then((_) {
+//       final controller = Get.find<CommandersCallsController>();
+//       if (controller.getAllBlogResponseModel != null &&
+//           controller.getAllBlogResponseModel.data != null &&
+//           controller.getAllBlogResponseModel.data!.blogs != null) {
+//         setState(() {
+//           getAllBlogResponseModel =
+//               controller.getAllBlogResponseModel;
+//         });
+//       }
+//     });
+//     super.initState();
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+
+//     return GetBuilder<CommandersCallsController>(
+
+//         builder: (commandersCallsController){
+//           return !commandersCallsController.isLoading ? Scaffold(
+//             body: SingleChildScrollView(
+//               child: Column(
+//                 children: [
+//                   HeaderForOthers(text: 'Commanders Call', image: '',),
+//                   const SizedBox(height: 10),
+//                   Padding(
+//                     padding: const EdgeInsets.all(16.0),
+//                     child: FilterButtons(
+//                       onSelectionChanged: (selectedFilters) {
+//                         print("Selected: $selectedFilters");
+//                       },
+//                     ),
+//                   ), //
+//                   // Horizontal filter button list
+//                   const SizedBox(height: 10),
+
+//                   Padding(
+
+//                     padding: const EdgeInsets.all(20.0),
+
+//                     child: Column(
+//                       children: List.generate(
+//                         getAllBlogResponseModel.data!.blogs!.length,
+//                             (index) => GestureDetector(
+//                           onTap: () {
+//                             Get.to(CallOfCommanderScreen(id: getAllBlogResponseModel.data!.blogs![index].sId!,));
+//                           },
+//                           child: LeadershipCardWidget(blog: getAllBlogResponseModel.data!.blogs![index]),
+//                         ),
+//                       ),
+//                     ),
+//                   ),
+
+//                 ],
+//               ),
+//             ),
+//           ) :
+
+//           Center(
+//             child: CircularProgressIndicator(),
+//           );
+//         }
+//     );
+//   }
+// }
