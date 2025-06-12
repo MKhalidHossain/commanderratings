@@ -23,7 +23,13 @@ class CommandersDetails extends StatefulWidget {
 
 class _CommandersDetailsState extends State<CommandersDetails> {
   late SingleCommandersResponseModel commandersResponseModel;
-  
+
+  late List<String> allRatting  = [];
+  late List <String> filteredReview = [];
+
+  String? selectedReview; // single string search  selection 
+
+
 
   @override
   void initState() {

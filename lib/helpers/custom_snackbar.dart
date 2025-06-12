@@ -20,10 +20,8 @@ void showCustomSnackBar(
       dismissDirection: DismissDirection.horizontal,
       margin: const EdgeInsets.all(10).copyWith(right: 10),
       duration: Duration(seconds: seconds),
-      backgroundColor:
-          Get.isDarkMode
-              ? Colors.white
-              : Theme.of(Get.context!).textTheme.titleMedium!.color!,
+      backgroundColor: Colors.white,
+
       borderRadius: 10,
       messageText: Row(
         children: [
@@ -38,7 +36,7 @@ void showCustomSnackBar(
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w600,
-                      color: Colors.white,
+                      color: Colors.black,
                     ),
                   ),
                   subMessage != null
@@ -47,7 +45,7 @@ void showCustomSnackBar(
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w600,
-                          color: Colors.white,
+                          color: Colors.black,
                         ),
                       )
                       : const SizedBox(),

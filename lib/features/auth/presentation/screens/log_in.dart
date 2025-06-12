@@ -1,10 +1,10 @@
 import 'package:commanderratings/app.dart';
 import 'package:commanderratings/core/headers/header_for_auth_three_man.dart';
-import 'package:commanderratings/core/widgets/outlined_text_field_widget.dart';
 import 'package:commanderratings/features/auth/controllers/auth_controller.dart';
 import 'package:commanderratings/features/auth/domain/model/authentication_model.dart';
 import 'package:commanderratings/features/auth/presentation/screens/lost_password.dart';
 import 'package:commanderratings/features/auth/presentation/screens/sign_up.dart';
+import 'package:commanderratings/features/auth/presentation/widgets/auth_outlined_text_field_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -61,7 +61,7 @@ class _LogInState extends State<LogIn> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const SizedBox(height: 8.0),
-                          OutlinedTextFieldWidget(
+                          AuthOutlinedTextFieldWidget(
                             name: 'Username or Email',
                             //lebel: 'Enter eamil or username',
                             controller: emailContoller,
@@ -70,7 +70,7 @@ class _LogInState extends State<LogIn> {
                             textFieldHeaderName: 'Username or Email',
                           ),
                           const SizedBox(height: 24),
-                          OutlinedTextFieldWidget(
+                          AuthOutlinedTextFieldWidget(
                             name: 'Password',
                             isObsecure: true,
                             // lebel: 'Enter valid password',

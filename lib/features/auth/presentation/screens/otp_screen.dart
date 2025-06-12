@@ -2,14 +2,12 @@ import 'package:commanderratings/features/auth/controllers/auth_controller.dart'
 import 'package:commanderratings/features/auth/presentation/screens/sign_up.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../../app.dart';
 import '../../../../core/headers/header_for_auth_three_man.dart';
-import '../../../../core/widgets/outlined_text_field_widget.dart';
 import '../../../../core/widgets/wide_custom_button.dart';
 import '../../../../helpers/custom_snackbar.dart';
 import '../../domain/model/authentication_model.dart';
-
+import '../widgets/auth_outlined_text_field_widget.dart';
 
 class OtpScreen extends StatefulWidget {
   const OtpScreen({super.key});
@@ -36,10 +34,11 @@ class _OtpScreenState extends State<OtpScreen> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<AuthController>(
-        builder: (authController){
-          return Scaffold(
-            backgroundColor: Colors.black,
-            body: Column(
+      builder: (authController) {
+        return Scaffold(
+          backgroundColor: Colors.black,
+          body: SingleChildScrollView(
+            child: Column(
               children: [
                 HeaderForAuthThreeMan(text: 'Otp'),
                 Padding(
@@ -59,10 +58,9 @@ class _OtpScreenState extends State<OtpScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-
                           const SizedBox(height: 8.0),
 
-                          OutlinedTextFieldWidget(
+                          AuthOutlinedTextFieldWidget(
                             name: 'Username or Email',
                             //lebel: 'Enter eamil or username',
                             controller: emailController,
@@ -73,7 +71,7 @@ class _OtpScreenState extends State<OtpScreen> {
 
                           const SizedBox(height: 24),
 
-                          OutlinedTextFieldWidget(
+                          AuthOutlinedTextFieldWidget(
                             name: 'Password',
                             // lebel: 'Enter valid password',
                             controller: otpController,
@@ -85,19 +83,18 @@ class _OtpScreenState extends State<OtpScreen> {
 
                           WideCustomButton(
                             text: 'Send OTP',
-                            onPressed: (){
+                            onPressed: () {
                               String email = emailController.text;
                               String otp = otpController.text;
-                              if(email.isEmpty){
+                              if (email.isEmpty) {
                                 showCustomSnackBar('email is required'.tr);
-                              }else{
+                              } else {
                                 authController.otpVerification(otp, email);
                               }
                             },
                           ),
 
                           const SizedBox(height: 10),
-
                         ],
                       ),
                     ),
@@ -136,8 +133,9 @@ class _OtpScreenState extends State<OtpScreen> {
                 ),
               ],
             ),
-          );
-        }
+          ),
+        );
+      },
     );
   }
 }

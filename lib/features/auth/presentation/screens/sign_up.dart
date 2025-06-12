@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../core/headers/header_for_auth_three_man.dart';
 import '../../../../core/widgets/wide_custom_button.dart';
-import '../../../../core/widgets/outlined_text_field_widget.dart';
 import '../../../../helpers/custom_snackbar.dart';
 import '../../domain/model/authentication_model.dart';
+import '../widgets/auth_outlined_text_field_widget.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -60,7 +60,7 @@ class _SignUpState extends State<SignUp> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const SizedBox(height: 8.0),
-                          OutlinedTextFieldWidget(
+                          AuthOutlinedTextFieldWidget(
                             name: 'name',
                             // lebel: 'Enter your username',
                             controller: nameController,
@@ -68,7 +68,7 @@ class _SignUpState extends State<SignUp> {
                             textFieldHeaderName: 'Username',
                           ),
                           const SizedBox(height: 20.0),
-                          OutlinedTextFieldWidget(
+                          AuthOutlinedTextFieldWidget(
                             name: 'Email',
                             // lebel: 'Enter your email.',
                             controller: emailController,
@@ -77,7 +77,7 @@ class _SignUpState extends State<SignUp> {
                             textFieldHeaderName: 'Email',
                           ),
                           const SizedBox(height: 20.0),
-                          OutlinedTextFieldWidget(
+                          AuthOutlinedTextFieldWidget(
                             name: 'Password',
                             //lebel: 'Enter a valid password',
                             isObsecure: true,
