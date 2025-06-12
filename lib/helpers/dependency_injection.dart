@@ -26,7 +26,7 @@ Future<void> initDI() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
 
   ApiClient apiClient = ApiClient(
-    appBaseUrl: 'https://backend-david-weijian.onrender.com/api/v1/',
+    appBaseUrl: 'https://johnnybrutes.onrender.com/api/v1/',
     sharedPreferences: prefs,
   );
 

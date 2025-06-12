@@ -26,6 +26,11 @@ class CommandersCallRepository implements CommandersCallRepositoryInterface{
     return apiClient.getData(Urls.getAllContact);
   }
 
+    @override
+  Future<Response> getAllCategoryBlogs() {
+    return apiClient.getData(Urls.getAllCategoryBlogs);
+  }
+
   @override
   Future<Response> createCommentUnderBlog (String blogId, String name, String email, String comment) async{
     return await apiClient.postData(Urls.commentUnderBlog, {
@@ -35,5 +40,5 @@ class CommandersCallRepository implements CommandersCallRepositoryInterface{
       "comment":comment,
     });
   }
-
+  
 }

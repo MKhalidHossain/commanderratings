@@ -34,6 +34,8 @@ class Urls {
 
   static const String getABlogs = '/api/v1/blog/';
 
+  static const String getAllCategoryBlogs = '/api/v1/blog/blog-category';
+
   static const String getAllUnits = '/api/v1/unit?page=1&limit=10';
 
   static const String getAllContact = '/api/v1/contact/';
