@@ -1,6 +1,7 @@
 import 'package:commanderratings/core/widgets/normal_custom_button.dart';
 import 'package:commanderratings/features/commanders/presentations/screens/all_commanders_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class BannerSection extends StatelessWidget {
   const BannerSection({super.key});
@@ -50,9 +51,12 @@ class BannerSection extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 20),
-                NormalCustomButton(text: "START REVIEWING", onPressed: () {
-                  AllCommandersScreen();
-                }),
+                NormalCustomButton(
+                  text: "START REVIEWING",
+                  onPressed: () {
+                    Get.to(() => AllCommandersScreen());
+                  },
+                ),
               ],
             ),
           ),

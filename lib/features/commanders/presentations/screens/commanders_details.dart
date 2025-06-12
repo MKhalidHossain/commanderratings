@@ -23,6 +23,7 @@ class CommandersDetails extends StatefulWidget {
 
 class _CommandersDetailsState extends State<CommandersDetails> {
   late SingleCommandersResponseModel commandersResponseModel;
+  
 
   @override
   void initState() {

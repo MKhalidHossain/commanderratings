@@ -63,6 +63,7 @@ class _AllCommandersScreenState extends State<AllCommandersScreen> {
   void initState() {
     super.initState();
     initializeData();
+    
   }
 
   List<String> filterString = [];
