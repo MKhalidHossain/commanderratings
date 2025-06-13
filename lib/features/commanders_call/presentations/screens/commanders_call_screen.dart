@@ -2,7 +2,6 @@ import 'package:commanderratings/features/commanders_call/controllers/commanders
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../core/headers/header_for_others_one_man.dart';
-import '../../../../core/utils/constants/app_colors.dart';
 import '../../domain/model/get_all_blog_service_model.dart';
 import '../widgets/filter_buttons.dart';
 import '../widgets/leadership_card_widget.dart';
@@ -18,6 +17,10 @@ class CommandersCallScreen extends StatefulWidget {
 class _CommandersCallScreenState extends State<CommandersCallScreen> {
   late GetAllBlogResponseModel getAllBlogResponseModel;
 
+  // Add a variable for categories
+  List<String> categoryNames = [];
+  bool isLoadingCategories = true;
+
   // Search and filter variables
   final TextEditingController _searchController = TextEditingController();
   List<Blogs> filteredBlogs = [];
@@ -26,6 +29,9 @@ class _CommandersCallScreenState extends State<CommandersCallScreen> {
 
   @override
   void initState() {
+    super.initState();
+
+    // Fetch blogs
     Get.find<CommandersCallsController>().getAllCommandersCall().then((_) {
       final controller = Get.find<CommandersCallsController>();
       if (controller.getAllBlogResponseModel != null &&
@@ -38,9 +44,61 @@ class _CommandersCallScreenState extends State<CommandersCallScreen> {
       }
     });
 
+    // Fetch categories
+    fetchCategories();
+
     // Add listener for search text changes
     _searchController.addListener(_onSearchChanged);
-    super.initState();
+  }
+
+  // Method to fetch categories using your existing getAllCategoryBlogs method
+  void fetchCategories() async {
+    try {
+      // Use your existing method to fetch categories
+      await Get.find<CommandersCallsController>().getAllCategoryBlogs();
+
+      final controller = Get.find<CommandersCallsController>();
+      if (controller.getAllCategoryBlogResponseModel != null &&
+          controller.getAllCategoryBlogResponseModel.data != null) {
+        // Extract category names from the model
+        List<String> names =
+            controller.getAllCategoryBlogResponseModel.data!
+                .map((category) => category.name ?? "")
+                .where((name) => name.isNotEmpty)
+                .toList();
+
+        setState(() {
+          categoryNames = names;
+          isLoadingCategories = false;
+        });
+      } else {
+        // Fallback to default if data is null
+        setDefaultCategories();
+      }
+    } catch (e) {
+      print('Error fetching categories: $e');
+      setDefaultCategories();
+    }
+  }
+
+  // Helper method to set default categories
+  void setDefaultCategories() {
+    setState(() {
+      // categoryNames = [
+      //   'Congressional & Senatorial Assistance',
+      //   'Enlisted Perspective',
+      //   'Inspector General & Military Equal Opportunity',
+      //   'International & Coalition leadership',
+      //   'Medication & Leadership',
+      //   'Military Leadership',
+      //   'Psychology of Leadership',
+      //   'U.S. Air Force',
+      //   'U.S. Coast Guard',
+      //   'Military',
+      //   'Veterans',
+      // ];
+      isLoadingCategories = false;
+    });
   }
 
   @override
@@ -128,47 +186,22 @@ class _CommandersCallScreenState extends State<CommandersCallScreen> {
                 child: Column(
                   children: [
                     HeaderForOthers(text: 'Commanders Call', image: ''),
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 20),
 
-                    // Search bar
-                    // Padding(
-                    //   padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    //   child: Container(
-                    //     decoration: BoxDecoration(
-                    //       color: Colors.white,
-                    //       borderRadius: BorderRadius.circular(8),
-                    //       border: Border.all(
-                    //         color: AppColors.context(context).borderColor,
-                    //       ),
-                    //     ),
-                    //     child: TextField(
-                    //       controller: _searchController,
-                    //       decoration: InputDecoration(
-                    //         hintText: 'Search blogs by title or description...',
-                    //         prefixIcon: Icon(Icons.search),
-                    //         suffixIcon:
-                    //             _searchController.text.isNotEmpty
-                    //                 ? IconButton(
-                    //                   icon: Icon(Icons.clear),
-                    //                   onPressed: () {
-                    //                     _searchController.clear();
-                    //                   },
-                    //                 )
-                    //                 : null,
-                    //         border: InputBorder.none,
-                    //         contentPadding: EdgeInsets.symmetric(vertical: 12),
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
-                    const SizedBox(height: 10),
-
-                    // Filter buttons
+                    // Filter buttons with dynamic categories
                     Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: FilterButtons(
-                        onSelectionChanged: _onCategoryFilterChanged,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16.0,
+                        vertical: 0,
                       ),
+                      child:
+                          isLoadingCategories
+                              ? Center(child: CircularProgressIndicator())
+                              : FilterButtons(
+                                onSelectionChanged: _onCategoryFilterChanged,
+                                categories:
+                                    categoryNames, // Pass the dynamic categories
+                              ),
                     ),
 
                     // Search results info
@@ -257,7 +290,6 @@ class _CommandersCallScreenState extends State<CommandersCallScreen> {
     );
   }
 }
-
 
 
 
