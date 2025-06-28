@@ -44,7 +44,6 @@ class _SignUpState extends State<SignUp> {
                 HeaderForAuthThreeMan(text: 'SIGN UP'),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24.0),
-
                   child: Container(
                     width: double.infinity,
                     decoration: BoxDecoration(

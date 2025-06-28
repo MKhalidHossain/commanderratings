@@ -18,70 +18,17 @@ class _ThemeChangeWidgetState extends State<ThemeChangeWidget> {
   String selectedTheme = "Light"; // or "Dark"
 
   @override
+  void initState() {
+    super.initState();
+    final isDark = themecontroller.themeMode == ThemeMode.dark;
+    selectedTheme = isDark ? "Dark" : "Light";
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // Text(
-        //   'Light',
-        //   style: TextStyle(
-        //     color: AppColors.context(context).textColor,
-        //     fontWeight:
-        //         selectedTheme == "Light"
-        //             ? FontWeight.bold
-        //             : FontWeight.normal,
-        //   ),
-        // ),
-        const SizedBox(height: 40),
-
-        // Light Theme Card
-        // Container(
-        //   decoration: BoxDecoration(
-        //     borderRadius: BorderRadius.circular(12),
-        //     color:
-        //         selectedTheme == "Light"
-        //             ? Colors.blue.shade100
-        //             : Colors.transparent,
-        //   ),
-        //   child: InkWell(
-        //     borderRadius: BorderRadius.circular(12),
-        //     onTap: () {
-        //       setState(() {
-        //         selectedTheme = "Light";
-        //       });
-        //       themecontroller.changeThemeToLight(); // Set actual theme here
-        //     },
-        //     child: Padding(
-        //       padding: const EdgeInsets.all(12.0),
-        //       child: Container(
-        //         color: Colors.red,
-        //         child: Row(
-        //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //           children: [
-        //             Text(
-        //               'Light',
-        //               style: TextStyle(
-        //                 color: AppColors.context(context).textColor,
-        //                 fontSize: 18,
-        //                 fontWeight:
-        //                     selectedTheme == "Light"
-        //                         ? FontWeight.bold
-        //                         : FontWeight.normal,
-        //               ),
-        //             ),
-        //             Text(''),
-        //             Image.asset(
-        //               'assets/icons/flashbangLight.png',
-        //               fit: BoxFit.cover,
-        //               height: 40,
-        //               alignment: Alignment.centerRight,
-        //             ),
-        //             const SizedBox(width: 10),
-        //           ],
-        //         ),
-        //       ),
-        //     ),
-        //   ),
-        // ),
+        const SizedBox(height: 32),
         Card(
           color:
               selectedTheme == "Light" ? Color(0xFFFFFFFF) : Colors.transparent,
@@ -116,7 +63,7 @@ class _ThemeChangeWidgetState extends State<ThemeChangeWidget> {
                   Image.asset(
                     'assets/icons/flashbangLight.png',
                     fit: BoxFit.cover,
-                    height: 40,
+                    height: 30,
                   ),
                   // const SizedBox(width: 10),
                 ],
@@ -125,7 +72,7 @@ class _ThemeChangeWidgetState extends State<ThemeChangeWidget> {
           ),
         ),
 
-        const SizedBox(height: 40),
+        const SizedBox(height: 24),
 
         // Dark Theme Card
         Card(
@@ -163,7 +110,7 @@ class _ThemeChangeWidgetState extends State<ThemeChangeWidget> {
                   Image.asset(
                     'assets/icons/flashbangDark.png',
                     fit: BoxFit.cover,
-                    height: 40,
+                    height: 30,
                   ),
                   // const SizedBox(width: 10),
                 ],

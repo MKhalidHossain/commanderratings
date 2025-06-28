@@ -49,7 +49,7 @@ class _AuthOutlinedTextFieldWidgetState
             controller: widget.controller,
             keyboardType: widget.textInputType,
             style: TextStyle(color: Colors.black),
-            obscureText: _obscureText,
+            obscureText: widget.isObsecure && !_obscureText,
             decoration: InputDecoration(
               // labelText: isLable && lebel != null ? lebel : null,
 

@@ -32,12 +32,8 @@ Future<void> initDI() async {
 
   //////////// Auth Service, Repository and Controller ////////////////////////////////
 
-  Get.lazyPut(
-    () => ApiClient(appBaseUrl: 'appBaseUrl', sharedPreferences: prefs),
-  );
-  Get.lazyPut(
-    () => AuthRepository(apiClient: Get.find(), sharedPreferences: prefs),
-  );
+  Get.lazyPut(() => ApiClient(appBaseUrl: 'appBaseUrl', sharedPreferences: prefs),);
+  Get.lazyPut(() => AuthRepository(apiClient: Get.find(), sharedPreferences: prefs),);
   AuthRepositoryInterface authRepositoryInterface = AuthRepository(
     apiClient: Get.find(),
     sharedPreferences: prefs,
@@ -49,6 +45,11 @@ Future<void> initDI() async {
   Get.lazyPut(() => AuthService(Get.find()));
 
   //////////// Auth Service, Repository and Controller ////////////////////////////////
+  ///
+  ///
+  ///
+
+  ///  ////////////  Commanders Calls, Repository and Controller ////////////////////////////////
 
   Get.lazyPut(
         () => CommandersCallRepository(Get.find(), prefs),
@@ -67,7 +68,7 @@ Future<void> initDI() async {
 
   Get.lazyPut(() => CommandersCallService(Get.find()));
 
-  ////////////  Commanders Calls, Repository and Controller ////////////////////////////////
+
 
   ////////////  Commanders Calls, Repository and Controller ////////////////////////////////
 
