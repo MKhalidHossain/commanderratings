@@ -20,14 +20,15 @@ void showCustomSnackBar(
       dismissDirection: DismissDirection.horizontal,
       margin: const EdgeInsets.all(10).copyWith(right: 10),
       duration: Duration(seconds: seconds),
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.red,
 
       borderRadius: 10,
       messageText: Row(
         children: [
           const SizedBox(width: 10),
           Expanded(
-            child: SizedBox(
+            child: Container(
+              color: Colors.red,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

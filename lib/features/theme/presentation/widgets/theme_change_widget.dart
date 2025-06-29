@@ -1,4 +1,3 @@
-import 'package:commanderratings/core/utils/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -52,7 +51,8 @@ class _ThemeChangeWidgetState extends State<ThemeChangeWidget> {
                   Text(
                     'LIGHT',
                     style: TextStyle(
-                      color: AppColors.context(context).textColor,
+                      color:
+                          selectedTheme == "Dark" ? Colors.white : Colors.black,
                       fontSize: 18,
                       fontWeight:
                           selectedTheme == "Light"

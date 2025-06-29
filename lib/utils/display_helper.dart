@@ -22,7 +22,7 @@ void showCustomSnackBar(
       duration: Duration(seconds: seconds),
       backgroundColor:
           Get.isDarkMode
-              ? Colors.white
+              ? Colors.grey.shade800
               : Theme.of(Get.context!).textTheme.titleMedium!.color!,
       borderRadius: 10,
       messageText: Row(

@@ -9,11 +9,12 @@ class DAppBarTheme {
   static AppBarTheme lightAppBarTheme = AppBarTheme(
     backgroundColor: AppColors.light().backgroundColor,
     //foregroundColor: AppColors.light().contentBoxColor,
-    surfaceTintColor: AppColors.light().backgroundColor,//AppColors.light().backgroundColor,
+    surfaceTintColor:
+        AppColors.light().backgroundColor, //AppColors.light().backgroundColor,
     systemOverlayStyle: SystemUiOverlayStyle(
       statusBarBrightness: Brightness.light,
       statusBarColor: AppColors.light().backgroundColor,
-      statusBarIconBrightness: Brightness.dark
+      statusBarIconBrightness: Brightness.dark,
     ),
     elevation: 0,
     iconTheme: IconThemeData(color: AppColors.light().iconColor),
@@ -33,7 +34,7 @@ class DAppBarTheme {
     systemOverlayStyle: SystemUiOverlayStyle(
       statusBarBrightness: Brightness.dark,
       statusBarColor: AppColors.dark().contentBoxColor,
-      statusBarIconBrightness: Brightness.light
+      statusBarIconBrightness: Brightness.light,
     ),
     elevation: 0,
     iconTheme: IconThemeData(color: AppColors.dark().iconColor),

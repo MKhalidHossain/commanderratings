@@ -98,6 +98,10 @@ class _SignUpState extends State<SignUp> {
                                 showCustomSnackBar(
                                   'minimum password length is 8'.tr,
                                 );
+                              } else if (name.isEmpty || name.length < 5) {
+                                showCustomSnackBar(
+                                  'Enter a valid name, minimum length is 6'.tr,
+                                );
                               } else {
                                 authController.register(name, email, password);
                               }

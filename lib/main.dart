@@ -14,6 +14,7 @@ void main() async {
   await initDI();
   if (!Get.find<AuthController>().isFirstTimeInstall()) {
     print("object ---------------000000000000-----------------");
+
     Get.find<AuthController>().setFirstTimeInstall();
   } else {
     print("object ---------------11111111111-----------------");
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(() {
       //print(controller.themeMode.value.toString());
+
       return GetMaterialApp(
         //debugShowCheckedModeBanner: false,
         title: 'Military Leadership',

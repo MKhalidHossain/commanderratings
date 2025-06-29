@@ -97,9 +97,13 @@ class AuthController extends GetxController implements GetxService {
     _isLoading = true;
     update();
 
+    print("email $email password $password");
+
     // Response? response = Response();
 
     Response? response = await authServiceInterface.login(email, password);
+    print(" loing response ${response!.body}");
+
     if (response!.statusCode == 200) {
       Map map = response.body;
       String token = '';

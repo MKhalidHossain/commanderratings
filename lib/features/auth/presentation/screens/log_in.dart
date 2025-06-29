@@ -137,6 +137,7 @@ class _LogInState extends State<LogIn> {
                                   'minimum password length is 8',
                                 );
                               } else {
+                              
                                 authController.login(email, password);
                               }
                             },

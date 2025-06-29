@@ -46,14 +46,17 @@ class _AuthOutlinedTextFieldWidgetState
         SizedBox(
           height: 40,
           child: TextField(
+            textAlign: TextAlign.left,
             controller: widget.controller,
             keyboardType: widget.textInputType,
             style: TextStyle(color: Colors.black),
             obscureText: widget.isObsecure && !_obscureText,
+
             decoration: InputDecoration(
               // labelText: isLable && lebel != null ? lebel : null,
 
               //labelText: lebel,
+              contentPadding: EdgeInsets.symmetric(horizontal: 10),
               labelStyle: TextStyle(color: Colors.grey),
               border: OutlineInputBorder(),
               suffixIcon:
