@@ -39,7 +39,7 @@ class CommandersCardWidget extends StatelessWidget {
                         ValueTextAeroMatics(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
-                          text: card.name.toString(),
+                          text: card.name.toString() ?? 'Commander Name',
                         ),
                         ValueTextAeroMatics(
                           fontSize: 18,
@@ -53,18 +53,44 @@ class CommandersCardWidget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         ClipRRect(
-                          borderRadius: BorderRadius.circular(
-                            8,
-                          ), // Adjust radius as needed
-                          child: Image.network(
-                            card.image ?? '',
-                            opacity: const AlwaysStoppedAnimation(.9),
-                            fit: BoxFit.cover,
-                            height: 70,
-                            width: 70,
-                          ),
+                          borderRadius: BorderRadius.circular(8),
+                          child:
+                              (card.image == null || card.image!.isEmpty)
+                                  ? Image.asset(
+                                    'assets/icons/profile_placeholder.png',
+                                    fit: BoxFit.cover,
+                                    height: 70,
+                                    width: 70,
+                                  )
+                                  : Image.network(
+                                    card.image!,
+                                    opacity: const AlwaysStoppedAnimation(0.9),
+                                    fit: BoxFit.cover,
+                                    height: 70,
+                                    width: 70,
+                                    errorBuilder: (context, error, stackTrace) {
+                                      return Image.asset(
+                                        'assets/icons/profile_placeholder.png',
+                                        fit: BoxFit.cover,
+                                        height: 70,
+                                        width: 70,
+                                      );
+                                    },
+                                  ),
                         ),
 
+                        // ClipRRect(
+                        //   borderRadius: BorderRadius.circular(
+                        //     8,
+                        //   ), // Adjust radius as needed
+                        //   child: Image.network(
+                        //     card.image ?? '',
+                        //     opacity: const AlwaysStoppedAnimation(.9),
+                        //     fit: BoxFit.cover,
+                        //     height: 70,
+                        //     width: 70,
+                        //   ),
+                        // ),
                         const SizedBox(height: 8.0),
                       ],
                     ),

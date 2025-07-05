@@ -70,6 +70,7 @@ class _LogInState extends State<LogIn> {
                         children: [
                           const SizedBox(height: 8.0),
                           AuthOutlinedTextFieldWidget(
+                           
                             name: 'Username or Email',
                             //lebel: 'Enter eamil or username',
                             controller: emailContoller,

@@ -46,6 +46,7 @@ class _AuthOutlinedTextFieldWidgetState
         SizedBox(
           height: 40,
           child: TextField(
+            //keyboardType: TextInputType.emailAddress,
             textAlign: TextAlign.left,
             controller: widget.controller,
             keyboardType: widget.textInputType,

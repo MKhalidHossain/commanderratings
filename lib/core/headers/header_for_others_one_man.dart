@@ -2,10 +2,12 @@ import 'package:commanderratings/core/widgets/three_icon_image_for_header.dart';
 import 'package:flutter/material.dart';
 
 class HeaderForOthers extends StatelessWidget {
+  final bool isShowSearch;
   final String text;
   final String? image;
-  const HeaderForOthers({
-    super.key, required this.text, required this.image});
+
+  const HeaderForOthers({super.key,  this.isShowSearch =true, required this.text, this.image});
+
 
   @override
   Widget build(BuildContext context) {
@@ -16,17 +18,17 @@ class HeaderForOthers extends StatelessWidget {
           children: [
             image != null && image!.isNotEmpty
                 ? Image.network(
-              image!,
-              width: double.infinity,
-              height: 300,
-              fit: BoxFit.cover,
-            )
+                  image!,
+                  width: double.infinity,
+                  height: 300,
+                  fit: BoxFit.cover,
+                )
                 : Image.asset(
-              'assets/images/banner/banner_for_others.jpg',
-              width: double.infinity,
-              height: 300,
-              fit: BoxFit.cover,
-            ),
+                  'assets/images/banner/banner_for_others.jpg',
+                  width: double.infinity,
+                  height: 300,
+                  fit: BoxFit.cover,
+                ),
             Positioned(
               top: 125,
               left: 20,
@@ -54,7 +56,7 @@ class HeaderForOthers extends StatelessWidget {
               top: 40,
               left: 20,
               right: 20,
-              child: ThreeIconImageForHeader(),
+              child: ThreeIconImageForHeader(isShowSearch: isShowSearch),
             ),
           ],
         ),

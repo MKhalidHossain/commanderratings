@@ -2,7 +2,9 @@ import 'package:commanderratings/core/utils/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class ThreeIconImageForHeader extends StatelessWidget {
-  const ThreeIconImageForHeader({super.key});
+  final bool isShowSearch;
+
+  const ThreeIconImageForHeader({super.key, this.isShowSearch = true});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +20,9 @@ class ThreeIconImageForHeader extends StatelessWidget {
           },
         ),
         Image.asset('assets/images/headers/star_logo.png', height: 50),
-        Image.asset('assets/images/headers/search_icon.png', height: 30),
+        isShowSearch
+            ? Image.asset('assets/images/headers/search_icon.png', height: 30)
+            : const SizedBox(width: 30),
       ],
     );
   }

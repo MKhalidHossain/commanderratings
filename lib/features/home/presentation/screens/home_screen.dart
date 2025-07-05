@@ -17,20 +17,17 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
-
   @override
   void initState() {
     Get.find<ReviewController>().getAllFeaturedReviews().then((_) {
       final controller = Get.find<ReviewController>();
       if (controller.featuredReviewsResponseModel != null &&
           controller.featuredReviewsResponseModel.data != null &&
-          controller.featuredReviewsResponseModel.data!.topCommanders != null) {
-      }
+          controller.featuredReviewsResponseModel.data!.topCommanders !=
+              null) {}
     });
     super.initState();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -60,25 +57,43 @@ class _HomeScreenState extends State<HomeScreen> {
                   // Map the list of reviews to ReviewCard widgets
                   Container(
                     child: GetBuilder<ReviewController>(
-                        builder: (reviewController){
-                          return !reviewController.isLoading ?
-                          Column(
-                            children: List.generate(reviewController.featuredReviewsResponseModel.data!.topCommanders!.length,
-                                    (index){
-                                  var review = reviewController.featuredReviewsResponseModel.data!.topCommanders![index];
-                                  return  ReviewCard(review: review);
-                                }
-                            ),
-                          ) :
-                          Container(
-                            height: 300,
-                            child: Center(
-                              child: CircularProgressIndicator(),
-                            ),
+                      builder: (reviewController) {
+                        if (reviewController
+                                .featuredReviewsResponseModel
+                                .data! ==
+                            null) {
+                          print('No data found');
+                          return Container(
+                            height: size.height * 0.8,
+                            width: size.width,
+                            child: const Center(child: Text('No Data Found')),
                           );
                         }
+                        return !reviewController.isLoading
+                            ? Column(
+                              children: List.generate(
+                                reviewController
+                                    .featuredReviewsResponseModel
+                                    .data!
+                                    .topCommanders!
+                                    .length,
+                                (index) {
+                                  var review =
+                                      reviewController
+                                          .featuredReviewsResponseModel
+                                          .data!
+                                          .topCommanders![index];
+                                  return ReviewCard(review: review);
+                                },
+                              ),
+                            )
+                            : Container(
+                              height: 300,
+                              child: Center(child: CircularProgressIndicator()),
+                            );
+                      },
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
@@ -91,5 +106,4 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
-
 }

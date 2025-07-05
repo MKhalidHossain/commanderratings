@@ -55,7 +55,10 @@ dev_dependencies:
 flutter_launcher_icons:
   android: true
   ios: true
-  image_path: "assets/images/headers/star_logo.png"
+  
+  image_path: "assets/images/banner/launcher_icon_cr.png"
+  adaptive_icon_background: "#FFFFFF"     # OR a path to background image
+  adaptive_icon_foreground: "assets/images/banner/launcher_icon_cr.png"
 
 
 
@@ -95,6 +98,8 @@ flutter:
     - assets/images/commander/
     - assets/images/onboarding/
     - assets/sp.mp4
+    - assets/images/banner/launcher_icon_cr.png
+
     # - assets/images/blog/image_button/for_dark/
     # - assets/images/blog/image_button/for_light/
 

@@ -52,6 +52,7 @@ class _OutlinedTextFieldWidgetState extends State<OutlinedTextFieldWidget> {
             obscureText: _obscureText,
             decoration: InputDecoration(
               // labelText: isLable && lebel != null ? lebel : null,
+              contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 16),
 
               //labelText: lebel,
               labelStyle: TextStyle(color: Colors.grey),

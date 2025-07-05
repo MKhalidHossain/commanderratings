@@ -54,7 +54,7 @@ class _ContactSectionState extends State<ContactSection> {
       {'icon': Icons.phone, 'text': "0 (800) 555 22 33", 'index': 1},
       {
         'icon': Icons.headset_mic,
-        'text': "admincommanderratings.com",
+        'text': "commanderratings@gmail.com",
         'index': 2,
       },
     ];

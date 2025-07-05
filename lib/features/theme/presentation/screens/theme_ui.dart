@@ -22,7 +22,7 @@ class _ThemeUiState extends State<ThemeUi> {
         child: Column(
           children: [
             const SizedBox(height: 80),
-            const ThreeIconImageForHeader(),
+            const ThreeIconImageForHeader(isShowSearch: false),
             const SizedBox(height: 20),
             ThemeChangeWidget(),
           ],

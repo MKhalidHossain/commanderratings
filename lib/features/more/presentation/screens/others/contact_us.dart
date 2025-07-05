@@ -43,7 +43,11 @@ class _ContactUsState extends State<ContactUs> {
               body: SingleChildScrollView(
                 child: Column(
                   children: [
-                    HeaderForOthers(text: 'Contact Us', image: ''),
+                    HeaderForOthers(
+                      text: 'Contact Us',
+                      image: '',
+                      isShowSearch: false,
+                    ),
                     const SizedBox(height: 24),
                     ContactSection(),
                   ],

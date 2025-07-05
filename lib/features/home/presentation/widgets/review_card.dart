@@ -1,4 +1,3 @@
-
 import 'package:commanderratings/features/commanders/presentations/screens/commanders_details.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -7,12 +6,10 @@ import '../../../../core/ratting_a_to_z/ratting.dart';
 import '../../../../core/utils/constants/app_colors.dart';
 import '../../../review/domain/featured_reviews_response_model.dart';
 
-
 class ReviewCard extends StatelessWidget {
   final TopCommanders review;
 
   const ReviewCard({super.key, required this.review});
-
 
   String timeAgoSinceDate(String dateString) {
     final date = DateTime.parse(dateString).toLocal();
@@ -33,7 +30,6 @@ class ReviewCard extends StatelessWidget {
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -51,8 +47,29 @@ class ReviewCard extends StatelessWidget {
               children: [
                 CircleAvatar(
                   radius: 20,
-                  backgroundImage: NetworkImage(review.image!),
+                  backgroundColor: Colors.grey[100],
+                  child: ClipOval(
+                    child: Image.network(
+                      review.image ?? '',
+                      width: 40,
+                      height: 40,
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) {
+                        return Image.asset(
+                          'assets/icons/profile_placeholder.png',
+                          width: 40,
+                          height: 40,
+                          fit: BoxFit.cover,
+                        );
+                      },
+                    ),
+                  ),
                 ),
+
+                // CircleAvatar(
+                //   radius: 20,
+                //   backgroundImage: NetworkImage(review.image!) ,
+                // ),
                 const SizedBox(width: 10),
                 Expanded(
                   child: Text(
@@ -64,7 +81,12 @@ class ReviewCard extends StatelessWidget {
                     ),
                   ),
                 ),
-                ShowRating(rating: double.tryParse(review.highestRatedReview!.rating.toString())!),
+                ShowRating(
+                  rating:
+                      double.tryParse(
+                        review.highestRatedReview!.rating.toString(),
+                      )!,
+                ),
               ],
             ),
             const SizedBox(height: 8),
