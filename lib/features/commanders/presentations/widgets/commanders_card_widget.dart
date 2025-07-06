@@ -118,7 +118,10 @@ class CommandersCardWidget extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          ShowRating(iconSize: 13, rating: 0.0),
+                          ShowRating(
+                            iconSize: 13,
+                            rating: card.avgRating!.toDouble() ?? 0.0,
+                          ),
                           Row(
                             children: [
                               ValueTextAeroMatics(

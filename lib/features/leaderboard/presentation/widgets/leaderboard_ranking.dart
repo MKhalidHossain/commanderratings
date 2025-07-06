@@ -6,9 +6,7 @@ import '../../../review/domain/get_top_five_reviews_response_model.dart';
 class LeaderboardRanking extends StatefulWidget {
   final GetTopFiveReviewsResponseModel getTopFiveReviewsResponseModel;
 
-
-   LeaderboardRanking({super.key, required this.getTopFiveReviewsResponseModel});
-
+  LeaderboardRanking({super.key, required this.getTopFiveReviewsResponseModel});
 
   @override
   State<LeaderboardRanking> createState() => _LeaderboardContentState();
@@ -25,7 +23,8 @@ class _LeaderboardContentState extends State<LeaderboardRanking> {
         padding: EdgeInsets.all(0),
         physics: const NeverScrollableScrollPhysics(),
 
-        itemCount: widget.getTopFiveReviewsResponseModel.data!.topCommanders!.length,
+        itemCount:
+            widget.getTopFiveReviewsResponseModel.data!.topCommanders!.length,
 
         itemBuilder: (context, index) {
           return Container(
@@ -40,15 +39,23 @@ class _LeaderboardContentState extends State<LeaderboardRanking> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-
-                Text('#${widget.getTopFiveReviewsResponseModel.data!.topCommanders![index].rank!}'),
+                Text(
+                  '#${widget.getTopFiveReviewsResponseModel.data!.topCommanders![index].rank!}' ??
+                      " #Rank",
+                ),
 
                 const SizedBox(height: 8),
 
                 Row(
                   children: [
                     Text(
-                      widget.getTopFiveReviewsResponseModel.data!.topCommanders![index].sumRating!.toStringAsFixed(0)!,
+                      widget
+                              .getTopFiveReviewsResponseModel
+                              .data!
+                              .topCommanders![index]
+                              .sumRating!
+                              .toStringAsFixed(0)! ??
+                          "0",
                       style: const TextStyle(
                         fontFamily: 'aero_matics',
                         fontWeight: FontWeight.bold,
@@ -60,8 +67,12 @@ class _LeaderboardContentState extends State<LeaderboardRanking> {
 
                     Text(
                       //data['name'],
-                       widget.getTopFiveReviewsResponseModel.data!.topCommanders![index].name!
-              ,
+                      widget
+                              .getTopFiveReviewsResponseModel
+                              .data!
+                              .topCommanders![index]
+                              .name! ??
+                          "Commander's Name",
                       style: const TextStyle(
                         fontFamily: 'aero_matics',
                         fontSize: 14,
@@ -74,10 +85,23 @@ class _LeaderboardContentState extends State<LeaderboardRanking> {
 
                 const SizedBox(height: 8),
 
-                Text(widget.getTopFiveReviewsResponseModel.data!.topCommanders![index].serviceBroad!),
+                Text(
+                  widget
+                          .getTopFiveReviewsResponseModel
+                          .data!
+                          .topCommanders![index]
+                          .serviceBroad! ??
+                      "Service Broad",
+                ),
 
-                Text(widget.getTopFiveReviewsResponseModel.data!.topCommanders![index].unit!),
-
+                Text(
+                  widget
+                          .getTopFiveReviewsResponseModel
+                          .data!
+                          .topCommanders![index]
+                          .unit! ??
+                      "Unit",
+                ),
               ],
             ),
           );

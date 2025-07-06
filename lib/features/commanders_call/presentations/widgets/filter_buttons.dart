@@ -59,7 +59,10 @@ class _FilterButtonsState extends State<FilterButtons> {
                   minimumSize: Size(0, 0),
                   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 ),
-                child: Text('Clear all', style: TextStyle(fontSize: 16)),
+                child: Text(
+                  'Clear all',
+                  style: TextStyle(fontSize: 16, color: Colors.red),
+                ),
               ),
             ],
           ),

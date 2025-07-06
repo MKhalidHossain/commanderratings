@@ -74,7 +74,7 @@ class ReviewCard extends StatelessWidget {
                 Expanded(
                   child: Text(
                     maxLines: 1,
-                    review.serviceBroad!,
+                    review.serviceBroad! ?? 'Commander',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: AppColors.context(context).textColor,
@@ -83,9 +83,10 @@ class ReviewCard extends StatelessWidget {
                 ),
                 ShowRating(
                   rating:
-                      double.tryParse(
+                      (double.tryParse(
                         review.highestRatedReview!.rating.toString(),
-                      )!,
+                      )!) ??
+                      0.0,
                 ),
               ],
             ),
@@ -95,7 +96,7 @@ class ReviewCard extends StatelessWidget {
               style: const TextStyle(color: Colors.grey, fontSize: 12),
             ),
             const SizedBox(height: 8),
-            Text(maxLines: 5, review.highestRatedReview!.description!),
+            Text(maxLines: 5, review.highestRatedReview!.description!?? 'Description of blog'),
             const SizedBox(height: 8),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

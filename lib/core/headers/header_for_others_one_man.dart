@@ -40,7 +40,7 @@ class HeaderForOthers extends StatelessWidget {
                     Text(
                       maxLines: 3,
                       textAlign: TextAlign.center,
-                      text,
+                      text ?? 'Blog Title',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 48,
