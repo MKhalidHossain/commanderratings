@@ -221,10 +221,11 @@ class AuthController extends GetxController implements GetxService {
     Response? response = await authServiceInterface.verifyCode(otp, email);
     if (response!.body['status'] == true) {
       showCustomSnackBar('Otp verification has been successful');
-      Get.to(ResetPassword());
+      Get.to(ResetPassword(userEmail: email,));
     } else {
-      showCustomSnackBar('There is a problem in sending OTP');
-      // Get.find<AuthController>().logOut();
+      showCustomSnackBar('Incorrect Otp! Otp verification has been failed');
+       Get.find<AuthController>().logOut();
+
     }
 
     update();
@@ -235,9 +236,9 @@ class AuthController extends GetxController implements GetxService {
     update();
     Response? response = await authServiceInterface.resendOtp(email);
     if (response!.body['status'] == true) {
-      showCustomSnackBar('Otp has been successful to your mail');
+      showCustomSnackBar('Otp has been successful to your email');
 
-      Get.to(OtpScreen());
+      Get.to(OtpScreen(userEmail: email,));
     }
 
     update();

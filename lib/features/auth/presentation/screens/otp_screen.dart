@@ -10,7 +10,9 @@ import '../../domain/model/authentication_model.dart';
 import '../widgets/auth_outlined_text_field_widget.dart';
 
 class OtpScreen extends StatefulWidget {
-  const OtpScreen({super.key});
+  final String userEmail;
+
+  const OtpScreen({super.key, required this.userEmail});
 
   @override
   State<OtpScreen> createState() => _OtpScreenState();
@@ -21,12 +23,12 @@ class _OtpScreenState extends State<OtpScreen> {
 
   bool isRemember = false;
 
-  late TextEditingController emailController;
+  // late TextEditingController emailController;
   late TextEditingController otpController;
 
   @override
   void initState() {
-    emailController = TextEditingController();
+    // emailController = TextEditingController();
     otpController = TextEditingController();
     super.initState();
   }
@@ -58,17 +60,16 @@ class _OtpScreenState extends State<OtpScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const SizedBox(height: 8.0),
+                          // const SizedBox(height: 8.0),
 
-                          AuthOutlinedTextFieldWidget(
-                            name: 'Username or Email',
-                            //lebel: 'Enter eamil or username',
-                            controller: emailController,
+                          // AuthOutlinedTextFieldWidget(
+                          //   name: 'Username or Email',
+                          //   //lebel: 'Enter eamil or username',
+                          //   controller: emailController,
 
-                            textInputType: TextInputType.text,
-                            textFieldHeaderName: 'Email',
-                          ),
-
+                          //   textInputType: TextInputType.text,
+                          //   textFieldHeaderName: 'Email',
+                          // ),
                           const SizedBox(height: 24),
 
                           AuthOutlinedTextFieldWidget(
@@ -84,12 +85,17 @@ class _OtpScreenState extends State<OtpScreen> {
                           WideCustomButton(
                             text: 'Send OTP',
                             onPressed: () {
-                              String email = emailController.text;
+                              // String email = emailController.text;
                               String otp = otpController.text;
-                              if (email.isEmpty) {
-                                showCustomSnackBar('email is required'.tr);
+                              if (otp.isEmpty) {
+                                showCustomSnackBar(
+                                  'An OTP sent to your mail address'.tr,
+                                );
                               } else {
-                                authController.otpVerification(otp, email);
+                                authController.otpVerification(
+                                  otp,
+                                  widget.userEmail,
+                                );
                               }
                             },
                           ),

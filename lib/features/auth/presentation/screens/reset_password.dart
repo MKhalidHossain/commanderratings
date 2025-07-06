@@ -10,7 +10,9 @@ import '../widgets/auth_outlined_text_field_widget.dart';
 import 'sign_up.dart';
 
 class ResetPassword extends StatefulWidget {
-  const ResetPassword({super.key});
+  final String userEmail;
+
+  const ResetPassword({super.key, required this.userEmail});
 
   @override
   State<ResetPassword> createState() => _ResetPasswordState();
@@ -21,12 +23,12 @@ class _ResetPasswordState extends State<ResetPassword> {
 
   bool isRemember = false;
 
-  late TextEditingController emailController;
+  late TextEditingController passwordController;
   late TextEditingController newpasswordController;
 
   @override
   void initState() {
-    emailController = TextEditingController();
+    passwordController = TextEditingController();
     newpasswordController = TextEditingController();
     super.initState();
   }
@@ -59,12 +61,12 @@ class _ResetPasswordState extends State<ResetPassword> {
                       children: [
                         const SizedBox(height: 8.0),
                         AuthOutlinedTextFieldWidget(
-                          name: 'Username or Email',
+                          name: 'Enter new password',
                           //lebel: 'Enter eamil or username',
-                          controller: emailController,
-
+                          controller: passwordController,
+                          isObsecure: true,
                           textInputType: TextInputType.text,
-                          textFieldHeaderName: 'Username or Email',
+                          textFieldHeaderName: 'Enter new password',
                         ),
                         const SizedBox(height: 24),
                         AuthOutlinedTextFieldWidget(
@@ -80,18 +82,26 @@ class _ResetPasswordState extends State<ResetPassword> {
                         WideCustomButton(
                           text: 'SUBMIT',
                           onPressed: () {
-                            String email = emailController.text;
-                            String password = newpasswordController.text;
-                            if (email.isEmpty) {
-                              showCustomSnackBar('email is required'.tr);
-                            } else if (password.isEmpty) {
-                              showCustomSnackBar('password_is_required'.tr);
-                            } else if (password.length < 5) {
+                            String pass = passwordController.text;
+                            String newPass = newpasswordController.text;
+                            if (pass.isEmpty) {
+                              showCustomSnackBar('Entur new password'.tr);
+                            } else if (newPass.isEmpty) {
+                              showCustomSnackBar('Enter password'.tr);
+                            } else if (pass.length < 5) {
                               showCustomSnackBar(
-                                'minimum password length is 8',
+                                'minimum password length is 6'.tr,
+                              );
+                            } else if (pass != newPass) {
+                              showCustomSnackBar(
+                                'password does not match , Please give same password'
+                                    .tr,
                               );
                             } else {
-                              authController.resetPassword(email, password);
+                              authController.resetPassword(
+                                widget.userEmail,
+                                pass,
+                              );
                             }
                           },
                         ),
