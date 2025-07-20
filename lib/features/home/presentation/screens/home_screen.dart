@@ -101,6 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
             const AnonymousReviewsBanner(),
             // const SizedBox(height: 10),
             const QrCodeDonation(),
+            SizedBox(height: size.height * 0.15),
           ],
         ),
       ),

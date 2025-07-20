@@ -125,7 +125,6 @@ class _QrCodeDonationState extends State<QrCodeDonation> {
                 // },
                 //
                 // ),
-                const SizedBox(height: 70),
               ],
             ),
           ),

@@ -15,7 +15,6 @@ class LeaderboardScreen extends StatefulWidget {
 }
 
 class _LeaderboardScreenState extends State<LeaderboardScreen> {
-
   late GetTopFiveReviewsResponseModel getTopFiveReviewsResponseModel;
 
   @override
@@ -24,53 +23,57 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
       final controller = Get.find<ReviewController>();
       if (controller.getTopFiveReviewsResponseModel != null &&
           controller.getTopFiveReviewsResponseModel.data != null &&
-          controller.getTopFiveReviewsResponseModel.data!.topCommanders != null) {
-
-      }
+          controller.getTopFiveReviewsResponseModel.data!.topCommanders !=
+              null) {}
     });
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return GetBuilder<ReviewController>(
-        builder: (reviewController){
-          return !reviewController.isLoading ? Scaffold(
-            body: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const SizedBox(height: 60),
-                  TitleWithIconPrefix(
-                    color: AppColors.context(context).textColor,
-                    text: 'Leaderboard',
-                  ),
-                  const SizedBox(height: 16),
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: AppColors.context(context).contentBoxColor,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Column(
-                        children: [
-                          TitleLeaderboardWithBorder(),
-                          const SizedBox(height: 16),
-                          LeaderboardRanking(getTopFiveReviewsResponseModel: reviewController.getTopFiveReviewsResponseModel),
-                        ],
+      builder: (reviewController) {
+        return !reviewController.isLoading
+            ? Scaffold(
+              body: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const SizedBox(height: 60),
+                    TitleWithIconPrefix(
+                      color: AppColors.context(context).textColor,
+                      text: 'Leaderboard',
+                    ),
+                    const SizedBox(height: 16),
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Container(
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: AppColors.context(context).contentBoxColor,
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Column(
+                          children: [
+                            TitleLeaderboardWithBorder(),
+                            const SizedBox(height: 16),
+                            LeaderboardRanking(
+                              getTopFiveReviewsResponseModel:
+                                  reviewController
+                                      .getTopFiveReviewsResponseModel,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                    SizedBox(height: size.height * 0.15),
+                  ],
+                ),
               ),
-            ),
-          ) :
-          Center(
-            child: CircularProgressIndicator(),
-          );
-        }
+            )
+            : Center(child: CircularProgressIndicator());
+      },
     );
   }
 }
