@@ -37,37 +37,82 @@ class _QrCodeDonationState extends State<QrCodeDonation> {
                   height: 200,
                 ),
                 const SizedBox(height: 16),
+
                 NormalCustomButton(
                   text: 'Buy Me A Coffee',
                   onPressed: () async {
-                    final url = Uri.parse(
+                    final Uri url = Uri.parse(
                       "https://www.buymeacoffee.com/commanderratings",
                     );
-                    final canLaunch = await canLaunchUrl(url);
-                    print("Can launch URL? $canLaunch");
 
-                    if (!canLaunch) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Device cannot launch browser.'),
-                        ),
+                    try {
+                      final canLaunch = await canLaunchUrl(url);
+                      debugPrint("Can launch URL? $canLaunch");
+
+                      if (!canLaunch) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Device cannot launch browser.'),
+                          ),
+                        );
+                        return;
+                      }
+
+                      final launched = await launchUrl(
+                        url,
+                        mode: LaunchMode.externalApplication,
                       );
-                      return;
-                    }
-
-                    final launched = await launchUrl(
-                      url,
-                      mode: LaunchMode.externalApplication,
-                    );
-                    if (!launched) {
+                      if (!launched) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Could not open the donation link.'),
+                          ),
+                        );
+                      }
+                    } catch (e) {
+                      debugPrint("Launch error: $e");
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
-                          content: Text('Could not open the donation link.'),
+                          content: Text(
+                            'An error occurred while opening the link.',
+                          ),
                         ),
                       );
                     }
                   },
                 ),
+
+                // NormalCustomButton(
+                //   text: 'Buy Me A Coffee',
+                //   onPressed: () async {
+                //     final url = Uri.parse(
+                //       "https://www.buymeacoffee.com/commanderratings",
+                //     );
+                //     final canLaunch = await canLaunchUrl(url);
+                //     print("Can launch URL? $canLaunch");
+
+                //     if (!canLaunch) {
+                //       ScaffoldMessenger.of(context).showSnackBar(
+                //         const SnackBar(
+                //           content: Text('Device cannot launch browser.'),
+                //         ),
+                //       );
+                //       return;
+                //     }
+
+                //     final launched = await launchUrl(
+                //       url,
+                //       mode: LaunchMode.externalApplication,
+                //     );
+                //     if (!launched) {
+                //       ScaffoldMessenger.of(context).showSnackBar(
+                //         const SnackBar(
+                //           content: Text('Could not open the donation link.'),
+                //         ),
+                //       );
+                //     }
+                //   },
+                // ),
 
                 // NormalCustomButton(text: 'Buy Me A Coffee', onPressed: () async{
                 //   final url = Uri.parse("https://buymeacoffee.com/commanderratings");
@@ -80,6 +125,7 @@ class _QrCodeDonationState extends State<QrCodeDonation> {
                 // },
                 //
                 // ),
+                const SizedBox(height: 70),
               ],
             ),
           ),

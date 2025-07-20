@@ -9,6 +9,7 @@ class OutlinedTextFieldWidget extends StatefulWidget {
   final TextInputType textInputType;
   final String textFieldHeaderName;
   final bool isObsecure;
+ 
 
   const OutlinedTextFieldWidget({
     super.key,
@@ -19,6 +20,7 @@ class OutlinedTextFieldWidget extends StatefulWidget {
     required this.textInputType,
     required this.textFieldHeaderName,
     this.isObsecure = false,
+    
   });
 
   @override
@@ -50,6 +52,7 @@ class _OutlinedTextFieldWidgetState extends State<OutlinedTextFieldWidget> {
             keyboardType: widget.textInputType,
             style: TextStyle(color: AppColors.context(context).textColor),
             obscureText: _obscureText,
+
             decoration: InputDecoration(
               // labelText: isLable && lebel != null ? lebel : null,
               contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 16),
@@ -57,6 +60,7 @@ class _OutlinedTextFieldWidgetState extends State<OutlinedTextFieldWidget> {
               //labelText: lebel,
               labelStyle: TextStyle(color: Colors.grey),
               border: OutlineInputBorder(),
+
               suffixIcon:
                   widget.isObsecure
                       ? IconButton(

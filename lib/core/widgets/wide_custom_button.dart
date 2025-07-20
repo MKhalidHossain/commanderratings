@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class WideCustomButton extends StatelessWidget {
   final String text;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final bool showIcon;
   final IconData? sufixIcon;
   final double ?height;

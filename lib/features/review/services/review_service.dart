@@ -9,27 +9,27 @@ class ReviewService implements ReviewServiceInterface{
   ReviewService(this.reviewRepositoryInterface);
 
   @override
-  Future<Response> createReviews(String commanderId, double rating, String title, String description) {
+  Future<Response> createReviews(String commanderId, double rating, String title, String description) async{
 
-    return reviewRepositoryInterface.createReviews(commanderId, rating, title, description);
+    return await reviewRepositoryInterface.createReviews(commanderId, rating, title, description);
   }
 
   @override
-  Future<Response> getAllReviews() {
+  Future<Response> getAllReviews() async{
     // TODO: implement getAllReviews
-    return reviewRepositoryInterface.getAllReviews();
+    return await reviewRepositoryInterface.getAllReviews();
   }
 
   @override
-  Future<Response> getTopFiveReviews() {
+  Future<Response> getTopFiveReviews()async {
     // TODO: implement getTopFiveReviews
-    return reviewRepositoryInterface.getTopFiveReviews();
+    return await reviewRepositoryInterface.getTopFiveReviews();
   }
 
   @override
-  Future<Response> getFeaturedFiveReviews() {
+  Future<Response> getFeaturedFiveReviews() async{
     // TODO: implement getFeaturedFiveReviews
-    return reviewRepositoryInterface.getFeaturedFiveReviews();
+    return await reviewRepositoryInterface.getFeaturedFiveReviews();
   }
 
 

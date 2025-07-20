@@ -1,3 +1,4 @@
+import 'package:commanderratings/core/utils/constants/app_colors.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -20,7 +21,7 @@ void showCustomSnackBar(
       dismissDirection: DismissDirection.horizontal,
       margin: const EdgeInsets.all(10).copyWith(right: 10),
       duration: Duration(seconds: seconds),
-      backgroundColor: Colors.red,
+      backgroundColor: Colors.black12,
 
       borderRadius: 10,
       messageText: Row(
@@ -28,7 +29,7 @@ void showCustomSnackBar(
           const SizedBox(width: 10),
           Expanded(
             child: Container(
-              color: Colors.red,
+              color: Colors.grey.shade200,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

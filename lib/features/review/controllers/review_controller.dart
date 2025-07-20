@@ -7,9 +7,7 @@ import 'package:get/get.dart';
 import '../../../helpers/custom_snackbar.dart';
 import '../domain/get_top_five_reviews_response_model.dart';
 
-
 class ReviewController extends GetxController implements GetxService {
-
   final ReviewServiceInterface reviewServiceInterface;
 
   ReviewController(this.reviewServiceInterface);
@@ -31,20 +29,16 @@ class ReviewController extends GetxController implements GetxService {
 
       var response = await reviewServiceInterface.getAllReviews();
       if (response.statusCode == 200) {
-
         print('All Commander Call are fetched successfully.');
         print("HTTP Status: ${response.statusCode}");
         print("Raw Response: ${response.body}");
 
         getAllReviewsResponseModel = GetAllReviewsResponseModel.fromJson(
-           jsonDecode( response.body)
+          jsonDecode(response.body),
         );
 
         print('Call from Controller Reviews after model calls.');
-
-      } else {
-
-      }
+      } else {}
     } catch (e) {
       if (e is Exception) {
         // print('⚠️ Exception in getAllCommanders: $e dddddddddddd');
@@ -63,18 +57,17 @@ class ReviewController extends GetxController implements GetxService {
 
       var response = await reviewServiceInterface.getTopFiveReviews();
       if (response.statusCode == 200) {
-
         print('All Commander Call are fetched successfully.');
         print("HTTP Status: ${response.statusCode}");
         print("Raw Response: ${response.body}");
 
-        getTopFiveReviewsResponseModel = GetTopFiveReviewsResponseModel.fromJson(
-            // jsonDecode( response.body)
-           response.body
-        );
+        getTopFiveReviewsResponseModel =
+            GetTopFiveReviewsResponseModel.fromJson(
+              // jsonDecode( response.body)
+              response.body,
+            );
 
         print('Call from Controller Top Five Reviews after model calls.');
-
       } else {
         // Get.find<AuthController>().logOut();
         // print(response.statusCode.toString());
@@ -98,17 +91,15 @@ class ReviewController extends GetxController implements GetxService {
 
       var response = await reviewServiceInterface.getFeaturedFiveReviews();
       if (response.statusCode == 200) {
-
         print('All Commander Call are fetched successfully.');
         print("HTTP Status: ${response.statusCode}");
         print("Raw Response: ${response.body}");
 
         featuredReviewsResponseModel = FeaturedReviewsResponseModel.fromJson(
-            response.body
+          response.body,
         );
 
         print('Call from Controller Reviews after model calls.');
-
       } else {
         // Get.find<AuthController>().logOut();
         // print(response.statusCode.toString());
@@ -125,23 +116,34 @@ class ReviewController extends GetxController implements GetxService {
     update();
   }
 
-  Future<void> createReview(String commanderId, double rating, String title, String description)async {
+  Future<void> createReview(
+    String commanderId,
+    double rating,
+    String title,
+    String description,
+  ) async {
     isLoading = true;
-    var response = await reviewServiceInterface.createReviews(commanderId, rating, title, description);
+    var response = await reviewServiceInterface.createReviews(
+      commanderId,
+      rating,
+      title,
+      description,
+    );
 
     if (response.statusCode == 201) {
+      createReviewsResponseModel = CreateReviewsResponseModel.fromJson(
+        response.body,
+      );
 
-      createReviewsResponseModel = CreateReviewsResponseModel.fromJson(response.body);
+      showCustomSnackBar('Your review has been added successfully');
 
-      showCustomSnackBar('Your comment has been add for this post Successfully');
-
-      showCustomSnackBar(createReviewsResponseModel.data!.description.toString());
-    }
-    else {
-
+      showCustomSnackBar(
+        createReviewsResponseModel.data!.description.toString(),
+      );
+    } else {
+      showCustomSnackBar('Your review Unsuccessfully');
     }
     isLoading = false;
     update();
   }
-
 }

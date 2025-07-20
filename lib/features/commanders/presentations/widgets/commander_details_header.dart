@@ -13,14 +13,36 @@ class CommanderDetailsHeader extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
       child: Column(
         children: [
-
           ClipRRect(
             borderRadius: BorderRadius.circular(10),
-            child: Image.network(commanderImage, opacity: const AlwaysStoppedAnimation(.9),
-              fit: BoxFit.cover,
-              height: 300,),
+            child:
+                commanderImage != null && commanderImage.isNotEmpty
+                    ? Image.network(
+                      commanderImage,
+                      fit: BoxFit.cover,
+                      height: 300,
+                      opacity: const AlwaysStoppedAnimation(0.9),
+                      errorBuilder: (context, error, stackTrace) {
+                        return Image.asset(
+                          'assets/icons/profile_placeholder.png',
+                          fit: BoxFit.cover,
+                          height: 300,
+                        );
+                      },
+                    )
+                    : Image.asset(
+                      'assets/icons/profile_placeholder.png',
+                      fit: BoxFit.cover,
+                      height: 300,
+                    ),
           ),
 
+          // ClipRRect(
+          //   borderRadius: BorderRadius.circular(10),
+          //   child: Image.network(commanderImage, opacity: const AlwaysStoppedAnimation(.9),
+          //     fit: BoxFit.cover,
+          //     height: 300,),
+          // ),
           const SizedBox(height: 12.0),
 
           Row(
@@ -42,7 +64,6 @@ class CommanderDetailsHeader extends StatelessWidget {
               ),
             ],
           ),
-
         ],
       ),
     );

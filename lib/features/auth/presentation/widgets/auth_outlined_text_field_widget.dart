@@ -27,8 +27,9 @@ class AuthOutlinedTextFieldWidget extends StatefulWidget {
 
 class _AuthOutlinedTextFieldWidgetState
     extends State<AuthOutlinedTextFieldWidget> {
-  @override
   bool _obscureText = false;
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -44,14 +45,14 @@ class _AuthOutlinedTextFieldWidgetState
         ),
         SizedBox(height: 7),
         SizedBox(
-          height: 40,
+          height: 50,
           child: TextField(
             //keyboardType: TextInputType.emailAddress,
             textAlign: TextAlign.left,
             controller: widget.controller,
             keyboardType: widget.textInputType,
             style: TextStyle(color: Colors.black),
-            obscureText: widget.isObsecure && !_obscureText,
+            obscureText: widget.isObsecure ? !_obscureText : false,
 
             decoration: InputDecoration(
               // labelText: isLable && lebel != null ? lebel : null,
@@ -67,6 +68,7 @@ class _AuthOutlinedTextFieldWidgetState
                           _obscureText
                               ? Icons.visibility
                               : Icons.visibility_off,
+                          color: Colors.grey.shade600,
                         ),
                         onPressed: () {
                           setState(() {

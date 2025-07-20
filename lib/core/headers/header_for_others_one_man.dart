@@ -6,14 +6,19 @@ class HeaderForOthers extends StatelessWidget {
   final String text;
   final String? image;
 
-  const HeaderForOthers({super.key,  this.isShowSearch =true, required this.text, this.image});
-
+  const HeaderForOthers({
+    super.key,
+    this.isShowSearch = true,
+    required this.text,
+    this.image,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         const SizedBox(height: 55),
+
         Stack(
           children: [
             image != null && image!.isNotEmpty
@@ -22,6 +27,14 @@ class HeaderForOthers extends StatelessWidget {
                   width: double.infinity,
                   height: 300,
                   fit: BoxFit.cover,
+                  opacity: const AlwaysStoppedAnimation(0.9),
+                  errorBuilder: (context, error, stackTrace) {
+                    return Image.asset(
+                      'assets/icons/profile_placeholder.png',
+                      fit: BoxFit.cover,
+                      height: 300,
+                    );
+                  },
                 )
                 : Image.asset(
                   'assets/images/banner/banner_for_others.jpg',

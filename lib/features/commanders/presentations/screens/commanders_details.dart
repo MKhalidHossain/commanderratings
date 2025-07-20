@@ -1,3 +1,4 @@
+import 'package:commanderratings/core/widgets/title_subtitle_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -23,11 +24,11 @@ class CommandersDetails extends StatefulWidget {
 
 class _CommandersDetailsState extends State<CommandersDetails> {
   late SingleCommandersResponseModel commandersResponseModel;
-  
+
   // Search functionality variables
   String searchQuery = ''; // Store search text
   List<Reviews> filteredReviews = []; // Store filtered reviews
-  
+
   @override
   void initState() {
     Get.find<CommandersController>().getACommander(widget.commandersId).then((
@@ -46,7 +47,7 @@ class _CommandersDetailsState extends State<CommandersDetails> {
     });
     super.initState();
   }
-  
+
   // Method to filter reviews based on search query
   void _filterReviews(String query) {
     setState(() {
@@ -56,13 +57,16 @@ class _CommandersDetailsState extends State<CommandersDetails> {
         filteredReviews = commandersResponseModel.data!.reviews ?? [];
       } else {
         // Filter reviews that contain the search query (case insensitive)
-        filteredReviews = commandersResponseModel.data!.reviews!
-            .where((review) => 
-                review.description != null &&
-                review.description!
-                    .toLowerCase()
-                    .contains(query.toLowerCase()))
-            .toList();
+        filteredReviews =
+            commandersResponseModel.data!.reviews!
+                .where(
+                  (review) =>
+                      review.description != null &&
+                      review.description!.toLowerCase().contains(
+                        query.toLowerCase(),
+                      ),
+                )
+                .toList();
       }
     });
   }
@@ -319,14 +323,16 @@ class _CommandersDetailsState extends State<CommandersDetails> {
                                       children: [
                                         // Updated SearchAndRecentWidget with callback
                                         SearchAndRecentWidget(
-                                          commanderId: commandersResponseModel
-                                              .data!
-                                              .commander!
-                                              .sId!,
-                                          onSearchChanged: _filterReviews, // Pass the callback
+                                          commanderId:
+                                              commandersResponseModel
+                                                  .data!
+                                                  .commander!
+                                                  .sId!,
+                                          onSearchChanged:
+                                              _filterReviews, // Pass the callback
                                         ),
                                         const SizedBox(height: 24.0),
-                                        
+
                                         // Leave a Review button
                                         OutlinedButton(
                                           style: OutlinedButton.styleFrom(
@@ -347,18 +353,40 @@ class _CommandersDetailsState extends State<CommandersDetails> {
                                           onPressed: () {
                                             showModalBottomSheet(
                                               context: context,
-                                              builder: (BuildContext contex) {
-                                                return LeaveAReview(
-                                                  commanderId:
-                                                      commandersResponseModel
-                                                          .data!
-                                                          .commander!
-                                                          .sId!,
+                                              isScrollControlled: true,
+                                              backgroundColor:
+                                                  Colors.transparent,
+                                              builder: (BuildContext context) {
+                                                final bottomInset =
+                                                    MediaQuery.of(
+                                                      context,
+                                                    ).viewInsets.bottom;
+
+                                                return AnimatedPadding(
+                                                  duration: const Duration(
+                                                    milliseconds: 150,
+                                                  ),
+                                                  padding: EdgeInsets.only(
+                                                    bottom: bottomInset,
+                                                  ),
+                                                  child: FractionallySizedBox(
+                                                    heightFactor:
+                                                        bottomInset > 0
+                                                            ? 0.85
+                                                            : 0.60, // full if keyboard, smaller if not
+                                                    child: LeaveAReview(
+                                                      commanderId:
+                                                          commandersResponseModel
+                                                              .data!
+                                                              .commander!
+                                                              .sId!,
+                                                    ),
+                                                  ),
                                                 );
                                               },
                                             );
                                           },
-                                          child: Text(
+                                          child: const Text(
                                             'Leave a Review',
                                             style: TextStyle(
                                               fontSize: 16,
@@ -366,16 +394,58 @@ class _CommandersDetailsState extends State<CommandersDetails> {
                                             ),
                                           ),
                                         ),
+
+                                        // OutlinedButton(
+                                        //   style: OutlinedButton.styleFrom(
+                                        //     alignment: Alignment.center,
+                                        //     side: const BorderSide(
+                                        //       color: Colors.red,
+                                        //       width: 1,
+                                        //     ),
+                                        //     shape: RoundedRectangleBorder(
+                                        //       borderRadius:
+                                        //           BorderRadius.circular(8),
+                                        //     ),
+                                        //     padding: const EdgeInsets.symmetric(
+                                        //       horizontal: 20,
+                                        //       vertical: 8,
+                                        //     ),
+                                        //   ),
+                                        //   onPressed: () {
+                                        //     showModalBottomSheet(
+                                        //       isScrollControlled: true,
+                                        //       context: context,
+                                        //       builder: (BuildContext contex) {
+                                        //         return LeaveAReview(
+                                        //           commanderId:
+                                        //               commandersResponseModel
+                                        //                   .data!
+                                        //                   .commander!
+                                        //                   .sId!,
+                                        //         );
+                                        //       },
+                                        //     );
+                                        //   },
+                                        //   child: Text(
+                                        //     'Leave a Review',
+                                        //     style: TextStyle(
+                                        //       fontSize: 16,
+                                        //       color: Colors.red,
+                                        //     ),
+                                        //   ),
+                                        // ),
                                         const SizedBox(height: 32.0),
-                                        
+
                                         // Show search results info
                                         Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
                                             LabelText(
-                                              text: searchQuery.isEmpty 
-                                                  ? 'User Rating (${commandersResponseModel.data!.totalReviews.toString()})'
-                                                  : 'Search Results (${filteredReviews.length})',
+                                              text:
+                                                  searchQuery.isEmpty
+                                                      ? 'User Rating (${commandersResponseModel.data!.totalReviews.toString()})'
+                                                      : 'Search Results (${filteredReviews.length})',
                                             ),
                                             if (searchQuery.isNotEmpty)
                                               Text(
@@ -390,71 +460,101 @@ class _CommandersDetailsState extends State<CommandersDetails> {
                                         ),
                                         const SizedBox(height: 8.0),
                                         ValueTextAeroMatics(text: 'Overall '),
-                                        
+
                                         // Show filtered reviews or no results message
-                                        filteredReviews.isEmpty && searchQuery.isNotEmpty
+                                        filteredReviews.isEmpty &&
+                                                searchQuery.isNotEmpty
                                             ? Padding(
-                                                padding: const EdgeInsets.all(32.0),
-                                                child: Center(
-                                                  child: Column(
-                                                    children: [
-                                                      Icon(
-                                                        Icons.search_off,
-                                                        size: 48,
-                                                        color: Colors.grey[400],
+                                              padding: const EdgeInsets.all(
+                                                32.0,
+                                              ),
+                                              child: Center(
+                                                child: Column(
+                                                  // mainAxisAlignment:
+                                                  //     MainAxisAlignment.start,
+                                                  children: [
+                                                    Icon(
+                                                      Icons.search_off,
+                                                      size: 48,
+                                                      color: Colors.grey[400],
+                                                    ),
+                                                    const SizedBox(height: 16),
+                                                    Text(
+                                                      'No reviews found matching "$searchQuery"',
+                                                      style: TextStyle(
+                                                        fontSize: 16,
+                                                        color: Colors.grey[600],
                                                       ),
-                                                      const SizedBox(height: 16),
-                                                      Text(
-                                                        'No reviews found matching "$searchQuery"',
-                                                        style: TextStyle(
-                                                          fontSize: 16,
-                                                          color: Colors.grey[600],
-                                                        ),
-                                                        textAlign: TextAlign.center,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              )
-                                            : Column(
-                                                children: List.generate(
-                                                  filteredReviews.length,
-                                                  (index) {
-                                                    return Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment.start,
-                                                      children: [
-                                                        const SizedBox(height: 32.0),
-                                                        ShowRating(
-                                                          rating:
-                                                              double.tryParse(
-                                                                filteredReviews[index]
-                                                                    .rating
-                                                                    .toString(),
-                                                              ) ??
-                                                              0.0,
-                                                        ),
-                                                        const SizedBox(height: 8),
-                                                        ValueTextAeroMatics(
-                                                          text:
-                                                              filteredReviews[index]
-                                                                  .rating
-                                                                  .toString() ??
-                                                              '0.0',
-                                                        ),
-                                                        const SizedBox(height: 8.0),
-                                                        ValueTextAeroMatics(
-                                                          text:
-                                                              filteredReviews[index]
-                                                                  .description
-                                                                  .toString(),
-                                                        ),
-                                                        const SizedBox(height: 32.0),
-                                                      ],
-                                                    );
-                                                  },
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                    ),
+                                                  ],
                                                 ),
                                               ),
+                                            )
+                                            : Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: List.generate(
+                                                filteredReviews.length,
+                                                (index) {
+                                                  return Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      const SizedBox(
+                                                        height: 32.0,
+                                                      ),
+                                                      ShowRating(
+                                                        rating:
+                                                            double.tryParse(
+                                                              filteredReviews[index]
+                                                                  .rating
+                                                                  .toString(),
+                                                            ) ??
+                                                            0.0,
+                                                      ),
+                                                      const SizedBox(height: 8),
+                                                      ValueTextAeroMatics(
+                                                        text:
+                                                            filteredReviews[index]
+                                                                .rating
+                                                                .toString() ??
+                                                            '0.0',
+                                                      ),
+                                                      const SizedBox(
+                                                        height: 8.0,
+                                                      ),
+                                                      Text(
+                                                        maxLines: 3,
+                                                        filteredReviews[index]
+                                                            .description
+                                                            .toString(),
+                                                        style: TextStyle(
+                                                          fontSize: 18,
+                                                          color: Colors.black,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                        ),
+                                                      ),
+                                                      const SizedBox(
+                                                        height: 8.0,
+                                                      ),
+                                                      ValueTextAeroMatics(
+                                                        text:
+                                                            filteredReviews[index]
+                                                                .description
+                                                                .toString(),
+                                                      ),
+                                                      const SizedBox(
+                                                        height: 32.0,
+                                                      ),
+                                                    ],
+                                                  );
+                                                },
+                                              ),
+                                            ),
                                       ],
                                     ),
                                   ),

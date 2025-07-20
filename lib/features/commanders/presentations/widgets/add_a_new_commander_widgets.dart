@@ -145,7 +145,7 @@ class _AddANewCommanderWidgetsState extends State<AddANewCommanderWidgets> {
                               name: 'Year of Service',
                               controller: yearsOfServiceController,
                               // lebel: 'Year of Service',
-                              textInputType: TextInputType.text,
+                              textInputType: TextInputType.number,
                             ),
                             const SizedBox(height: 20),
                             //...........................For Service Branch..............................
@@ -333,144 +333,212 @@ class _AddANewCommanderWidgetsState extends State<AddANewCommanderWidgets> {
                             WideCustomButton(
                               text: 'Submit Commander',
                               onPressed: () {
-                                String name = nameController.text;
+                                String name = nameController.text.trim();
                                 String yearOfService =
-                                    yearsOfServiceController.text;
-                                String serviceBranch = selectServiceBranch!;
-                                String unit = selectUnit!;
-                                String base = selectBase!;
-                                String rank = selectRank!;
+                                    yearsOfServiceController.text.trim();
+                                String? serviceBranch = selectServiceBranch;
+                                String? unit = selectUnit;
+                                String? base = selectBase;
+                                String? rank = selectRank;
+
+                                String? validationMessage;
+
                                 if (name.isEmpty) {
-                                  showDialog(
-                                    context: context,
-                                    builder: (context) {
-                                      return AlertDialog(
-                                        title: Text('Opps ! '),
-                                        content: Text(
-                                          'Please Fill the required Commander Name',
-                                        ),
-                                        actions: [
-                                          TextButton(
-                                            child: Text('OK'),
-                                            onPressed: () {
-                                              Navigator.of(context).pop();
-                                            },
-                                          ),
-                                        ],
-                                      );
-                                    },
-                                  );
+                                  validationMessage =
+                                      'Please fill the required Commander Name';
                                 } else if (yearOfService.isEmpty) {
-                                  showDialog(
-                                    context: context,
-                                    builder: (context) {
-                                      return AlertDialog(
-                                        title: Text('Opps ! '),
-                                        content: Text(
-                                          'Please Fill the Year of Service ',
-                                        ),
-                                        actions: [
-                                          TextButton(
-                                            child: Text('OK'),
-                                            onPressed: () {
-                                              Navigator.of(context).pop();
-                                            },
-                                          ),
-                                        ],
-                                      );
-                                    },
-                                  );
-                                } else if (serviceBranch.isEmpty) {
-                                  showDialog(
-                                    context: context,
-                                    builder: (context) {
-                                      return AlertDialog(
-                                        title: Text('Opps ! '),
-                                        content: Text(
-                                          'Please Fill the required Service Branch ',
-                                        ),
-                                        actions: [
-                                          TextButton(
-                                            child: Text('OK'),
-                                            onPressed: () {
-                                              Navigator.of(context).pop();
-                                            },
-                                          ),
-                                        ],
-                                      );
-                                    },
-                                  );
-                                } else if (unit.isEmpty) {
-                                  showDialog(
-                                    context: context,
-                                    builder: (context) {
-                                      return AlertDialog(
-                                        title: Text('Opps ! '),
-                                        content: Text(
-                                          'Please Fill the required Unit',
-                                        ),
-                                        actions: [
-                                          TextButton(
-                                            child: Text('OK'),
-                                            onPressed: () {
-                                              Navigator.of(context).pop();
-                                            },
-                                          ),
-                                        ],
-                                      );
-                                    },
-                                  );
-                                } else if (base.isEmpty) {
-                                  showDialog(
-                                    context: context,
-                                    builder: (context) {
-                                      return AlertDialog(
-                                        title: Text('Opps ! '),
-                                        content: Text(
-                                          'Please Fill the required base',
-                                        ),
-                                        actions: [
-                                          TextButton(
-                                            child: Text('OK'),
-                                            onPressed: () {
-                                              Navigator.of(context).pop();
-                                            },
-                                          ),
-                                        ],
-                                      );
-                                    },
-                                  );
-                                } else if (rank.isEmpty) {
-                                  showDialog(
-                                    context: context,
-                                    builder: (context) {
-                                      return AlertDialog(
-                                        title: Text('Opps ! '),
-                                        content: Text(
-                                          'Please Fill the required rank',
-                                        ),
-                                        actions: [
-                                          TextButton(
-                                            child: Text('OK'),
-                                            onPressed: () {
-                                              Navigator.of(context).pop();
-                                            },
-                                          ),
-                                        ],
-                                      );
-                                    },
-                                  );
+                                  validationMessage =
+                                      'Please fill the Year of Service';
+                                } else if (serviceBranch == null ||
+                                    serviceBranch.isEmpty) {
+                                  validationMessage =
+                                      'Please fill the required Service Branch';
+                                } else if (unit == null || unit.isEmpty) {
+                                  validationMessage =
+                                      'Please fill the required Unit';
+                                } else if (base == null || base.isEmpty) {
+                                  validationMessage =
+                                      'Please fill the required Base';
+                                } else if (rank == null || rank.isEmpty) {
+                                  validationMessage =
+                                      'Please fill the required Rank';
                                 }
+
+                                if (validationMessage != null) {
+                                  showDialog(
+                                    context: context,
+                                    builder:
+                                        (context) => AlertDialog(
+                                          title: const Text('Oops!'),
+                                          content: Text(validationMessage!),
+                                          actions: [
+                                            TextButton(
+                                              child: const Text('OK'),
+                                              onPressed:
+                                                  () =>
+                                                      Navigator.of(
+                                                        context,
+                                                      ).pop(),
+                                            ),
+                                          ],
+                                        ),
+                                  );
+                                  return; // Stop execution
+                                }
+
+                                // All validations passed
                                 commandersController.createCommander(
                                   name,
                                   yearOfService,
-                                  serviceBranch,
-                                  unit,
-                                  base,
-                                  rank,
+                                  serviceBranch!,
+                                  unit!,
+                                  base!,
+                                  rank!,
                                 );
                               },
                             ),
+
+                            // WideCustomButton(
+                            //   text: 'Submit Commander',
+                            //   onPressed: () {
+                            //     String name = nameController.text;
+                            //     String yearOfService =
+                            //         yearsOfServiceController.text;
+                            //     String serviceBranch = selectServiceBranch!;
+                            //     String unit = selectUnit!;
+                            //     String base = selectBase!;
+                            //     String rank = selectRank!;
+                            //     if (name.isEmpty) {
+                            //       showDialog(
+                            //         context: context,
+                            //         builder: (context) {
+                            //           return AlertDialog(
+                            //             title: Text('Opps ! '),
+                            //             content: Text(
+                            //               'Please Fill the required Commander Name',
+                            //             ),
+                            //             actions: [
+                            //               TextButton(
+                            //                 child: Text('OK'),
+                            //                 onPressed: () {
+                            //                   Navigator.of(context).pop();
+                            //                 },
+                            //               ),
+                            //             ],
+                            //           );
+                            //         },
+                            //       );
+                            //     } else if (yearOfService.isEmpty) {
+                            //       showDialog(
+                            //         context: context,
+                            //         builder: (context) {
+                            //           return AlertDialog(
+                            //             title: Text('Opps ! '),
+                            //             content: Text(
+                            //               'Please Fill the Year of Service ',
+                            //             ),
+                            //             actions: [
+                            //               TextButton(
+                            //                 child: Text('OK'),
+                            //                 onPressed: () {
+                            //                   Navigator.of(context).pop();
+                            //                 },
+                            //               ),
+                            //             ],
+                            //           );
+                            //         },
+                            //       );
+                            //     } else if (serviceBranch.isEmpty) {
+                            //       showDialog(
+                            //         context: context,
+                            //         builder: (context) {
+                            //           return AlertDialog(
+                            //             title: Text('Opps ! '),
+                            //             content: Text(
+                            //               'Please Fill the required Service Branch ',
+                            //             ),
+                            //             actions: [
+                            //               TextButton(
+                            //                 child: Text('OK'),
+                            //                 onPressed: () {
+                            //                   Navigator.of(context).pop();
+                            //                 },
+                            //               ),
+                            //             ],
+                            //           );
+                            //         },
+                            //       );
+                            //     } else if (unit.isEmpty) {
+                            //       showDialog(
+                            //         context: context,
+                            //         builder: (context) {
+                            //           return AlertDialog(
+                            //             title: Text('Opps ! '),
+                            //             content: Text(
+                            //               'Please Fill the required Unit',
+                            //             ),
+                            //             actions: [
+                            //               TextButton(
+                            //                 child: Text('OK'),
+                            //                 onPressed: () {
+                            //                   Navigator.of(context).pop();
+                            //                 },
+                            //               ),
+                            //             ],
+                            //           );
+                            //         },
+                            //       );
+                            //     } else if (base.isEmpty) {
+                            //       showDialog(
+                            //         context: context,
+                            //         builder: (context) {
+                            //           return AlertDialog(
+                            //             title: Text('Opps ! '),
+                            //             content: Text(
+                            //               'Please Fill the required base',
+                            //             ),
+                            //             actions: [
+                            //               TextButton(
+                            //                 child: Text('OK'),
+                            //                 onPressed: () {
+                            //                   Navigator.of(context).pop();
+                            //                 },
+                            //               ),
+                            //             ],
+                            //           );
+                            //         },
+                            //       );
+                            //     } else if (rank.isEmpty) {
+                            //       showDialog(
+                            //         context: context,
+                            //         builder: (context) {
+                            //           return AlertDialog(
+                            //             title: Text('Opps ! '),
+                            //             content: Text(
+                            //               'Please Fill the required rank',
+                            //             ),
+                            //             actions: [
+                            //               TextButton(
+                            //                 child: Text('OK'),
+                            //                 onPressed: () {
+                            //                   Navigator.of(context).pop();
+                            //                 },
+                            //               ),
+                            //             ],
+                            //           );
+                            //         },
+                            //       );
+                            //     }
+                            //     commandersController.createCommander(
+                            //       name,
+                            //       yearOfService,
+                            //       serviceBranch,
+                            //       unit,
+                            //       base,
+                            //       rank,
+                            //     );
+                            //   },
+                            // ),
                           ],
                         ),
                       ),

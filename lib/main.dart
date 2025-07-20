@@ -2,6 +2,7 @@ import 'package:commanderratings/app.dart';
 import 'package:commanderratings/features/theme/app_themes/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'core/constants/permission_service.dart';
 import 'core/onboarding/presentation/screens/onboarding1.dart';
 import 'core/onboarding/presentation/screens/spashScreen.dart';
 import 'features/auth/controllers/auth_controller.dart';
@@ -15,7 +16,13 @@ void main() async {
   if (!Get.find<AuthController>().isFirstTimeInstall()) {
     print("object ---------------000000000000-----------------");
 
+        // Request storage permission here
+  await requestPermissions();
+
+  // Handle first-time install flag
+
     Get.find<AuthController>().setFirstTimeInstall();
+
   } else {
     print("object ---------------11111111111-----------------");
   }
@@ -34,7 +41,7 @@ class MyApp extends StatelessWidget {
       //print(controller.themeMode.value.toString());
 
       return GetMaterialApp(
-        //debugShowCheckedModeBanner: false,
+        debugShowCheckedModeBanner: false,
         title: 'Military Leadership',
         themeMode: controller.themeMode.value,
         theme: AppTheme.lightTheme,

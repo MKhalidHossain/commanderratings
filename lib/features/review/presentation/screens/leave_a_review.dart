@@ -23,6 +23,7 @@ class _LeaveAReviewState extends State<LeaveAReview> {
   late TextEditingController descriptionController;
 
   double _userRating = 0.0;
+  bool _isSubmitting = false;
 
   void _handleRatingSelected(double rating) {
     setState(() {
@@ -39,79 +40,111 @@ class _LeaveAReviewState extends State<LeaveAReview> {
     descriptionController = TextEditingController();
   }
 
+  void _submitReview(ReviewController reviewController) async {
+    String title = titleController.text.trim();
+    String description = descriptionController.text.trim();
+
+    if (title.isEmpty) {
+      showCustomSnackBar('Please give a title for your review'.tr);
+      return;
+    }
+
+    if (_userRating == 0.0) {
+      showCustomSnackBar('Please give a rating by touching or swiping'.tr);
+      return;
+    }
+
+    if (description.isEmpty) {
+      showCustomSnackBar('Please give a description for your review'.tr);
+      return;
+    }
+
+    setState(() {
+      _isSubmitting = true;
+    });
+
+    try {
+      await reviewController.createReview(
+        widget.commanderId,
+        _userRating,
+        title,
+        description,
+      );
+
+      showCustomSnackBar('Submitting your review'.tr);
+
+      // Optionally clear the fields after success
+      titleController.clear();
+      descriptionController.clear();
+      setState(() {
+        _userRating = 0.0;
+      });
+    } catch (e) {
+      showCustomSnackBar('Something went wrong. Please try again.'.tr);
+    } finally {
+      setState(() {
+        _isSubmitting = false;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ReviewController>(
-        builder: (reviewController){
-          return Scaffold(
-            appBar: AppBar(
-              automaticallyImplyLeading: false,
-              title: TitleText(text: 'Leave a Review'),
-              centerTitle: false,
-              actions: [
-                IconButton(
-                  icon: const Icon(Icons.cancel),
-                  onPressed: () {
-                    Get.back();
-                  },
+      builder: (reviewController) {
+        return Container(
+          padding: const EdgeInsets.all(16.0),
+          color: Colors.white,
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    TitleText(text: 'Leave a Review'),
+                    IconButton(
+                      icon: Icon(Icons.cancel),
+                      onPressed: () {
+                        Get.back();
+                      },
+                    ),
+                  ],
+                ),
+            
+                TextFieldForTakeReview(
+                  hintText: 'title',
+                  controller: titleController,
+                ),
+                const SizedBox(height: 16),
+                TextFieldForTakeReview(
+                  hintText: 'Description',
+                  controller: descriptionController,
+                  height: 100,
+                ),
+                const SizedBox(height: 32),
+                LabelText(text: 'Select Rating'),
+                const SizedBox(height: 8),
+            
+                TakeRating(onRatingSelected: _handleRatingSelected),
+                const SizedBox(height: 20),
+                Text(
+                  'Selected Rating: $_userRating',
+                  style: const TextStyle(fontSize: 20),
+                ),
+                SizedBox(height: 30),
+                WideCustomButton(
+                  text: _isSubmitting ? 'Submitting...' : 'Submit',
+                  onPressed:
+                      _isSubmitting
+                          ? null
+                          : () => _submitReview(reviewController),
                 ),
               ],
             ),
-            body: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  TextFieldForTakeReview(
-                    hintText: 'title',
-                    controller: titleController,
-                  ),
-                  const SizedBox(height: 16),
-                  TextFieldForTakeReview(
-                    hintText: 'Description',
-                    controller: descriptionController,
-                    height: 100,
-                  ),
-                  const SizedBox(height: 32),
-                  LabelText(text: 'Select Rating'),
-                  const SizedBox(height: 8),
-
-                  TakeRating(onRatingSelected: _handleRatingSelected),
-                  const SizedBox(height: 20),
-                  Text(
-                    'Selected Rating: $_userRating',
-                    style: const TextStyle(fontSize: 20),
-                  ),
-                  SizedBox(height: 30,),
-                  WideCustomButton(text: 'Submit',
-                      onPressed: (){
-                      String title = titleController.text;
-                      String description = descriptionController.text;
-                      if(title.isEmpty){
-                      showCustomSnackBar('email is required'.tr);
-                      }
-                      if(_userRating.isNaN){
-                        showCustomSnackBar('email is required'.tr);
-                      }else if(description.length<5){
-                      showCustomSnackBar('minimum password length is 8');
-
-                      }else{
-
-                        print('Yonus Commander Id ${widget.commanderId}');
-                      reviewController.createReview(
-                        widget.commanderId,
-                        _userRating,
-                        title,
-                        description
-                      );
-                      }
-                      }
-                  ),
-                ],
-              ),
-            ),
-          );
-        }
+          ),
+        );
+      },
     );
   }
 }

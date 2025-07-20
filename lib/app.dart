@@ -6,7 +6,6 @@ import 'features/home/presentation/screens/home_screen.dart';
 import 'features/leaderboard/presentation/screens/leaderboard_screen.dart';
 import 'features/more/presentation/screens/more_screen.dart';
 
-
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
   @override
@@ -32,6 +31,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,
       body: _pages[_selectedIndex],
       bottomNavigationBar: CustomBottomNavBar(
         selectedIndex: _selectedIndex,
