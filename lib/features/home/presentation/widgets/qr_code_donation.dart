@@ -12,6 +12,21 @@ class QrCodeDonation extends StatefulWidget {
 }
 
 class _QrCodeDonationState extends State<QrCodeDonation> {
+  Future<void> launchURL(BuildContext context) async {
+    final Uri uri = Uri.parse("https://www.buymeacoffee.com/commanderratings");
+
+    try {
+      if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
+        throw Exception('Could not launch $uri');
+      }
+    } catch (e) {
+      // Show fallback SnackBar or log
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Could not launch the URL')));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -40,45 +55,8 @@ class _QrCodeDonationState extends State<QrCodeDonation> {
 
                 NormalCustomButton(
                   text: 'Buy Me A Coffee',
-                  onPressed: () async {
-                    final Uri url = Uri.parse(
-                      "https://www.buymeacoffee.com/commanderratings",
-                    );
-
-                    try {
-                      final canLaunch = await canLaunchUrl(url);
-                      debugPrint("Can launch URL? $canLaunch");
-
-                      if (!canLaunch) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Device cannot launch browser.'),
-                          ),
-                        );
-                        return;
-                      }
-
-                      final launched = await launchUrl(
-                        url,
-                        mode: LaunchMode.externalApplication,
-                      );
-                      if (!launched) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Could not open the donation link.'),
-                          ),
-                        );
-                      }
-                    } catch (e) {
-                      debugPrint("Launch error: $e");
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text(
-                            'An error occurred while opening the link.',
-                          ),
-                        ),
-                      );
-                    }
+                  onPressed: () {
+                    launchURL(context);
                   },
                 ),
 
