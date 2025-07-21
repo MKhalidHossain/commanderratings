@@ -7,9 +7,9 @@ import 'package:commanderratings/features/auth/presentation/screens/sign_up.dart
 import 'package:commanderratings/features/auth/presentation/widgets/auth_outlined_text_field_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../../core/widgets/wide_custom_button.dart';
 import '../../../../helpers/custom_snackbar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LogIn extends StatefulWidget {
   const LogIn({super.key});
@@ -28,11 +28,27 @@ class _LogInState extends State<LogIn> {
 
   @override
   void initState() {
+    super.initState();
     emailContoller = TextEditingController();
     passwordController = TextEditingController();
-    super.initState();
+
+    _loadRememberedCredentials();
   }
 
+  Future<void> _loadRememberedCredentials() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool? remember = prefs.getBool('remember_me');
+    String? savedEmail = prefs.getString('saved_email');
+    String? savedPassword = prefs.getString('saved_password');
+
+    if (remember != null && remember) {
+      setState(() {
+        isRemember = true;
+        emailContoller.text = savedEmail ?? '';
+        passwordController.text = savedPassword ?? '';
+      });
+    }
+  }
 
   @override
   void dispose() {
@@ -70,7 +86,6 @@ class _LogInState extends State<LogIn> {
                         children: [
                           const SizedBox(height: 8.0),
                           AuthOutlinedTextFieldWidget(
-                           
                             name: 'Username or Email',
                             //lebel: 'Enter eamil or username',
                             controller: emailContoller,
@@ -126,19 +141,34 @@ class _LogInState extends State<LogIn> {
 
                           WideCustomButton(
                             text: 'LOG IN',
-                            onPressed: () {
+                            onPressed: () async {
                               String email = emailContoller.text;
                               String password = passwordController.text;
                               if (email.isEmpty) {
-                                showCustomSnackBar('email is required'.tr);
+                                showCustomSnackBar('Email is required'.tr);
                               } else if (password.isEmpty) {
-                                showCustomSnackBar('password_is_required'.tr);
+                                showCustomSnackBar('Password_is_required'.tr);
                               } else if (password.length < 5) {
                                 showCustomSnackBar(
-                                  'minimum password length is 8',
+                                  'Minimum password length is 8',
                                 );
                               } else {
-                              
+                                SharedPreferences prefs =
+                                    await SharedPreferences.getInstance();
+
+                                if (isRemember) {
+                                  await prefs.setBool('remember_me', true);
+                                  await prefs.setString('saved_email', email);
+                                  await prefs.setString(
+                                    'saved_password',
+                                    password,
+                                  );
+                                } else {
+                                  await prefs.setBool('remember_me', false);
+                                  await prefs.remove('saved_email');
+                                  await prefs.remove('saved_password');
+                                }
+
                                 authController.login(email, password);
                               }
                             },

@@ -1,7 +1,6 @@
 import 'package:commanderratings/features/commanders/presentations/screens/commanders_details.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../../core/ratting_a_to_z/ratting.dart';
 import '../../../../core/utils/constants/app_colors.dart';
 import '../../../review/domain/featured_reviews_response_model.dart';
