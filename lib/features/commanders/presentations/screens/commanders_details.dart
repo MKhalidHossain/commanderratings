@@ -532,7 +532,10 @@ class _CommandersDetailsState extends State<CommandersDetails> {
                                                             .toString(),
                                                         style: TextStyle(
                                                           fontSize: 18,
-                                                          color: Colors.black,
+                                                          color:
+                                                              AppColors.context(
+                                                                context,
+                                                              ).textColor,
                                                           fontWeight:
                                                               FontWeight.w600,
                                                         ),

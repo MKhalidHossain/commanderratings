@@ -1,4 +1,5 @@
 import 'package:commanderratings/core/ratting_a_to_z/ratting.dart';
+import 'package:commanderratings/core/utils/constants/app_colors.dart';
 import 'package:commanderratings/core/widgets/lebel_and_value_text.dart';
 import 'package:commanderratings/core/widgets/title_subtitle_text.dart';
 import 'package:commanderratings/core/widgets/wide_custom_button.dart';
@@ -94,7 +95,7 @@ class _LeaveAReviewState extends State<LeaveAReview> {
       builder: (reviewController) {
         return Container(
           padding: const EdgeInsets.all(16.0),
-          color: Colors.white,
+          color: AppColors.context(context).contentBoxColor,
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -111,7 +112,7 @@ class _LeaveAReviewState extends State<LeaveAReview> {
                     ),
                   ],
                 ),
-            
+
                 TextFieldForTakeReview(
                   hintText: 'title',
                   controller: titleController,
@@ -125,7 +126,7 @@ class _LeaveAReviewState extends State<LeaveAReview> {
                 const SizedBox(height: 32),
                 LabelText(text: 'Select Rating'),
                 const SizedBox(height: 8),
-            
+
                 TakeRating(onRatingSelected: _handleRatingSelected),
                 const SizedBox(height: 20),
                 Text(
