@@ -1,5 +1,6 @@
 class Urls {
-  static const String baseUrl = 'http://46.202.179.186';
+  //  static const String baseUrl = 'https://api.commanderratings.com';
+  static const String baseUrl = 'https://api.ccratings.info';
   static const String register = '/api/v1/auth/register';
   static const String login = '/api/v1/auth/login';
   static const String refreshAccessToken = '/api/v1/auth/refresh-access-token';
